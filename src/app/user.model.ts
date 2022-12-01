@@ -4,7 +4,7 @@
 export class User {
   constructor(
     userId: string,  // user id
-    userkName: string,  // userName: name showed on card / editable
+    userName: string,  // userName: name showed on card / editable
     email: string,  // RWTH email(store after verify for sing up)
     isSignedup: boolean  // information required when loggin in
   ){}
