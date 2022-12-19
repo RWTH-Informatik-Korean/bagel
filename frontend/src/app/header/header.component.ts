@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { SignupComponent } from '../signup/signup.component';
-import { FooterComponent } from '../footer/footer.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +21,16 @@ export class HeaderComponent implements OnInit{
     this.SideNavToggle.emit();
   }
 
-  constructor() {}
+  constructor(public matDialog: MatDialog) {}
+
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.id = "signup-component";
+    dialogConfig.height = "600px";
+    dialogConfig.width = "800px";
+    const modalDialog = this.matDialog.open(SignupComponent, dialogConfig);
+  }
 
   ngOnInit(): void {
       
