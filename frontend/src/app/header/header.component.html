@@ -1,7 +1,10 @@
 <div class="container">
   <div class="logo">logo</div>
-  <div class="btn-container">
-    <button mat-button class="btn-item" (click)="openDialog()">Sign Up</button>
-    <button class="btn-item" [routerLink]="">Log In</button>
+  <div *ngIf="!isLoggedIn" class="btn-container">
+    <button mat-button class="btn-item">Sign Up</button>
+    <button class="btn-item" [routerLink]="" (click)="login()">Log In</button>
+  </div>
+  <div *ngIf="isLoggedIn" class="btn-container">
+    <button mat-button class="temp-btn" (click)="openSidenav()"><img class="temp-img" src="../../assets/images/Avatar_1.png"/></button>
   </div>
 </div>

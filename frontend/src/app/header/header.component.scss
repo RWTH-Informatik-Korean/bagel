@@ -1,8 +1,8 @@
 @import '../../styles.scss'; 
 
 .container{
-  width: 1180px;
-  height: 56px;
+  max-width: 1180px;
+  height: 85px;
   align-items: center;
   display: flex;
   z-index: 1;
@@ -19,10 +19,6 @@
 }
 
 .btn-item{
-  
-}
-
-button{
   margin-left: 24px;
   width: 127px;
   height: 100%;
@@ -31,4 +27,12 @@ button{
   border: 0.5px solid;
   border-radius: 50px;
   background-color: #ffffff;
+}
+
+.temp-btn {
+  margin-right: 100px;
+}
+.temp-img {
+  border-radius: 50%;
+  height: 50px;
 }

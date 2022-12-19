@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SignupComponent } from '../signup/signup.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -8,16 +8,24 @@ import { FooterComponent } from '../footer/footer.component';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
-  constructor(public dialog: MatDialog) {}
+  @Output() SideNavToggle = new EventEmitter();
 
-  openDialog() {
-    const dialogRef = this.dialog.open(FooterComponent);
+  isLoggedIn: boolean = false;
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  login(): void{
+    this.isLoggedIn = !this.isLoggedIn;
+  }
+
+  openSidenav() {
+    this.SideNavToggle.emit();
+  }
+
+  constructor() {}
+
+  ngOnInit(): void {
+      
   }
 
 }
