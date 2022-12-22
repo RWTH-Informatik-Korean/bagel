@@ -3,6 +3,9 @@
   max-width: 1180px;
   max-height: 120px;
   padding-top: 36px;
+  align-items: center;
+  display: flex;
+  margin: 0 auto;
 }
 
 .navbar{
@@ -15,7 +18,7 @@
   vertical-align: 20%;
   display: inline-block;
   vertical-align: middle;
-  margin-left: 20%;
+  margin-left: auto;
 }
 
 input{

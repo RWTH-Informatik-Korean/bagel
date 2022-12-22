@@ -1,0 +1,20 @@
+<section class="mainNav-container">
+  <div class="mainNav-wrapper">
+    <ul class="categories">
+      <li class="categoryItem" *ngFor="let category of categories">
+        <button id="category-title">{{ category.category }}</button>
+      </li>
+    </ul>
+    <ul class="courses-wrapper">
+      <li class="courseItem" *ngFor="let course of courses">
+        <a class="courses" [href]="course.courseName">
+          <img class="courseLogo" [src]="course.moduleUrl"/>
+          <div class="courseText">
+            <span class="courseModule">{{ course.module }}</span>
+            <span class="courseName">{{ course.courseName }}</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>

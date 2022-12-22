@@ -1,0 +1,68 @@
+@import '../../styles.scss';
+
+.mainNav-container {
+  padding: 64px;
+  margin-bottom: 80px;
+}
+.mainNav-wrapper {
+  max-width: 1024px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.categories {
+  display: flex;
+  justify-content: center;
+}
+.categoryItem {
+  padding: 0 32px 16px;
+  margin-bottom: 32px;
+  border-bottom: 3px solid rgb(215, 215, 215);
+  font-weight: bold;
+}
+.categoryItem:hover {
+  border-bottom: 3px solid $bagel-warn;
+}
+#category-title {
+  font-weight: bold;
+}
+.courses-wrapper {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.courseItem {
+  border-radius: 20px;
+  // border: 1px solid $bagel-dark;
+}
+.courseItem:hover {
+  border: 1px solid $bagel-primary;
+}
+.courses {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 88px;
+}
+.courseLogo {
+  height: 32px;
+  margin-left: 16px;
+}
+.courseText {
+  margin: auto 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.courseModule {
+  font-size: 0.8rem;
+}
+.courseName {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 1.2rem;
+  line-height: 110%;
+}

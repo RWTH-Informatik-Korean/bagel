@@ -1,0 +1,60 @@
+@import '../../styles.scss';
+
+.register-container {
+  max-width: 1024px;
+  margin: 70px auto 0;
+  background-color: $bagel-W-text;
+}
+.form-group {
+  padding: 8px 16px;
+}
+label {
+  font-family: 'Poppins';
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+input {
+  height: 40px;
+  padding: 10px;
+}
+.form-select {
+  block-size: 40px;
+}
+select {
+  padding-left: 10px;
+  color: $bagel-dark;
+}
+::placeholder { 
+  color: $bagel-dark;
+  opacity: 0.5;
+}
+datalist {
+  position: absolute;
+  max-height: 10rem;
+  border: 0 none;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+option {
+  width: 100%;
+  font-size: 0.8em;
+  padding: 0.3em 1em;
+  background-color: $bagel-dark;
+  cursor: pointer;
+}
+datalist option:hover, datalist option:active {
+  color: #fff;
+  background-color: $bagel-dark;
+  outline: 0 none;
+}
+#content-text {
+  height: 160px;
+  padding: 10px;
+}
+.register-btn {
+  width: 100%;
+  background-color: $bagel-accent;
+  margin-top: 24px;
+  padding: 8px;
+  border-radius: 50px;
+}

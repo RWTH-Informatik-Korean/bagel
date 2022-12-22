@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DummyMainComponent } from './dummy-main.component';
+import { MainNavigationComponent } from './main-navigation.component';
 
-describe('DummyMainComponent', () => {
-  let component: DummyMainComponent;
-  let fixture: ComponentFixture<DummyMainComponent>;
+describe('MainNavigationComponent', () => {
+  let component: MainNavigationComponent;
+  let fixture: ComponentFixture<MainNavigationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DummyMainComponent ]
+      declarations: [ MainNavigationComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DummyMainComponent);
+    fixture = TestBed.createComponent(MainNavigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
