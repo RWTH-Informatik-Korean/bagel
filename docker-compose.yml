@@ -9,7 +9,7 @@ services:
     ports:         
       - '8080:8080'      
     links:         
-      - mongo  
+      - mongodb  
     volumes:
       - ./backend/:/usr/src/app
       - /usr/src/app/node_modules
@@ -22,14 +22,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: bagel_db
     volumes:
       - ./init-mongodb/data:/data/db
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongo 10.10.10.60:27017/test --quiet
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   mongo-express:
     image: mongo-express:latest
@@ -42,9 +36,4 @@ services:
     depends_on:
       - mongodb
     restart: unless-stopped
-    healthcheck:
-      test:  wget --quiet --tries=3 --spider http://admin:admin123@10.10.10.60:8081 || exit 1
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
+    
