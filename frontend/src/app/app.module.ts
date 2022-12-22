@@ -37,6 +37,7 @@ import { LoginComponent } from './login/login.component';
     DummyMainComponent,
     CardListComponent,
     LoginComponent,
+    RoundedBtnComponent
   ],
   imports: [
     BrowserModule,

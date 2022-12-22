@@ -1,0 +1,23 @@
+
+<form #form="ngForm" (submit)="postComment(form, comment?.id)">
+  <div class="form-group">
+      <textarea
+      id="commentInput"
+      class="form-control"
+      #commentBox="ngModel"
+      [ngModel]="comment?.text"
+      name="commentBox"
+      (focus)="isCommentInEditMode=true"
+      trim="blur"
+      maxlength="250"
+      placeholder="Ask a question  or  leave a message."
+      ></textarea>
+      <button
+      type="submit"
+      id="buttonSubmit"
+      class="btn"
+      >
+        POST
+      </button>
+  </div>
+</form>

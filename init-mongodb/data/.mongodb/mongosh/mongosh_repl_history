@@ -1,0 +1,7 @@
+exit
+show databases
+show databases;
+use test
+show collections
+use customer
+use bagel_db
