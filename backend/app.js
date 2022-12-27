@@ -47,6 +47,7 @@ passport.deserializeUser((id, done) => {
 google();
 
 app.get('/',(req,res)=>{
+  console.log(req.user)
 const temp = getPage('Welcome', 'Welcome to visit...',getBtn(req.user));
   res.send(temp);
 });

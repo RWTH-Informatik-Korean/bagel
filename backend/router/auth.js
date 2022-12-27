@@ -10,13 +10,13 @@ router.get(
    '/google/callback',
    passport.authenticate('google', { failureRedirect: '/' }),
    (req, res) => {
-      res.redirect('/');
+      res.status(200).redirect('/');
    },
 );
 
 router.get('/logout', (req, res) => {
    req.session.destroy( (err) => {
-     res.redirect('/');
+      res.status(200).redirect('/');
    });
  });
 
