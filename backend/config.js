@@ -15,3 +15,8 @@ export const config = {
     host: required('DB_HOST'),
   },  
 }
+
+export const googleConfig = {
+  id: required('GOOGLE_ID'),
+  secret: required('GOOGLE_SECRET')
+}
