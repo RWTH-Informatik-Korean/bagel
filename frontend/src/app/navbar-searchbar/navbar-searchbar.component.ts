@@ -1,5 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../services/search.service';
+
 
 @Component({
   selector: 'app-navbar-searchbar',
@@ -8,6 +10,7 @@ import { SearchService } from '../services/search.service';
 })
 export class NavbarSearchbarComponent implements OnInit {
   searchInput: string;
+
 
   constructor(private searchService: SearchService) { }
 
@@ -20,5 +23,6 @@ export class NavbarSearchbarComponent implements OnInit {
     } 
     this.searchService.searchCard(this.searchInput);
   }
+
 
 }

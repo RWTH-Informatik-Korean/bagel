@@ -27,6 +27,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { Signup2Component } from './signup2/signup2.component';
 import { SearchService } from './services/search.service';
+import { TopButtonComponent } from './top-button/top-button.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { SearchService } from './services/search.service';
     MainPageComponent,
     LoginComponent,
     SignupComponent,
-    Signup2Component
+    Signup2Component,
+    TopButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { SearchService } from './services/search.service';
         syntax: true,
         toolbar: [ ]
       }
-    })
+    }),
+    HttpClientModule,
   ],
   providers: [SearchService],
   bootstrap: [AppComponent]

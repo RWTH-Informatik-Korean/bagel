@@ -1,0 +1,46 @@
+@import '../../styles.scss';
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  height: 56px;
+  width: 56px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid $bagel-dark;
+  border-radius: 50%;
+  background-color: #fff;
+  z-index: 100;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+}
+.show-scrollTop {
+  opacity: 1;
+  transition: all .2s ease-in-out;
+}
+.scroll-to-top:hover {
+  border: 1px solid $bagel-primary;
+  box-shadow: 0 0 2px $bagel-dark;
+  #top-btn-icon {
+    color: $bagel-primary;
+    transition: all .2s ease-in-out;
+  }
+}
+#to-top {
+  width: 100%;
+  height: 100%;
+}
+#top-btn-icon {
+  font-size: 32px !important;
+  color: $bagel-dark;
+  transition: all .2s ease-in-out;
+}
+.bi::before, .bi::after {
+  font-weight: bolder !important;
+}
+.show-scrollTop {
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}

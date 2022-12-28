@@ -1,10 +1,10 @@
 <div class="container-fluid">
-  <ul class="cardList-wrapper"> <!-- grid -->
+  <ul class="cardList-wrapper">
     <!-- todo: after search hidden -->
     <a href="" class="newBagel" *ngIf="!searched">
       <div>+ new card</div>      
     </a>
-    <a href="" class="cardItem" *ngFor="let bagel of bagels"> <!-- flex -->
+    <a href="" class="cardItem" *ngFor="let bagel of bagels">
       <div class="cardItem-header">
         <div class="cardItemH-left">{{ bagel.term }}</div>
         <div class="cardItemH-right" [ngClass]="bagel.category">{{ bagel.category }}</div>  
@@ -14,7 +14,7 @@
         <div class="cardItemC-text">{{ bagel.title }}</div>
       </div>
       <div class="cardItem-footer">
-        <div class="cardItemF-left">{{ bagel.userID }}</div> 
+        <div class="cardItemF-left">{{ bagel.username }}</div> 
         <div class="cardItemF-right">
           <div id="view"><i class="bi bi-eye"></i>    {{ bagel.view }}</div>
           <div id="chat"><i class="bi bi-chat-left"></i>    {{ bagel.comment }}</div>

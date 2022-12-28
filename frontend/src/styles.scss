@@ -55,6 +55,9 @@ $bagel-W-text: #F2F0ED;
   margin: 0;
   padding: 0;
 }
+html, body {
+  scroll-behavior: smooth;
+}
 body { 
   font-family: "Poppins", "Helvetica Neue", sans-serif; 
   color: #1B1C1E;

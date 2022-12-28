@@ -3,6 +3,7 @@ import { SignupComponent } from '../signup/signup.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { Signup2Component } from '../signup2/signup2.component';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -14,16 +15,14 @@ export class HeaderComponent implements OnInit{
 
   isLoggedIn: boolean = false;
 
+  constructor(public matDialog: MatDialog) {}
+  
   login(): void{
     this.isLoggedIn = !this.isLoggedIn;
   }
-
   openSidenav() {
     this.SideNavToggle.emit();
   }
-
-  constructor(public matDialog: MatDialog) {}
-
   openModal() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -32,7 +31,6 @@ export class HeaderComponent implements OnInit{
     dialogConfig.width = "800px";
     const modalDialog = this.matDialog.open(SignupComponent, dialogConfig);
   }
-
   openLoginModal() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -41,9 +39,6 @@ export class HeaderComponent implements OnInit{
     dialogConfig.width = "800px";
     const modalDialog = this.matDialog.open(LoginComponent, dialogConfig);
   }
-
-
-  ngOnInit(): void {
-      
+  ngOnInit(): void {   
   }
 }
