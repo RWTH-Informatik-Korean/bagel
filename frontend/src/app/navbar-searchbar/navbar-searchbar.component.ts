@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CATEGORIES } from '../models/post-category';
 import { SearchService } from '../services/search.service';
+import { SearchService } from '../services/search.service';
+
 
 @Component({
   selector: 'app-navbar-searchbar',
@@ -9,6 +11,7 @@ import { SearchService } from '../services/search.service';
 })
 export class NavbarSearchbarComponent implements OnInit {
   searchInput: string;
+
 
   constructor(private searchService: SearchService) { }
   @Output() SelectedCategory = new EventEmitter<string>();

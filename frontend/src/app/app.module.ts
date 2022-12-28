@@ -29,6 +29,7 @@ import { Signup2Component } from './signup2/signup2.component';
 import { SearchService } from './services/search.service';
 import { TopButtonComponent } from './top-button/top-button.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

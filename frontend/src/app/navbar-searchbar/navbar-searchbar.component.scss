@@ -29,14 +29,12 @@
 .navbar a{
   text-decoration: none;
 }
-
 .navbar a:hover{
   color: $bagel-accent;
 a:hover{
   color: $bagel-warn;
   text-decoration: none;
 }
-
 .searchbar input{
   font-size: 0.9rem;
   padding: 4px;
@@ -48,8 +46,8 @@ a:hover{
   display: flex;
   align-items: center;
 }
-
 .searchbar input:focus {
   outline: none !important;
   border: 2px solid $bagel-primary;
 } 
+
