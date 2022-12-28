@@ -9,12 +9,9 @@
   display: flex;
   margin: 0 auto;
 }
-
 .navbar{
-  display: inline-block;
-  vertical-align: middle;
+  display: flex;
 }
-
 .searchbar{
   vertical-align: bottom;
   vertical-align: 20%;
@@ -24,7 +21,7 @@
 }
 
 .nav-item{
-  padding: 4px;
+  padding-right: 32px;
   font-size: 1.5rem;
   margin-right: 15px;
 }
@@ -35,6 +32,8 @@
 
 .navbar a:hover{
   color: $bagel-accent;
+a:hover{
+  color: $bagel-warn;
   text-decoration: none;
 }
 

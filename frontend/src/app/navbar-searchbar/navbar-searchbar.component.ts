@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CATEGORIES } from '../models/post-category';
 import { SearchService } from '../services/search.service';
 
 @Component({
@@ -10,6 +11,11 @@ export class NavbarSearchbarComponent implements OnInit {
   searchInput: string;
 
   constructor(private searchService: SearchService) { }
+  @Output() SelectedCategory = new EventEmitter<string>();
+  
+  categories = CATEGORIES;
+  
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -21,4 +27,8 @@ export class NavbarSearchbarComponent implements OnInit {
     this.searchService.searchCard(this.searchInput);
   }
 
+  
+  selectedPostCategory(category: string) {
+    this.SelectedCategory.emit(category);
+  }
 }
