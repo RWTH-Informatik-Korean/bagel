@@ -12,6 +12,7 @@ const app = express();
 const port = 8080;
 
 app.use(express.json());
+app.use(express.urlencoded({extended:false}))
 app.use(helmet());
 app.use(cors());
 app.use(morgan('tiny'));
@@ -42,6 +43,26 @@ app.get('/category/post', async (req, res) => {
     res.status(404).json({ message: 'category(post) not found' });
   }
 });
+
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
+app.get('/cards', async (req, res, next) => {
+  if(req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+
+    const searchedCard = await cardRepository.searchCards(regex);
+    if (searchedCard) {
+      res.status(200).json(searchedCard);
+    } else {
+      res.status(404).json({ message: 'No card match that query, please try again.' });
+    }
+  }
+  else {
+    next();
+  }
+})
 
 app.get('/cards', async (req, res) => {
   const cards = await cardRepository.getAll();

@@ -8,6 +8,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from "@angular/material/dialog";
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RoundedBtnComponent } from './rounded-btn/rounded-btn.component';
@@ -25,6 +26,7 @@ import { MainPageComponent } from './Pages/main-page/main-page.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { Signup2Component } from './signup2/signup2.component';
+import { SearchService } from './services/search.service';
 
 
 @NgModule({
@@ -56,6 +58,7 @@ import { Signup2Component } from './signup2/signup2.component';
     MatDialogModule,
     CommonModule,
     FormsModule,
+    HttpClientModule,
     QuillModule.forRoot({
       modules: {
         syntax: true,
@@ -63,7 +66,7 @@ import { Signup2Component } from './signup2/signup2.component';
       }
     })
   ],
-  providers: [],
+  providers: [SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

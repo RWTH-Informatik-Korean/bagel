@@ -5,7 +5,7 @@
     <a class="nav-item" href="#">Review</a>
     <a class="nav-item" href="#">Community</a>
   </div>
-  <div class="searchbar">
-    <input type="search" placeholder="Search"/>
-  </div>
+    <div class="searchbar">
+      <input [(ngModel)]="searchInput" name="searchInput" type="search" autocomplete="off" placeholder="Search" required (keydown.enter)="searchCard()"/>
+    </div>
 </div>

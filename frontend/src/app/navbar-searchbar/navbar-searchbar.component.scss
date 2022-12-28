@@ -1,3 +1,5 @@
+@import '../../styles.scss';
+
 .nav-search-bar{
   flex-direction: row;
   max-width: 1180px;
@@ -21,32 +23,34 @@
   margin-left: auto;
 }
 
-input{
-  font-size: 0.7rem;
+.nav-item{
+  padding: 4px;
+  font-size: 1.5rem;
+  margin-right: 15px;
+}
+
+.navbar a{
+  text-decoration: none;
+}
+
+.navbar a:hover{
+  color: $bagel-accent;
+  text-decoration: none;
+}
+
+.searchbar input{
+  font-size: 0.9rem;
   padding: 4px;
   width: 360px;
   border-color: gray;
   border-style: solid;
   border-radius: 20px;
-  padding-left: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding: 8px 16px;
   display: flex;
-  vertical-align: middle;
+  align-items: center;
 }
 
-.nav-item{
-  padding: 4px;
-  font-size: 1.5rem;
-}
-
-a{
-  color: black;
-  text-decoration: none;
-}
-
-a:hover{
-  color: #F0CB92;
-  text-decoration: none;
-}
-
+.searchbar input:focus {
+  outline: none !important;
+  border: 2px solid $bagel-primary;
+} 
