@@ -2,7 +2,7 @@
   <div class="mainNav-wrapper">
     <ul class="categories">
       <li class="categoryItem" *ngFor="let category of categories">
-        <button id="category-title">{{ category.category }}</button>
+        <button id="category-title" (click)="selectCategory(category.category)">{{ category.category }}</button>
       </li>
     </ul>
     <ul class="courses-wrapper">

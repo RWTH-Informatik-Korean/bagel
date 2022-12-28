@@ -1,10 +1,13 @@
 export class bagelCard {
-    term!: string;
-    category!: string;
-    course!: string;
-    title!: string;
-    userID!: string;
-    save!: number;
-    view!: number;
-    comment!: number;
+    _id: string;
+    title: string;
+    text?: string;
+    category: string;
+    username: string;
+    term: string;
+    course: string;
+    createdAt?: string;
+    updatedAt?: string;
+    view?: number;
+    comment?: number;
 }
