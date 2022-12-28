@@ -6,8 +6,7 @@
   <mat-sidenav-content class="header-container">
     <app-header (SideNavToggle)="sidenav.toggle()"></app-header>
     <app-main-navigation></app-main-navigation>
-    <app-navbar-searchbar (SelectedCategory)="changePostCategory($event)"></app-navbar-searchbar>
-    <app-card-list [postCategory]="selectedCategory"></app-card-list>
-    <app-top-button (TopButton)="scrollToTop()"></app-top-button>
+    <app-navbar-searchbar></app-navbar-searchbar>
+    <app-card-list></app-card-list>
   </mat-sidenav-content>
 </mat-sidenav-container>

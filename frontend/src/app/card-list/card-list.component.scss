@@ -23,6 +23,7 @@
 .cardItem {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 30px;
   height: 400px;
   background-color: #fff;
@@ -49,35 +50,25 @@
 	align-items : center;
   border-radius: 50px 0 0 50px;
 }
-.Course {
+.courses {
   background-color: $bagel-primary;
   color: $bagel-W-text;
 }
-.Study {
+.community {
   background-color: $bagel-warn;
   color: $bagel-W-text;
 }
-.InAachen {
+.review {
   background-color: $bagel-accent;
   color: $bagel-dark;
 }
-.AfterRWTH {
-  background-color: $bagel-dark;
-  color: $bagel-accent;
-}
 .cardItem-content {
-  display: flex;
-  flex-direction: column;
-  margin: 1rem 0;
   font-size: 1.5rem;
 }
 .cardItemC-text {
-  margin: 1rem 0;
-  height: 64px;
-  line-height: normal;
+  margin-bottom: 3rem;
 }
 .cardItem-footer {
-  margin-top: 1rem;
   font-size: 1rem;
   display: flex;
   justify-content: space-between;

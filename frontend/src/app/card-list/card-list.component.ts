@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, SimpleChange } from '@angular/core';
-import { PostcategoryFilterService } from '../services/postcategory-filter.service';
-import { bagelCard } from '../models/bagelCard';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { BAGELS } from '../models/mock-bagelCard';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-list',
@@ -8,25 +8,13 @@ import { bagelCard } from '../models/bagelCard';
   styleUrls: ['./card-list.component.scss']
 })
 export class CardListComponent implements OnInit {
-  
-  @Input() postCategory: string ;
 
-  bagels: bagelCard[];  
+  bagels = BAGELS;
   searched: boolean = false;  
-  
-  constructor(private _filterservice:PostcategoryFilterService) {
-  }
-  
-  ngOnInit() {
-    this._filterservice.getAllData().subscribe(res => { 
-      this.bagels = res; 
-    })
-  }
-  
-  ngOnChanges(change: SimpleChange) {
-    console.log(this.postCategory);
-    this._filterservice.findByCategory(this.postCategory).subscribe(res => {
-      this.bagels = res;
-    })
-  }
+    
+  constructor() { }
+
+  ngOnInit(): void {
+  }  
+
 }
