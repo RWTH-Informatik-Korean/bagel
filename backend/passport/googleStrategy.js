@@ -13,14 +13,13 @@ export const google = () => {
           callbackURL: '/auth/google/callback',
        },
        async (accessToken, refreshToken, profile, done) => {
-          //console.log('google profile : ', profile);
           try {
              const exUser = await User.findUser(profile.id);
              if (exUser) {
                 done(null, exUser);
              } else {
                 const newUser = await User.create(
-                   's',
+                   profile.displayName,
                    profile.id,
                 );
                 done(null, newUser);

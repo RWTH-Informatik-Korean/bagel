@@ -10,14 +10,8 @@ const userSchema = new Mongoose.Schema(
 
 const User = Mongoose.model('users', userSchema);
 
-export async function getUser(googleID){
-  return User.findById(id);
-}
-
 export async function findUser(googleID){
-  return User.findOne({
-    where: {googleID: googleID}
-  });
+  return User.findOne({ googleID: googleID });
 }
 
 export async function create(username, googleID, avataUrl){
@@ -28,6 +22,11 @@ export async function create(username, googleID, avataUrl){
   }).save();
 }
 
+export async function update(googleID, username, avataUrl){
+  return User.findOneAndUpdate({ googleID: googleID }
+    , { username: username, avataUrl: avataUrl });
+}
+
 export async function remove(id) {
-  return Card.findByIdAndDelete(id);
+  return User.findByIdAndDelete(id);
 }

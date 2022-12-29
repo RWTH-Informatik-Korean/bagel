@@ -46,35 +46,6 @@ passport.deserializeUser((id, done) => {
 }); 
 google();
 
-app.get('/',(req,res)=>{
-  console.log(req.user)
-const temp = getPage('Welcome', 'Welcome to visit...',getBtn(req.user));
-  res.send(temp);
-});
-
-const getBtn = (user) =>{
-  return user !== undefined ? `${user.username} | <a href="/auth/logout">logout</a>` : `<a href="/auth/google">Google Login</a>`;
-}
-
-const getPage = (title, description,auth)=>{
-return `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>${title}</title>
-      </head>
-      <body>
-          ${auth}
-          <h1>${title}</h1>
-          <p>${description}</p>
-      </body>
-      </html>
-      `;
-}
-
 app.get('/category/module', async (req, res) => {
   const category = await moduleCategoryRepository.getAll();
   if (category) {
