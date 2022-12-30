@@ -12,6 +12,7 @@ export class NavbarSearchbarComponent implements OnInit {
   categories = CATEGORIES;
   
   searchInput: string;
+  doubbleSubmit: boolean = false;
 
   constructor(private searchService: SearchService) { }
 
@@ -25,9 +26,16 @@ export class NavbarSearchbarComponent implements OnInit {
   searchCard () {
     if(this.searchInput === undefined) {
       return console.log("Input some keyword...")
-    } 
-    this.searchService.searchCard(this.searchInput);
-    console.log('enter');
+    } else {
+        if (this.doubbleSubmit) {
+          this.doubbleSubmit = false;
+          return
+        } else {
+          this.doubbleSubmit = true;
+          return this.searchService.searchCard(this.searchInput);
+       }
+    }
   }
 
+  
 }
