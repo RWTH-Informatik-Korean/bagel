@@ -4,15 +4,14 @@ import 'express-async-errors';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
-import passport from 'passport';
+import flash from 'connect-flash';
 
-import { google } from './passport/googleStrategy.js'
+import passportGoogle from './passport/googleStrategy.js';
 import { connectDB } from './database/database.js';
 import * as courseCategoryRepository from './database/courseCategory.js';
 import * as moduleCategoryRepository from './database/moduleCategory.js';
 import * as postCategoryRepository from './database/postCategory.js';
 import * as cardRepository from './database/card.js';
-import * as userRepository from './database/user.js'
 import authRouter from './router/auth.js'
 
 
@@ -28,23 +27,11 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
+app.use(flash());
+
+passportGoogle(app);
 
 app.use('/auth', authRouter);
-
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser((user, done) => {
-  done(null, user.googleID);
-});
-
-passport.deserializeUser((id, done) => {
-  userRepository.findUser(id)
-    .then(user => done(null, user))
-    .catch(err => done(err));
-}); 
-google();
 
 app.get('/category/module', async (req, res) => {
   const category = await moduleCategoryRepository.getAll();
