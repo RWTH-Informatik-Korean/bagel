@@ -9,7 +9,7 @@ router.post('/send', async (req, res) => {
   const result = await verifiEmail.send(email);
 
   if (result == 1) {
-    res.status(200).json({ message: `${email}@rwth-aachen.de으로 인증번호를 전송 하였습니다.` });
+    res.status(200).json({ message: `${email}으로 인증번호를 전송 하였습니다.` });
   } else if (result == 2) {
     res.status(404).json({ message: '이미 요청된 이메일 입니다. 이메일을 확인 해주세요.' })
   } else {
