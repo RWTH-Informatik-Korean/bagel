@@ -13,6 +13,7 @@ import * as moduleCategoryRepository from './database/moduleCategory.js';
 import * as postCategoryRepository from './database/postCategory.js';
 import * as cardRepository from './database/card.js';
 import authRouter from './router/auth.js'
+import verificationRouter from './router/verification.js'
 
 
 const app = express();
@@ -32,6 +33,7 @@ app.use(flash());
 passportGoogle(app);
 
 app.use('/auth', authRouter);
+app.use('/verification', verificationRouter);
 
 app.get('/category/module', async (req, res) => {
   const category = await moduleCategoryRepository.getAll();
