@@ -9,7 +9,7 @@ import { Course, COURSES, CATEGORIES } from '../../../models/courses';
 export class MainNavigationComponent implements OnInit {
   categories = CATEGORIES;
   courses: Course[] = COURSES.filter(courses => courses.category === '1 Semester');
-
+  selected: string;
   
   constructor() { }
 
@@ -18,6 +18,7 @@ export class MainNavigationComponent implements OnInit {
 
   selectCategory(data: string) {
     this.courses = COURSES.filter(courses => courses.category === data + 'ester');
+    this.selected = data;
   }
 
 }
