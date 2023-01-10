@@ -55,10 +55,16 @@ $bagel-W-text: #F2F0ED;
   margin: 0;
   padding: 0;
 }
-html, body {
+html {
   scroll-behavior: smooth;
+  position: relative;
+  height: 100%;
+  padding-bottom: 128px;
 }
 body { 
+  scroll-behavior: smooth;
+  position: relative;
+  min-height: 100%;
   font-family: "Poppins", "Helvetica Neue", sans-serif; 
   color: #1B1C1E;
 }
