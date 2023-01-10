@@ -14,8 +14,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 400px;
-  font-size: 1.5rem;
   background-color: #D9D9D9;
   box-shadow: 0 3px 6px rgba(93,67,58,0.12), 0 3px 6px rgba(93,67,58,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -111,4 +109,70 @@
 }
 .res-text {
   font-size: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile: */
+  .cardList-wrapper {
+    width: min(100% - 1rem, 768px);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+  }
+  .cardItem {
+    height: 200px;
+    padding: 16px;
+    justify-content: space-between;
+  }
+  .cardItem-header {
+    margin: 0;
+    font-size: 0.5rem;
+  } 
+  .cardItemH-right {
+    border: 1pr solid red;
+    margin-right: -16px;
+    padding-right: 16px;
+    width: 80px;
+    height: 24px;
+    display: flex;
+    justify-content : right;
+    align-items : center;
+    border-radius: 50px 0 0 50px;
+  }  
+  .cardItem-content {
+    margin: 0;
+    height: 50%;
+  }
+  .cardItemC-text {
+    height: auto;
+    margin: 0;
+    line-height: 150%;
+  }
+  .cardItem-content #text-course{
+    font-size: 1rem;
+  }
+  .cardItem-content #text-title{
+    font-size: 1.2rem;
+  }
+  .cardItem-footer {
+    margin: 0;
+    font-size: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .cardItemF-right {
+    padding: 0;
+    align-items: flex-end;
+  }
+  #save, #view, #chat {
+    padding: 0 4px;
+    align-items: flex-end;
+  }
+  .info-text {
+    font-size: 1rem;
+    margin: 8px;
+  }
+
 }

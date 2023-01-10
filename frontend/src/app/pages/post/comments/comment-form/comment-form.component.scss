@@ -23,3 +23,20 @@
 .btn:hover {
   opacity: 0.8;
 }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile: */
+  .form-group {
+    display: grid;
+    grid-template-columns: 7fr 1fr;
+    column-gap: 8px;
+    margin-left: 28px;
+    height: 72px;
+  }  
+  .btn {
+    font-size: 0.7rem;
+  }
+  .form-control {
+    font-size: 1rem;
+  }
+}

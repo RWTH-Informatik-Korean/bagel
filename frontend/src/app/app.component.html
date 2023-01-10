@@ -1,4 +1,4 @@
-<mat-sidenav-container class="container-fluid">
+<mat-sidenav-container class="container-fluid" [(ngModel)]="screenMode">
   <mat-sidenav class="mySidenav" #sidenav mode="over" position="end">
     <app-sidenav (closeSideNav)="sidenav.close()"></app-sidenav>
   </mat-sidenav>
@@ -6,7 +6,7 @@
   <mat-sidenav-content class="header-container">
     <app-header (SideNavToggle)="sidenav.toggle()"></app-header>
     <router-outlet></router-outlet>
-    <app-top-button (TopButton)="scrollToTop()"></app-top-button>
+    <app-top-button *ngI="screenMode==='W'" (TopButton)="scrollToTop()"></app-top-button>
   </mat-sidenav-content>
 </mat-sidenav-container>
 

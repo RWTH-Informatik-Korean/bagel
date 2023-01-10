@@ -1,9 +1,26 @@
 @import '../../../../styles.scss';
 
 .footer-container{
+  position: sticky;
   height: 127px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile: */
+  .footer-text {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  /* For mobile: */
+  .footer-container{
+    height: 100px;
+  }
+  .footer-text {
+    font-size: 0.5rem;
+  }
 }

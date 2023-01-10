@@ -44,3 +44,33 @@ a:hover{
   color: $bagel-warn;
   text-decoration: none;
 }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile: */
+  .m-nav-search {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  }
+  .searchbar {
+    width: 100%;
+  }
+  .m-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .nav-item {
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .searchbar input {
+    padding: 4px 8px;
+    border: 0.5px solid $bagel-dark;
+    width: 100%;
+  }
+}

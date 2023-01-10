@@ -3,13 +3,13 @@
   margin: 0;
 } 
 .comments-container {
-  display: flex;
-  align-items: center;
-  width: 1024px;
+  width: min(100% - 2rem, 1024px);
+  margin-inline: auto;
 }
 .comments-list {
   list-style: none;
   margin-bottom: 30px;
+  width: 100%;
 }
 .user-container {
   display: flex;
@@ -30,3 +30,26 @@
   margin-left: 35px;
 }
 
+@media only screen and (max-width: 768px) {
+  /* For mobile: */
+  .comments-container {
+    width: min(100% - 1rem, 768px);
+    margin-inline: auto;
+  }
+  .comments-list {
+    list-style: none;
+    margin-bottom: 30px;
+  }  
+  .user-photo {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  }
+}
+@media only screen and (max-width: 576px) {
+  /* For mobile: */
+  .comments-container {
+    width: min(100%, 576px);
+    margin-inline: auto;
+  }
+}

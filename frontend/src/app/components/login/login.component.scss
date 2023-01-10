@@ -11,6 +11,8 @@
 
 .close-btn {
   float: right;
+  margin: 1rem;
+  font-size: 2rem;
 }
 
 .text{
@@ -32,4 +34,26 @@
 
 .icon {
   margin-right: 8px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile: */
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .text {
+    justify-content: center;
+    text-align: center;
+    margin: 32px 0;
+    width: min(100% - 5rem, 768px);
+    margin-inline: auto;
+  }
+  .login-btn {
+    margin: 16px 0;
+    width: min(100% - 2rem, 768px);
+    margin-inline: auto;
+    font-size: 1.2rem;
+  }
 }

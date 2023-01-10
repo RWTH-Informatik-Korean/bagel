@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -8,16 +8,20 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
-
+  
   selectedCategory: string;
   inputtedText: string;
   searched: boolean;
+  screenMode: string;
 
   constructor(
     private scroller: ViewportScroller,
   ) {}
   
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let screenWidth = window.innerWidth;
+    (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
+  }
   
   scrollToTop() {
     this.scroller.scrollToPosition([0, 0]);
@@ -29,4 +33,10 @@ export class MainPageComponent implements OnInit {
     this.inputtedText = text;
     this.searched = this.inputtedText!=='';    
   }
+  @HostListener ('window:resize', ['$event'])
+  onResize(event: any) {
+    let screenWidth = window.innerWidth;
+    (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
+  }
+
 }

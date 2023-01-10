@@ -5,11 +5,12 @@
   background-color: #fff;
 }
 ::ng-deep .ql-container {
-  height: 90%;
+  height: 300px;
 }
 .register-container {
   max-width: 1024px;
-  margin: 40px auto 0;
+  margin: 16px auto 0;
+  padding: 32px;
   background-color: $bagel-W-text;
 }
 .form-group {
@@ -61,7 +62,6 @@ datalist option:hover, datalist option:active {
   padding: 10px;
 }
 quill-editor {
-  height: 300px;
   background-color: #fff;
 }
 .register-btn {
@@ -70,4 +70,17 @@ quill-editor {
   margin-top: 24px;
   padding: 8px;
   border-radius: 50px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile: */
+  .register-container {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 16px 0;
+    background-color: $bagel-W-text;
+  }
+  ::ng-deep .ql-container {
+    height: 200px;
+  }
 }

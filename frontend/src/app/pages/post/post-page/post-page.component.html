@@ -8,9 +8,11 @@
     <span id="title">{{ bagel.title }}</span>
   </div>
   <div class="user-info">
-    <img src="../../assets/user-photo/tigger.png" alt="">
-    <span id="username">{{ bagel.username }}</span>
-    <span id="created-date">{{ bagel.createdAt }}</span>
+    <div>
+      <img src="../../assets/user-photo/tigger.png" alt="">
+      <span id="username">{{ bagel.username }}</span>
+    </div>
+    <span id="created-date">{{ bagel.createdAt | date:'mediumDate'}}</span>
   </div>
   <div class="content">{{ bagel.text }}</div>
   <app-comments></app-comments>
