@@ -1,8 +1,8 @@
 <section class="mainNav-container">
   <div class="mainNav-wrapper">
     <ul class="categories">
-      <li class="categoryItem" *ngFor="let category of categories">
-        <button id="category-title" (click)="selectCategory(category.category)">{{ category.category }}</button>
+      <li class="categoryItem" [ngClass]="selected===category.category ? 'selected' : ''" *ngFor="let category of categories">
+        <a (click)="selectCategory(category.category)">{{ category.category }}</a>
       </li>
     </ul>
     <ul class="courses-wrapper">
