@@ -1,7 +1,8 @@
 @import '../../../../styles.scss';
 
 .post-page-container {
-  max-width: 1024px;
+  width: min(100% - 4rem, 1024px);
+  margin-inline: auto;
   margin: 40px auto 60px;
 }
 .back-btn-container {
@@ -26,7 +27,6 @@
   width: 400px;
   display: flex;
   align-items: center;
-  margin-left: 10px;
 }
 .user-info img {
   width: 35px;
@@ -46,4 +46,29 @@
   margin-top: 30px;
   margin-bottom: 72px;
   font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile: */
+  .post-page-container {
+    margin-top: 0;
+    width: min(100% - 2rem, 768px);
+    margin-inline: auto;
+  }
+  .post-info {
+    margin: 16px 0;
+  }
+  #course {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+  #title {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    line-height: 100%;
+  }
+  .user-info {
+    width: 100%;
+    justify-content: space-between;
+  }
 }

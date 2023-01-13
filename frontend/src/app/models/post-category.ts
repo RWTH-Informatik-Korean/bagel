@@ -3,6 +3,7 @@ export interface PostCategory {
 }
 
 export const CATEGORIES: PostCategory[] = [
+  { category: 'All' },
   { category: 'Course' },
   { category: 'Study' },
   { category: 'InAachen' },

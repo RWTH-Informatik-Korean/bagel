@@ -19,7 +19,6 @@ export class MainNavigationComponent implements OnInit {
   selectCategory(data: string) {
     this.courses = COURSES.filter(courses => courses.category === data + 'ester');
     this.selected = data;
-    console.log(this.selected);
   }
 
 }

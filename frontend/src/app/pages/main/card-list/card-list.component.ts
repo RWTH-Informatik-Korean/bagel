@@ -15,7 +15,7 @@ export class CardListComponent implements OnInit {
   @Input() searchText: string;
   @Input() isSearch: boolean;
   @Output() currentBagelId: string;
-  bagels: BagelCard[];  
+  bagels: BagelCard[]; 
   noResult: boolean
   
   constructor(
@@ -52,5 +52,8 @@ export class CardListComponent implements OnInit {
         this.bagels = res;
       });
     }
-  }  
+  } 
+  showDetail(id: string) {
+    this.router.navigate(['/card',id], { skipLocationChange: true });
+  }
 }

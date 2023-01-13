@@ -106,14 +106,14 @@ export const COURSES: Course[] = [
 		moduleUrl: iconPraktisch
   },
   {    
-    courseName: 'Systemprogrammierung(PSP)',
+    courseName: 'System programmierung (PSP)',
     category: '3 Semester',
     courseId: 11,
 		module: 'Praktisch',
 		moduleUrl: iconPraktisch
   },
   {    
-    courseName: 'Datenkommunikation',
+    courseName: 'Daten kommunikation',
     category: '3 Semester',
     courseId: 12,
 		module: 'Technisch',
@@ -176,7 +176,7 @@ export const COURSES: Course[] = [
 		moduleUrl: iconSonstige
   },
   {    
-    courseName: 'Nicht-technisches Wahlfach',
+    courseName: 'Nicht- technisches Wahlfach',
     category: '5 Semester',
     courseId: 21,
 		module: 'Wahlpflicht',
