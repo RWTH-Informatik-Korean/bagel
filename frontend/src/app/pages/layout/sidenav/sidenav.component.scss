@@ -1,0 +1,100 @@
+@import '../../../../styles.scss';
+
+.sidenav-container {
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+}
+.avatar-info {
+  width: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+}
+i {
+  font-size: 2rem;
+}
+.close-btn {
+  margin: 16px;
+  position: absolute;
+  right: 0px;
+}
+.avatar-item {
+  margin-top: 20px;
+  width: 90%;
+  text-align: center;
+}
+#dropdownMenuLink {
+  width: 100%;
+  margin: 0;;
+}
+.avatar-image {
+  width: 80%;
+  border-radius: 50%;
+  margin-top: 64px;
+  text-align: center;
+}
+.avatar-change-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#avatar-bg {
+  opacity: 0.5;
+}
+#avatar-change-icon {
+  margin-top: -130px;
+  margin-bottom: 80px;
+}
+input {
+  width: 100%;
+  text-align: center;
+}
+.avatar-btn {
+  width: 120px;
+  height: 32px;
+  font-size: 1rem;
+  text-align: center;
+  border: 0.5px solid #F0CB92;
+  border-radius: 50px;
+  background-color: #ffffff;
+  color: #F0CB92;
+}
+#edit-btn {
+  border: none;
+  background-color: $bagel-primary;
+  color: $bagel-W-text;
+}
+#save-btn {
+  border: none;
+  background-color: $bagel-warn;
+  color: $bagel-W-text;
+}
+.dropdown-menu {
+  width: 100%;
+  border: none;
+}
+.dropdown-item-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-items: center;
+} 
+.dropdown-item, .dropdown-image {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+}
+.avatar-upload-text {
+  font-size: 0.75rem;
+}
+#avatar {
+  opacity: 0;
+  height: 0;
+}
+label {
+  width: 100%;
+  text-align: center;
+}

@@ -1,0 +1,94 @@
+@import '../../../../styles.scss';
+
+.cardList-wrapper {
+  max-width: 1180px;
+  margin: 44px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 44px;
+}
+.bagelHidden {
+  display: none;
+}
+.newBagel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  font-size: 1.5rem;
+  background-color: #D9D9D9;
+  box-shadow: 0 3px 6px rgba(93,67,58,0.12), 0 3px 6px rgba(93,67,58,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.cardItem {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  height: 400px;
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba(93,67,58,0.12), 0 3px 6px rgba(93,67,58,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.cardItem:hover, .newBagel:hover {
+  box-shadow: 0 14px 28px rgba(93,67,58,0.25), 0 10px 10px rgba(93,67,58,0.22);
+}
+.cardItem-header {
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.cardItemH-right {
+  margin-right: -30px;
+  padding-right: 10px;
+  width: 100px;
+  height: 24px;
+  display: flex;
+  justify-content : right;
+	align-items : center;
+  border-radius: 50px 0 0 50px;
+}
+.Course {
+  background-color: $bagel-primary;
+  color: $bagel-W-text;
+}
+.Study {
+  background-color: $bagel-warn;
+  color: $bagel-W-text;
+}
+.InAachen {
+  background-color: $bagel-accent;
+  color: $bagel-dark;
+}
+.AfterRWTH {
+  background-color: $bagel-dark;
+  color: $bagel-accent;
+}
+.cardItem-content {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  font-size: 1.5rem;
+}
+.cardItemC-text {
+  margin: 1rem 0;
+  height: 64px;
+  line-height: normal;
+}
+.cardItem-footer {
+  margin-top: 1rem;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardItemF-right {
+  display: flex;
+}
+#save, #view, #chat {
+  padding: 8px;
+}
+.bi {
+  vertical-align: 3px;
+}

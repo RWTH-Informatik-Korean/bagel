@@ -1,0 +1,15 @@
+<div class="post-page-container">
+  <div *ngIf="bagel._id" class="back-btn-container">
+    <!-- todo: add history router link -->
+    <a href=""><img src="../../assets/icons/backIcon.svg" alt="back-icon"></a>
+  </div>
+  <div id="course">{{ bagel.course }}</div>
+  <div id="title">{{ bagel.title }}</div>
+  <div id="user-info">
+    <img src="../../assets/user-photo/tigger.png" alt="">
+    <div class="username">{{ bagel.username }}</div>
+    <div class="created-date">{{ bagel.createdAt }}</div>
+  </div>
+  <div class="content">{{ bagel.text }}</div>
+  <app-comments></app-comments>
+</div>

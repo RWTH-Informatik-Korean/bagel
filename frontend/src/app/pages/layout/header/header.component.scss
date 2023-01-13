@@ -1,0 +1,39 @@
+@import '../../../../styles.scss'; 
+
+.container{
+  max-width: 1180px;
+  height: 85px;
+  align-items: center;
+  display: flex;
+  z-index: 1;
+  margin: 0 auto;
+}
+
+.logo{
+  float: left;
+  padding: 0px;
+}
+
+.btn-container{
+  height: 48px;
+  margin-left: auto;
+}
+
+.btn-item{
+  margin-left: 24px;
+  width: 127px;
+  height: 100%;
+  font-size: 1rem;
+  text-align: center;
+  border: 0.5px solid;
+  border-radius: 50px;
+  background-color: #ffffff;
+}
+
+.temp-btn {
+  margin-right: 100px;
+}
+.temp-img {
+  border-radius: 50%;
+  height: 50px;
+}

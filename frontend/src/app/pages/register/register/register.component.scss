@@ -1,0 +1,73 @@
+@import '../../../../styles.scss';
+
+::ng-deep .ql-snow .ql-editor {
+  font-size: 1rem;
+  background-color: #fff;
+}
+::ng-deep .ql-container {
+  height: 90%;
+}
+.register-container {
+  max-width: 1024px;
+  margin: 40px auto 0;
+  background-color: $bagel-W-text;
+}
+.form-group {
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+}
+label {
+  font-family: 'Poppins';
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+input {
+  height: 40px;
+  padding: 10px;
+}
+.form-select {
+  block-size: 40px;
+}
+select {
+  padding-left: 10px;
+  color: $bagel-dark;
+}
+::placeholder { 
+  color: $bagel-dark;
+  opacity: 0.5;
+}
+datalist {
+  position: absolute;
+  max-height: 10rem;
+  border: 0 none;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+option {
+  width: 100%;
+  font-size: 0.8em;
+  padding: 0.3em 1em;
+  background-color: $bagel-dark;
+  cursor: pointer;
+}
+datalist option:hover, datalist option:active {
+  color: #fff;
+  background-color: $bagel-dark;
+  outline: 0 none;
+}
+#content-text {
+  height: 160px;
+  padding: 10px;
+}
+quill-editor {
+  height: 300px;
+  background-color: #fff;
+}
+.register-btn {
+  width: 100%;
+  background-color: $bagel-accent;
+  margin-top: 24px;
+  padding: 8px;
+  border-radius: 50px;
+}

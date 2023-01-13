@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <ul class="cardList-wrapper">
+    <!-- todo: after search hidden -->
+    <a [routerLink]="['/register']" class="newBagel" *ngIf="!searched">
+      <div>+ new card</div>      
+    </a>
+    <!-- <a [routerLink]="['/cards', bagel._id]" class="cardItem" *ngFor="let bagel of bagels"> -->
+    <a [routerLink]="['/card', bagel._id]" class="cardItem" *ngFor="let bagel of bagels">
+      <div class="cardItem-header">
+        <div class="cardItemH-left">{{ bagel.term }}</div>
+        <div class="cardItemH-right" [ngClass]="bagel.category">{{ bagel.category }}</div>  
+      </div>
+      <div class="cardItem-content">
+        <div class="cardItemC-text">{{ bagel.course }}</div>
+        <div class="cardItemC-text">{{ bagel.title }}</div>
+      </div>
+      <div class="cardItem-footer">
+        <div class="cardItemF-left">{{ bagel.username }}</div> 
+        <div class="cardItemF-right">
+          <!-- todo: view count , comment count -->
+          <!-- <div id="view"><i class="bi bi-eye"></i>{{ bagel.view }}</div>
+          <div id="chat"><i class="bi bi-chat-left"></i>{{ bagel.comment }}</div> -->
+          <div id="view"><i class="bi bi-eye"></i>0</div>
+          <div id="chat"><i class="bi bi-chat-left"></i>0</div>
+        </div>
+      </div>
+    </a>
+  </ul>
+</div>

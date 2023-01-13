@@ -1,0 +1,10 @@
+<div class="container">
+  <img class="logo" routerLink="/" src="../../assets/logos/Bagel.svg"/>
+  <div *ngIf="!isLoggedIn" class="btn-container">
+    <button mat-button class="btn-item" (click)="openModal()">Sign Up</button>
+    <button class="btn-item" (click)="openLoginModal()">Log In</button>
+  </div>
+  <div *ngIf="isLoggedIn" class="btn-container">
+    <button mat-button class="temp-btn" (click)="openSidenav()"><img class="temp-img" src="../../assets/images/Avatar_1.png"/></button>
+  </div>
+</div>

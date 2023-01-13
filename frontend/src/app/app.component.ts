@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'bagel';
+  
+  constructor(
+    private scroller: ViewportScroller
+  ) {}
+
+  
+  scrollToTop() {
+    this.scroller.scrollToPosition([0, 0]);
+  }
+
 }

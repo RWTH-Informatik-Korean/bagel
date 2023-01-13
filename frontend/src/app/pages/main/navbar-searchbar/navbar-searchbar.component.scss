@@ -1,0 +1,46 @@
+@import '../../../../styles.scss';
+
+.nav-search-bar{
+  flex-direction: row;
+  max-width: 1180px;
+  max-height: 120px;
+  padding-top: 36px;
+  align-items: center;
+  display: flex;
+  margin: 0 auto;
+}
+.navbar{
+  display: flex;
+}
+.searchbar{
+  vertical-align: bottom;
+  vertical-align: 20%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: auto;
+}
+.searchbar input{
+  font-size: 0.9rem;
+  padding: 4px;
+  width: 360px;
+  border-color: gray;
+  border-style: solid;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+.searchbar input:focus {
+  outline: none !important;
+  border: 2px solid $bagel-warn;
+}
+.nav-item{
+  padding-right: 32px;
+  font-size: 1.5rem;
+  margin-right: 15px;
+  cursor: pointer;
+}
+a:hover{
+  color: $bagel-warn;
+  text-decoration: none;
+}

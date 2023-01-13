@@ -19,6 +19,7 @@ const app = express();
 const port = 8080;
 
 app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 app.use(helmet());
 app.use(cors());
 app.use(morgan('tiny'));
@@ -61,6 +62,26 @@ app.get('/category/post', async (req, res) => {
   }
 });
 
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
+app.get('/cards', async (req, res, next) => {
+  if(req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+
+    const searchedCard = await cardRepository.searchCards(regex);
+    if (searchedCard) {
+      res.status(200).json(searchedCard);
+    } else {
+      res.status(404).json({ message: 'No card match that query, please try again.' });
+    }
+  }
+  else {
+    next();
+  }
+})
+
 app.get('/cards', async (req, res) => {
   const cards = await cardRepository.getAll();
   if(cards) {
@@ -93,6 +114,26 @@ app.post('/card', async (req, res) => {
   const { title, text, category, term, course } = req.body;
   const card = await cardRepository.create(title, text, category, term, course );
   res.status(201).json(card);
+
+app.put('/card/:id', async (req, res) => {
+  const { title, text, category, term, course } = req.body;
+  const id = req.params.id;
+  const card = await cardRepository.getCard(id);
+   if(!card){
+    res.status(404).json({ message: `card not found :${id}` });
+  }
+  const updated = await cardRepository.update(id, title, text, category, term, course);
+  res.status(200).json(updated);
+})
+
+app.delete('/card/:id', async (req, res) => {
+  const id = req.params.id;
+  const card = await cardRepository.getCard(id);
+   if(!card){
+    res.status(404).json({ message: `card not found :${id}` });
+  }
+  await cardRepository.remove(id);
+  res.sendStatus(204);
 })
 
 app.put('/card/:id', async (req, res) => {

@@ -1,0 +1,35 @@
+@import '../../../styles.scss';
+
+.container{
+  max-width: 420px;
+  max-height: 358px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25%;
+  text-align: center;
+} 
+
+.close-btn {
+  float: right;
+}
+
+.text{
+  font-size: 1.3rem;
+  margin: 12px 0 0 12px;
+}
+
+.login-btn{
+  width: 100%;
+  padding: 12px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 50px;
+  border: none;
+  background-color: #F0CB92;
+  margin: 24px 12px 12px 12px;
+}
+
+.icon {
+  margin-right: 8px;
+}

@@ -1,0 +1,51 @@
+<form class="register-container container">
+  <div class="form-row row">
+    <div class="form-group col-sm-6">
+      <label for="selectCategory">Category</label>
+      <select class="form-select form-control" id="selectCategory" (change)="selectCategory()">
+        <option selected>Select category</option>
+        <option value="courses">Courses</option>
+        <option value="review">Review</option>
+        <option value="community">Community</option>
+      </select>    
+    </div>
+    <div class="form-group col-sm-6">
+      <label for="inputTerm">Term</label>
+      <input type="term" class="form-control" placeholder="ex) ss21, ws22">
+    </div>
+  </div>
+  
+  <div class="form-row row">
+    <div class="form-group col-6">
+      <label for="inputCourses">Courses</label>
+      <input type="Courses" class="form-control" id="inputCourses" list="selectCourses" placeholder="Input course" [disabled]="isEnabled">
+      <datalist id="selectCourses">
+        <option value="Programmierung">Programmierung</option>
+        <option value="Technische Informatik">Technische Informatik</option>
+        <option value="Diskrete Strukturen">Diskrete Strukturen</option>
+        <option value="Analysis für Informatiker">Analysis für Informatiker</option>
+        <option value="Datenstrukturen und Algorithmen">Datenstrukturen und Algorithmen</option>
+        <option value="Betriebssysteme und Systemsoftware">Betriebssysteme und Systemsoftware</option>
+        <option value="Formale Systeme, Automaten, Prozesse">Formale Systeme, Automaten, Prozesse</option>
+        <option value="Lineare Algebra">Lineare Algebra</option>
+      </datalist>
+    </div>
+    <div class="form-group col-6">
+      <label for="inputPassword4">Name</label>
+      <input type="userName" class="form-control" placeholder="자동으로 userId 받아오나?">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="inputTitle">Title</label>
+    <input type="text" class="form-control" placeholder="말로 과제 같이 합시다">
+  </div>
+  <div class="form-group">
+    <label for="inputContent">Content</label>
+    <quill-editor [(ngModel)]="content"
+    [modules]="modules" (onEditorCreated)="addBindingCreated($event)"></quill-editor>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="register-btn">REGISTER</button>
+  </div>
+</form>
