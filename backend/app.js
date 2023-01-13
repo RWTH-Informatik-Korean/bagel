@@ -15,7 +15,6 @@ import * as cardRepository from './database/card.js';
 import authRouter from './router/auth.js'
 import verificationRouter from './router/verification.js'
 
-
 const app = express();
 const port = 8080;
 

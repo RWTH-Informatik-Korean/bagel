@@ -18,7 +18,7 @@ router.get('/signup/google', (req, res) => {
 
 router.post('/signup/google', async (req, res) => {
    const { username, googleID, avataUrl } = req.body;
-   
+
    if (googleID == 'undefined') {
       res.status(404).json({ message: 'no googleID' });
    } else {
