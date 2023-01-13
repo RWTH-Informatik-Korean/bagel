@@ -9,6 +9,8 @@ const url = "http://localhost:8080";
 export class AuthService {
 
   private email$: string = '';
+  private googleId$: string = '';
+  private avatarUrl$: string = '';
 
   constructor(
     private http: HttpClient
@@ -22,8 +24,8 @@ export class AuthService {
     return this.http.post<any>(`${url}/verification/check`, { email, verifiCode });
   }
 
-  saveUsername(username: string){
-    this.http.post<any>(`${url}/verification/check`, { username });
+  saveUsername(googleId: string, username: string, avataUrl: string){
+    return this.http.post<any>(`${url}/auth/google/update`, { googleId, username, avataUrl});
   }
 
   updateEmail(email: string){
@@ -32,5 +34,13 @@ export class AuthService {
   
   getEmail(){
     return this.email$;
+  }
+
+  getGoogleId(){
+    return this.googleId$;
+  }
+
+  getAvatarUrl(){
+    return this.avatarUrl$;
   }
 }
