@@ -8,7 +8,6 @@ router.get('/login/google', passport.authenticate('googleLogin', { scope: ['prof
 
 router.get('/signup/google', (req, res) => {
    const googleID = req.flash('googleID');
-   console.log(googleID)
  
    if(googleID == undefined) {
      res.redirect('/auth/login/google')
@@ -19,6 +18,7 @@ router.get('/signup/google', (req, res) => {
 
 router.post('/signup/google', async (req, res) => {
    const { username, googleID, avataUrl } = req.body;
+
    if (googleID == 'undefined') {
       res.status(404).json({ message: 'no googleID' });
    } else {
