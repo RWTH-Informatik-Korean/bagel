@@ -30,6 +30,7 @@ import { CommentComponent } from './pages/post/comments/comment/comment.componen
 import { CommentFormComponent } from './pages/post/comments/comment-form/comment-form.component';
 import { CommentsComponent } from './pages/post/comments/comments.component';
 import { AfterSearchComponent } from './pages/after-search/after-search.component';
+import { SignupUsernameComponent } from './components/signup-username/signup-username.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { AfterSearchComponent } from './pages/after-search/after-search.componen
     SignupComponent,
     Signup2Component,
     TopButtonComponent,
-    AfterSearchComponent
+    AfterSearchComponent,
+    SignupUsernameComponent
   ],
   imports: [
     BrowserModule,
