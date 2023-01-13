@@ -2,6 +2,7 @@
 <div class="container">
   <div class="title">Authenticaation with Email</div>
   <div class="text">we have sent you code to your email for verification</div>
-  <input type="text" [placeholder]="'enter code'">
-  <button class="get-started">Getting Started</button>
+  <input [(ngModel)]="verifiCode" type="text" [placeholder]="'enter code'">
+  <div *ngIf="verifiFailed" class="warning-msg">{{ warningMsg }}</div>
+  <button (click)="verificationCode()" class="get-started">Getting Started</button>
 </div>

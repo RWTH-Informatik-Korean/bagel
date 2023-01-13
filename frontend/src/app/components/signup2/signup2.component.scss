@@ -10,6 +10,8 @@
 
 .close-btn {
   float: right;
+  margin: 1rem;
+  font-size: 2rem;
 }
 
 .title{
@@ -21,6 +23,13 @@
 .text{
   font-size: 1.3rem;
   margin: 12px 0 8px 12px;
+}
+
+.warning-msg{
+  font-size: 1rem;
+  margin-top: 20px;
+  text-align: center;
+  color: rgb(195, 20, 20);
 }
 
 input{

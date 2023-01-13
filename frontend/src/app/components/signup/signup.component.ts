@@ -12,6 +12,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 })
 export class SignupComponent implements OnInit {
   email: string = '';
+  warningMsg: string = 'example';
+  verifiFailed: boolean = false; 
 
   constructor(
     public dialogRef: MatDialogRef<SignupComponent>,
@@ -21,7 +23,7 @@ export class SignupComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-  }
+  } 
 
   closeModal() {
     this.dialogRef.close();
@@ -33,8 +35,13 @@ export class SignupComponent implements OnInit {
       console.log(data);
       console.log(data.status);
       if(data.message === `${this.email}으로 인증번호를 전송 하였습니다.`){
+        this.closeModal();
         this.openSignup2Modal();
+      } else {
+        this.warningMsg = data.message;
+        this.verifiFailed = true;
       }
+      this.auth.updateEmail(this.email);
     }
     )
   }
@@ -45,6 +52,7 @@ export class SignupComponent implements OnInit {
     dialogConfig.id = "signup2-component";
     dialogConfig.height = "600px";
     dialogConfig.width = "800px";
+    dialogConfig.data = this.email;
     const modalDialog = this.matDialog.open(Signup2Component, dialogConfig);
   }
 

@@ -8,6 +8,8 @@ const url = "http://localhost:8080";
 })
 export class AuthService {
 
+  private email$: string = '';
+
   constructor(
     private http: HttpClient
     ){}
@@ -16,11 +18,19 @@ export class AuthService {
     return this.http.post<any>(`${url}/verification/send`, { email });
   }
 
-  verificationCode(email: string, code: string){
-    return this.http.post<any>(`${url}/verification/check`, { email, code });
+  verificationCode(email: string, verifiCode: string){
+    return this.http.post<any>(`${url}/verification/check`, { email, verifiCode });
   }
 
   saveUsername(username: string){
     this.http.post<any>(`${url}/verification/check`, { username });
+  }
+
+  updateEmail(email: string){
+    this.email$ = email
+  }
+  
+  getEmail(){
+    return this.email$;
   }
 }

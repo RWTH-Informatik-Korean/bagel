@@ -3,6 +3,6 @@
   <div class="title">Email Confirmation</div>
   <div class="text">E-mail</div>
   <input [(ngModel)]="email" type="text" [placeholder]="'name@rwth-aachen.de'">
+  <div *ngIf="verifiFailed" class="warning-msg">{{ warningMsg }}</div>
   <button class="next" (click)="verificationEmail()">Next</button>
-  <button class="next" (click)="openSignup2Modal()">Next</button>
 </div>
