@@ -1,15 +1,44 @@
-.container{
-  position: static;
-  height: 127px;
-  display: flex;
-  align-items: center;
-}
+@import '../../../../styles.scss';
 
 .footer-container{
-  width: 100%;
-  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: -128px;
+  height: 128px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
-span{
-  display: block;
+@media only screen and (max-width: 768px) {
+  /* For mobile: */
+  .footer-text {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  /* For mobile: */
+  .footer-text {
+    font-size: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile: */
+  .footer-text {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  /* For mobile: */
+  .footer-container{
+    height: 100px;
+  }
+  .footer-text {
+    font-size: 0.5rem;
+  }
 }

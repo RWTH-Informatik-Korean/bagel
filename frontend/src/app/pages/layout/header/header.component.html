@@ -1,10 +1,22 @@
-<div class="container">
-  <img class="logo" routerLink="/" src="../../assets/logos/Bagel.svg"/>
-  <div *ngIf="!isLoggedIn" class="btn-container">
-    <button mat-button class="btn-item" (click)="openModal()">Sign Up</button>
-    <button class="btn-item" (click)="openLoginModal()">Log In</button>
-  </div>
-  <div *ngIf="isLoggedIn" class="btn-container">
-    <button mat-button class="temp-btn" (click)="openSidenav()"><img class="temp-img" src="../../assets/images/Avatar_1.png"/></button>
+<div class="container-fluid">
+  <div class="content-wrapper">
+    <a href=""><img class="logo" src="../../assets/logos/Bagel.svg"/></a>
+    <div *ngIf="screenMode==='W'">
+      <div *ngIf="!isLoggedIn" class="btn-container">
+        <button mat-button class="btn-item" (click)="openModal()">Sign Up</button>
+        <button class="btn-item" (click)="openLoginModal()">Log In</button>
+      </div>
+      <div *ngIf="isLoggedIn" class="btn-container">
+        <button mat-button class="temp-btn" (click)="openSidenav()"><img class="temp-img" src="../../assets/images/Avatar_1.png"/></button>
+      </div>
+    </div>
+    <div *ngIf="screenMode==='M'">
+      <div *ngIf="!isLoggedIn">
+        <button class="btn-item" (click)="openLoginModal()">Log In</button>
+      </div>
+      <div *ngIf="isLoggedIn">
+        <button mat-button class="temp-btn" (click)="openSidenav()"><img class="temp-img" src="../../assets/images/Avatar_1.png"/></button>
+      </div>
+    </div>
   </div>
 </div>

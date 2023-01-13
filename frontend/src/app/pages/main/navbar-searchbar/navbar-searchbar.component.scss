@@ -1,16 +1,22 @@
 @import '../../../../styles.scss';
 
 .nav-search-bar{
-  flex-direction: row;
-  max-width: 1180px;
+  width: min(100% - 1rem, 1180px);
+  margin-inline: auto;  
   max-height: 120px;
-  padding-top: 36px;
+  padding: 32px 0;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-gap: 200px;
   align-items: center;
-  display: flex;
-  margin: 0 auto;
 }
 .navbar{
   display: flex;
+  justify-content: space-between;
+}
+.nav-item{
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 .searchbar{
   vertical-align: bottom;
@@ -34,13 +40,55 @@
   outline: none !important;
   border: 2px solid $bagel-warn;
 }
-.nav-item{
-  padding-right: 32px;
-  font-size: 1.5rem;
-  margin-right: 15px;
-  cursor: pointer;
-}
 a:hover{
   color: $bagel-warn;
   text-decoration: none;
+}
+.selected {
+  color: $bagel-warn;
+}
+
+@media only screen and (max-width: 992px) {
+  /* For Pad */
+  .nav-search-bar{
+    width: min(100% - 2rem, 1180px);
+  }  
+  .nav-search-bar{
+    grid-gap: 10%;
+  }  
+  .nav-item{
+    font-size: 1.2rem;
+  }
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile: */
+  .nav-search-bar{
+    padding: 16px 0;
+    grid-template-columns: 2fr 1fr;
+  }
+  .m-nav-search-bar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  }
+  .searchbar {
+    width: 100%;
+  }
+  .m-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .nav-item {
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+  }
+  .searchbar input {
+    padding: 4px 8px;
+    border: 0.5px solid $bagel-dark;
+    width: 100%;
+  }
 }

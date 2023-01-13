@@ -1,18 +1,27 @@
 <div class="container-fluid">
+  <div class="aboutSearch" *ngIf="isSearch" >
+    <div class="no-result" *ngIf="noResult" >
+      <span class="info-text">죄송합니다. 검색어 관련 게시글이 없습니다.</span>
+      <span class="info-text">No Result Found</span>
+      <span class="info-text">We can’t find any item matching your search</span>
+    </div>
+    <div class="has-result" *ngIf="!noResult">
+      <span class="res-text">We’ve found 3 post!</span>
+    </div>
+  </div>
   <ul class="cardList-wrapper">
-    <!-- todo: after search hidden -->
-    <a [routerLink]="['/register']" class="newBagel" *ngIf="!searched">
+    <a [routerLink]="['/register']" class="cardItem" id="newBagel" *ngIf="!isSearch">
       <div>+ new card</div>      
     </a>
-    <!-- <a [routerLink]="['/cards', bagel._id]" class="cardItem" *ngFor="let bagel of bagels"> -->
-    <a [routerLink]="['/card', bagel._id]" class="cardItem" *ngFor="let bagel of bagels">
+    <a class="cardItem" (click)="showDetail(bagel._id)" *ngFor="let bagel of bagels">
+    <!-- <a [routerLink]="['/card', bagel._id]" class="cardItem" *ngFor="let bagel of bagels"> -->
       <div class="cardItem-header">
         <div class="cardItemH-left">{{ bagel.term }}</div>
         <div class="cardItemH-right" [ngClass]="bagel.category">{{ bagel.category }}</div>  
       </div>
       <div class="cardItem-content">
-        <div class="cardItemC-text">{{ bagel.course }}</div>
-        <div class="cardItemC-text">{{ bagel.title }}</div>
+        <div class="cardItemC-text" id="text-course">{{ bagel.course }}</div>
+        <div class="cardItemC-text" id="text-title">{{ bagel.title }}</div>
       </div>
       <div class="cardItem-footer">
         <div class="cardItemF-left">{{ bagel.username }}</div> 
@@ -20,8 +29,8 @@
           <!-- todo: view count , comment count -->
           <!-- <div id="view"><i class="bi bi-eye"></i>{{ bagel.view }}</div>
           <div id="chat"><i class="bi bi-chat-left"></i>{{ bagel.comment }}</div> -->
-          <div id="view"><i class="bi bi-eye"></i>0</div>
-          <div id="chat"><i class="bi bi-chat-left"></i>0</div>
+          <div id="view"><img id="view" src="../../../../assets/icons/eye.svg">5</div>
+          <div id="chat"><img id="chat" src="../../../../assets/icons/chat.svg">0</div>
         </div>
       </div>
     </a>
