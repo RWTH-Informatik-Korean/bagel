@@ -11,11 +11,11 @@ export default (app) => {
    passport.use('googleLogin', googleLogin);
 
    passport.serializeUser((user, done) => {
-      done(null, user.googleID);
+      done(null, { username: user.username, googleID: user.googleID });
    });
 
-   passport.deserializeUser((id, done) => {
-      userRepository.findUser(id)
+   passport.deserializeUser((user, done) => {
+      userRepository.findUser(user.googleID)
          .then(user => done(null, user))
          .catch(err => done(err));
    });
