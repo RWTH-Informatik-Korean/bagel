@@ -15,11 +15,11 @@ const cardSchema = new Mongoose.Schema(
 const Card = Mongoose.model('cards', cardSchema);
 
 export async function getAll(){
-  return Card.find({});
+  return Card.find({}).sort({ "_id": -1 });
 }
 
 export async function getList(){
-  return Card.find({}, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1 });
+  return Card.find({}, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1 }).sort({ "_id": -1 });
 }
 
 export async function getCard(id){
