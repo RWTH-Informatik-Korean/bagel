@@ -121,21 +121,28 @@ app.put('/card/:id', isAuth, async (req, res) => {
   const { title, text, category, term, course } = req.body;
   const id = req.params.id;
   const card = await cardRepository.getCard(id);
-   if(!card){
+  
+  if(!card){
     res.status(404).json({ message: `card not found :${id}` });
+  } else if(card.username != req.user.username){
+    res.status(403).json({ message: 'user is not author' });
+  } else {
+    const updated = await cardRepository.update(id, title, text, category, term, course);
+    res.status(200).json(updated);
   }
-  const updated = await cardRepository.update(id, title, text, category, term, course);
-  res.status(200).json(updated);
 });
 
 app.delete('/card/:id', isAuth, async (req, res) => {
   const id = req.params.id;
   const card = await cardRepository.getCard(id);
-   if(!card){
+  if(!card){
     res.status(404).json({ message: `card not found :${id}` });
-  }
+  } else if(card.username != req.user.username){
+    res.status(403).json({ message: 'user is not author' });
+  } else {
   await cardRepository.remove(id);
   res.sendStatus(204);
+  }
 });
 
 app.use((req, res, next) => {
