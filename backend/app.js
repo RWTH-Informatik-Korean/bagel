@@ -104,6 +104,9 @@ app.get('/cards/list', async (req, res) => {
 app.get('/card/:id', isAuth, async (req, res) => {
   const id = req.params.id;
   const card = await cardRepository.getCard(id);
+  card.views = card.views + 1;
+  card.save();
+
   if(card) {
     res.status(200).json(card);
   } else {
@@ -121,7 +124,7 @@ app.put('/card/:id', isAuth, async (req, res) => {
   const { title, text, category, term, course } = req.body;
   const id = req.params.id;
   const card = await cardRepository.getCard(id);
-  
+
   if(!card){
     res.status(404).json({ message: `card not found :${id}` });
   } else if(card.username != req.user.username){

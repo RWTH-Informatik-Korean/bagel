@@ -9,6 +9,7 @@ const cardSchema = new Mongoose.Schema(
     avataUrl: { type: String },
     term: { type: String, requierd: true },
     course: { type: String, requierd: true },
+    views: { type: Number, required: true },
   }, { timestamps: true, versionKey: false }
 );
 
@@ -19,7 +20,7 @@ export async function getAll(){
 }
 
 export async function getList(){
-  return Card.find({}, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1 }).sort({ "_id": -1 });
+  return Card.find({}, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1, views: 1 }).sort({ "_id": -1 });
 }
 
 export async function getCard(id){
@@ -33,7 +34,8 @@ export async function create(title, text, category, term, course){
     username: 'yoseob',
     category,
     term,
-    course
+    course,
+    views: 0,
   }).save();
 }
 
