@@ -124,6 +124,7 @@ app.put('/card/:id', isAuth, async (req, res) => {
   const { title, text, category, term, course } = req.body;
   const id = req.params.id;
   const card = await cardRepository.getCard(id);
+
   if(!card){
     res.status(404).json({ message: `card not found :${id}` });
   } else if(card.username != req.user.username){
@@ -137,6 +138,7 @@ app.put('/card/:id', isAuth, async (req, res) => {
 app.delete('/card/:id', isAuth, async (req, res) => {
   const id = req.params.id;
   const card = await cardRepository.getCard(id);
+
   if(!card){
     res.status(404).json({ message: `card not found :${id}` });
   } else if(card.username != req.user.username){
