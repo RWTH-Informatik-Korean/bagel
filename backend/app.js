@@ -158,7 +158,7 @@ app.post('/card/:id/comment', isAuth, async (req, res) => {
   const username = req.user.username;
 
   const comment = await cardRepository.commentCreate(cardId, text, username);
-  res.status(200).json(comment)
+  res.status(201).json(comment);
 });
 
 app.put('/comment/:id', async (req, res) => {

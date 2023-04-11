@@ -64,7 +64,8 @@ export async function remove(id) {
 
 export async function commentCreate(cardId, text, username) {
   const comment = await new Comment({ cardId, text, username }).save();
-  return Card.findByIdAndUpdate(cardId, { $push : { comments: comment._id } }, { returnOriginal: false });
+  Card.findByIdAndUpdate(cardId, { $push : { comments: comment._id } }, { returnOriginal: false });
+  return comment;
 }
 
 export async function getComment(id) {
