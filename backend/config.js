@@ -21,6 +21,11 @@ export const googleConfig = {
   secret: required('GOOGLE_SECRET')
 }
 
+export const googleConfig = {
+  id: required('GOOGLE_ID'),
+  secret: required('GOOGLE_SECRET')
+}
+
 export const nodemailerConfig = {
   user: required('NODEMAILER_USER'),
   pass : required('NODEMAILER_PASS')
