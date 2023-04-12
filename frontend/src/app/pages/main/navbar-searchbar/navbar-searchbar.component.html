@@ -1,18 +1,6 @@
-<div *ngIf="screenMode === 'W'" class="nav-search-bar">
+<div class="nav-search-bar">
   <div class="navbar">
-    <!-- <a class="nav-item" href="">All</a> -->
     <a class="nav-item" [ngClass]="selected===category.category ? 'selected' : ''" *ngFor="let category of categories">
-      <div (click)="selectedPostCategory(category.category)">{{ category.category }}</div>
-    </a>
-  </div>
-  <div class="searchbar">
-    <input [(ngModel)]="searchInput" name="searchInput" type="search" autocomplete="off" placeholder="Search" (keydown.enter)="searchCard(); $event.preventDefault(); "/>
-  </div>
-</div>
-<div *ngIf="screenMode === 'M'" class="m-nav-search-bar">
-  <div class="navbar">
-    <!-- <a class="nav-item" href="">All</a> -->
-    <a class="nav-item" *ngFor="let category of categories">
       <div (click)="selectedPostCategory(category.category)">{{ category.category }}</div>
     </a>
   </div>

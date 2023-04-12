@@ -24,7 +24,7 @@ router.post('/signup/google', async (req, res) => {
    } else {
       const newUser = await userRepository.create(username, googleID, avataUrl);
       if (newUser) {
-         req.session.passport = { user: googleID };
+         req.session.passport = { user: googleID, username: username };
          res.status(200).json(req.session);
       } else {
          res.status(404).json({ message: 'signup failed' });

@@ -33,4 +33,7 @@ export class SidenavComponent implements OnInit{
   changeAvatar(imageObject: { imageSrc: string; }) {
     this.myUser.imageSrc = imageObject.imageSrc;
   }  
+  updateUser() {
+    console.log('todo');
+  }
 }

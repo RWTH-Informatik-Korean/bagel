@@ -13,7 +13,11 @@
       <span id="username">{{ bagel.username }}</span>
     </div>
     <span id="created-date">{{ bagel.createdAt | date:'mediumDate'}}</span>
+    <div class="icon-wrapper" *ngIf="isMy">
+      <a (click)="bagelUpdate()"><i class="bi bi-pencil-fill"></i></a>
+      <a (click)="bagelDelete()"><i class="bi bi-trash3"></i></a>
+    </div>
   </div>
-  <div class="content">{{ bagel.text }}</div>
+  <quill-view [content]="bagel.text" format="html"></quill-view>
   <app-comments></app-comments>
 </div>

@@ -1,5 +1,16 @@
 @import '../../../../styles.scss';
 
+::ng-deep .ql-editor {
+  min-height: 150px;
+  padding-top: 30px;
+  padding-bottom: 72px;
+  & p {
+    font-size: 1.2rem;
+    font-family: "Poppins", sans-serif;
+    line-height: 1.5;
+  }
+}
+
 .post-page-container {
   width: min(100% - 4rem, 1024px);
   margin-inline: auto;
@@ -47,6 +58,13 @@
   margin-bottom: 72px;
   font-size: 1.2rem;
 }
+.icon-wrapper {
+  margin: 0 1rem;
+  & a i.bi {
+    margin: 0 0.25rem;
+  }  
+}
+
 
 @media only screen and (max-width: 768px) {
   /* For mobile: */
