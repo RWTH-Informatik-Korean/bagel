@@ -2,3 +2,5 @@
 Thumbs.db
 node_modules
 init-mongodb
+frontend/package-lock.json
+frontend/package.json

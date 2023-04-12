@@ -1,6 +1,6 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
-import { ScreenModeService } from './services/screen-mode.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,7 @@ export class AppComponent {
   
   constructor(
     private scroller: ViewportScroller,
+    private router: Router,
   ) {
     let screenWidth = window.innerWidth;
     (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
@@ -25,5 +26,8 @@ export class AppComponent {
   }
   scrollToTop() {
     this.scroller.scrollToPosition([0, 0]);
+  }
+  plusNewCard() {
+    this.router.navigate(['/register']);
   }
 }

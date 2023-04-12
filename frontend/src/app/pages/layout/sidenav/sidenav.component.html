@@ -1,7 +1,7 @@
 <mat-nav-list class="sidenav-container" [ngSwitch]="navMode">
   <button class="close-btn" type="button" (click)="onToggleClose()"><i class="bi bi-x-lg"></i></button>
   <!-- Saved Information -->
-  <section class="avatar-info" *ngSwitchCase="'saved'">
+  <section class="avatar-info" *ngSwitchCase="'default'">
     <img class="avatar-item avatar-image" [src]="myUser.imageSrc"/>
     <h2 class="avatar-item">{{ myUser.userName }}</h2>
     <span class="avatar-item">{{ myUser.email }}</span>
@@ -34,6 +34,6 @@
     <span class="avatar-item">
       <input type="text" placeholder="{{ myUser.email }}" />
     </span>
-    <button class="avatar-item avatar-btn" id="save-btn" type="button" (click)="changeViewMode()">Save</button>
+    <button class="avatar-item avatar-btn" id="save-btn" type="button" (click)="updateUser()">Save</button>
   </section>
 </mat-nav-list>

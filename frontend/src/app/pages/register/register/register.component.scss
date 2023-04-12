@@ -3,23 +3,29 @@
 ::ng-deep .ql-snow .ql-editor {
   font-size: 1rem;
   background-color: #fff;
+  white-space: normal !important;
 }
 ::ng-deep .ql-container {
   height: 300px;
 }
-.register-container {
-  max-width: 1024px;
-  margin: 16px auto 0;
+.container {
+  max-width: 1180px;
+  margin: 32px auto 0;
   padding: 32px;
-  background-color: $bagel-W-text;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 .form-group {
   padding: 8px 16px;
   display: flex;
   flex-direction: column;
+  
+  &:nth-child(4), &:nth-child(5), &:nth-child(6), &:nth-child(7)  {
+    grid-column: 1 / 4;
+  }
 }
 label {
-  font-family: 'Poppins';
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   margin-bottom: 4px;
 }
@@ -38,25 +44,35 @@ select {
   color: $bagel-dark;
   opacity: 0.5;
 }
-datalist {
+datalist #selectCourses {          //  안먹힌다
   position: absolute;
+  background-color: white;
+  border: 1px solid blue;
+  border-radius: 0 0 5px 5px;
+  border-top: none;
+  font-family: 'Poppins', sans-serif;
+  width: 350px;
+  padding: 5px;
   max-height: 10rem;
-  border: 0 none;
-  overflow-x: hidden;
   overflow-y: auto;
+  & option {
+    background-color: white;
+    padding: 4px;
+    color: blue;
+    margin-bottom: 1px;
+     font-size: 18px;
+    cursor: pointer;
+    
+    &:hover,  &.active{
+      background-color: lightblue;
+    }
+  }
 }
-option {
-  width: 100%;
-  font-size: 0.8em;
-  padding: 0.3em 1em;
-  background-color: $bagel-dark;
-  cursor: pointer;
-}
-datalist option:hover, datalist option:active {
-  color: #fff;
-  background-color: $bagel-dark;
-  outline: 0 none;
-}
+// datalist option:hover, datalist option:active {
+//   color: #fff;
+//   background-color: $bagel-dark;
+//   outline: 0 none;
+// }
 #content-text {
   height: 160px;
   padding: 10px;
@@ -64,17 +80,21 @@ datalist option:hover, datalist option:active {
 quill-editor {
   background-color: #fff;
 }
-.register-btn {
+.register-btn, .delete-btn {
   width: 100%;
   background-color: $bagel-accent;
   margin-top: 24px;
   padding: 8px;
   border-radius: 50px;
 }
-
+#btn-group {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
 @media only screen and (max-width: 768px) {
   /* For mobile: */
-  .register-container {
+  .container {
     max-width: 768px;
     margin: 0 auto;
     padding: 16px 0;

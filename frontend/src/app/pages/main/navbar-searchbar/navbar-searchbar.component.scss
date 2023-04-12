@@ -60,26 +60,23 @@ a:hover{
     font-size: 1.2rem;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 576px) {
   /* For mobile: */
   .nav-search-bar{
+    width: min(100% - 1rem, 576px);
     padding: 16px 0;
-    grid-template-columns: 2fr 1fr;
-  }
-  .m-nav-search-bar {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    align-items: center;
+  }
+  .navbar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 8px 8px 8px;
   }
   .searchbar {
     width: 100%;
-  }
-  .m-nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 8px;
   }
   .nav-item {
     font-size: 1rem;
