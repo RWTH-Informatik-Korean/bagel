@@ -1,12 +1,19 @@
 @import '../../../../styles.scss'; 
 
 .container-fluid {
-  z-index: 1;
+  position: fixed;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  background-color: rgb(240, 203, 146, 0.35);
+}
+.fixed {
+  background-color: #fff;
 }
 .content-wrapper {
   width: min(100%, 1180px);
-  height: 85px;
   margin-inline: auto;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,10 +33,7 @@
   border-radius: 50px;
   background-color: #ffffff;
 }
-.temp-btn {
-  margin-right: 100px;
-}
-.temp-img {
+.avatar-img {
   border-radius: 50%;
   height: 50px;
 }

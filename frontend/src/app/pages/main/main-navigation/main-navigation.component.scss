@@ -23,18 +23,19 @@
   border-bottom: 3px solid $bagel-accent;
   font-size: 1.3rem;
   text-align: center;
+  & a:hover {
+    color: $bagel-warn;
+    cursor: pointer;
+  }
 }
 .categoryItem:hover {
   border-bottom: 3px solid $bagel-warn;
-  cursor: pointer;
 }
 .selected {
   border-bottom: 3px solid $bagel-warn !important;
 }
 .courses-wrapper {
   display: grid;
-  // display: inline-grid;
-  // grid-template-columns: repeat(3, 1fr);
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px;
 }
@@ -44,6 +45,26 @@
 }
 .courseItem:hover {
   border: 3px solid $bagel-primary;
+}
+#department {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+#depart-item {
+  border: none;
+  text-align: center;
+  align-items: center;
+}
+#depart-logo {
+  max-width: 160px;
+  height: 64px;
+}
+#department:hover #depart-logo:hover {
+  transition: all 0.5s ease-in-out;
+  transform: scale(1.5);
+  z-index: 10;
+}
+#department:hover #depart-logo:not(:hover) {
+  opacity: 0.5;
 }
 .courses {
   display: flex;

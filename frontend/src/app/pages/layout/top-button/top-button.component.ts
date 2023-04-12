@@ -1,8 +1,5 @@
-import { DOCUMENT, isPlatformServer, ViewportScroller } from '@angular/common';
-import { Component, EventEmitter, HostListener, Inject, OnInit, Output } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import { NavigationEnd } from '@angular/router';
-import { debounce, debounceTime, fromEvent, map, Observable, tap } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
+import { Component, EventEmitter, HostListener, Inject, Output } from '@angular/core';
 
 @Component({
   selector: 'app-top-button',

@@ -10,11 +10,10 @@
     </div>
   </div>
   <ul class="cardList-wrapper">
-    <a [routerLink]="['/register']" class="cardItem" id="newBagel" *ngIf="!isSearch">
+    <a (click)="newBagel()" class="cardItem" id="newBagel" *ngIf="!isSearch && screenMode === 'W'">
       <div>+ new card</div>      
     </a>
     <a class="cardItem" (click)="showDetail(bagel._id)" *ngFor="let bagel of bagels">
-    <!-- <a [routerLink]="['/card', bagel._id]" class="cardItem" *ngFor="let bagel of bagels"> -->
       <div class="cardItem-header">
         <div class="cardItemH-left">{{ bagel.term }}</div>
         <div class="cardItemH-right" [ngClass]="bagel.category">{{ bagel.category }}</div>  

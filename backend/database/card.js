@@ -38,20 +38,16 @@ export async function getCard(id){
   return Card.findById(id);
 }
 
-export async function create(title, text, category, term, course){
+export async function create(title, text, category, term, course, username){
   return new Card({
     title,
     text,
-    username: 'yoseob',
+    username,
     category,
     term,
     course,
     views: 0,
   }).save();
-}
-
-export async function searchCards(keyword) {
-  return Card.find({$or: [{ title: keyword }, { text: keyword }]});
 }
 
 export async function update(id, title, text, category, term, course) {
