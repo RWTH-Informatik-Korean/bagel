@@ -77,13 +77,28 @@ app.get('/cards', async (req, res, next) => {
     } else {
       res.status(404).json({ message: 'No card match that query, please try again.' });
     }
-  }
-  else {
+  } else if(req.query.category) {
+    const category = req.query.category;
+    const categoryCard = await cardRepository.categoryCards(category);
+    if(categoryCard) {
+      res.status(200).json(categoryCard);
+    } else {
+      res.status(404).json({ message: 'No card match the category, please try again.' });
+    }
+  } else if(req.query.course) {
+    const course = req.query.course;
+    const courseCard = await cardRepository.courseCards(course);
+    if(courseCard) {
+      res.status(200).json(courseCard);
+    } else {
+     res.status(404).json({ message: 'No card match the course, please try again.' });
+    }
+  } else {
     next();
   }
 })
 
-app.get('/cards', async (req, res) => {
+app.get('/cards/', async (req, res) => {
   const cards = await cardRepository.getAll();
   if(cards) {
     res.status(200).json(cards);
@@ -104,15 +119,10 @@ app.get('/cards/list', async (req, res) => {
 app.get('/card/:id', isAuth, async (req, res) => {
   const id = req.params.id;
   const card = await cardRepository.getCard(id);
+  card.views = card.views + 1;
+  card.save();
 
   if(card) {
-    card.views = card.views + 1;
-    card.save();
-    
-    if(card.comments.length) {
-      const commentList = await cardRepository.getComments(card.comments);
-      card.comments = commentList;
-    }
     res.status(200).json(card);
   } else {
     res.status(404).json({ message: 'card not found' });
@@ -149,50 +159,8 @@ if(!card){
   } else if(card.username != req.user.username){
     res.status(403).json({ message: 'user is not author' });
   } else {
-    await cardRepository.remove(id);
-    res.sendStatus(204);
-  }
-});
-
-app.post('/card/:id/comment', isAuth, async (req, res) => {
-  const cardId = req.params.id;
-  const text = req.body.text;
-  const username = req.user.username;
-
-  const comment = await cardRepository.commentCreate(cardId, text, username);
-  res.status(201).json(comment);
-});
-
-app.put('/comment/:id', async (req, res) => {
-  const id = req.params.id;
-  const text = req.body.text;
-  const username = req.user.username;
-
-  const comment = await cardRepository.getComment(id);
-
-  if(!comment){
-    res.status(404).json({ message: `comment not found: ${id}` });
-  } else if(username != comment.username) {
-    res.status(403).json({ message: `user is not autor`});
-  } else {
-    const update = await cardRepository.commentUpdate(id, text);
-    res.status(200).json(update);
-  }
-});
-
-app.delete('/comment/:id', isAuth, async (req, res) => {
-  const id = req.params.id;
-  const username = req.user.username;
-
-  const comment = await cardRepository.getComment(req.params.id);
-
-  if(!comment){
-    res.status(404).json({ message: `comment not found: ${id}` });
-  } else if(username != comment.username) {
-    res.status(403).json({ message: `user is not autor`});
-  } else {
-    const remove = await cardRepository.commentRemove(id);
-    res.status(200).json(remove);
+  await cardRepository.remove(id);
+  res.sendStatus(204);
   }
 });
 

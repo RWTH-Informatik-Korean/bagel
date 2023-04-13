@@ -30,6 +30,14 @@ export async function getAll(){
   return Card.find({}).sort({ "_id": -1 });
 }
 
+export async function categoryCards(category) {
+  return Card.find({ category: category }, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1, views: 1 }).sort({ "_id": -1 });
+}
+
+export async function courseCards(course) {
+  return Card.find({ course: course }, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1, views: 1 }).sort({ "_id": -1 });
+}
+
 export async function getList(){
   return Card.find({}, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1, views: 1 }).sort({ "_id": -1 });
 }
@@ -48,6 +56,10 @@ export async function create(title, text, category, term, course, username){
     course,
     views: 0,
   }).save();
+}
+
+export async function searchCards(keyword) {
+  return Card.find({$or: [{ title: keyword }, { text: keyword }]});
 }
 
 export async function update(id, title, text, category, term, course) {
