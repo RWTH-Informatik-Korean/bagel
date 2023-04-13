@@ -144,7 +144,7 @@ app.delete('/card/:id', isAuth, async (req, res) => {
   const id = req.params.id;
   const card = await cardRepository.getCard(id);
 
-  if(!card){
+if(!card){
     res.status(404).json({ message: `card not found :${id}` });
   } else if(card.username != req.user.username){
     res.status(403).json({ message: 'user is not author' });
