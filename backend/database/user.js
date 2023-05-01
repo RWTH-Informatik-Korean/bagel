@@ -9,6 +9,7 @@ const userSchema = new Mongoose.Schema(
     avataUrl: { type: String },
     postCards: [],
     postComments: [],
+    rwthVerified: { type: Boolean, requried: true }
     }, { timestamps: true, versionKey: false }
 );
 
@@ -18,15 +19,11 @@ export async function findUser(googleID){
   return User.findOne({ googleID: googleID });
 }
 
-export async function findUsername(username){
-  return User.findOne({ username: username});
-}
-
-export async function create(username, googleID, avataUrl){
+export async function create(username, googleID, avatarUrl){
   return new User({
     username,
     googleID,
-    avataUrl,
+    avatarUrl
   }).save();
 }
 
@@ -49,6 +46,11 @@ export async function update(googleID, username, avataUrl){
     }
   });
   return user;
+}
+
+export async function updateVerfied(googleID) {
+  return User.findOneAndUpdate({googleID: googleID}
+    , { rwthVerified: true });
 }
 
 export async function remove(id) {

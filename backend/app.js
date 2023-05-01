@@ -22,12 +22,16 @@ const port = 8080;
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin:"http://localhost:4200",
+  credentials: true
+}));
 app.use(morgan('tiny'));
 app.use(session({ 
   secret: 'SECRET',
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { httpOnly: false }
 }));
 app.use(flash());
 
