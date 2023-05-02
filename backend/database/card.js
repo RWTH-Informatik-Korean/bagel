@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import * as userRepasitory from './user.js';
+
 const commentSchema = new Mongoose.Schema(
   {
     cardId : { type: String, require: true },
@@ -46,8 +48,8 @@ export async function getCard(id){
   return Card.findById(id);
 }
 
-export async function create(title, text, category, term, course, username){
-  return new Card({
+export async function create(title, text, category, term, course, username, googleID){
+  const card = await new Card({
     title,
     text,
     username,
@@ -56,6 +58,8 @@ export async function create(title, text, category, term, course, username){
     course,
     views: 0,
   }).save();
+  await userRepasitory.updatePostCards(googleID, card._id);
+  return card;
 }
 
 export async function searchCards(keyword) {
@@ -65,14 +69,23 @@ export async function searchCards(keyword) {
 export async function update(id, title, text, category, term, course) {
   return Card.findByIdAndUpdate(id, { title, text, category, term, course }, { returnOriginal: false });
 }
+export async function updateUsername(id, username){
+  await Card.findByIdAndUpdate(id, { username });
+}
 
-export async function remove(id) {
+export async function updateAvataUrl(id, avataUrl){
+  await Card.findByIdAndUpdate(id, { avataUrl });
+}
+
+export async function remove(id, googleID) {
+  await userRepasitory.deletePostCards(googleID, id);
   return Card.findByIdAndDelete(id);
 }
 
-export async function commentCreate(cardId, text, username) {
+export async function commentCreate(cardId, text, username, googleID) {
   const comment = await new Comment({ cardId, text, username }).save();
   await Card.findByIdAndUpdate(cardId, { $push : { comments: comment._id } }, { returnOriginal: false });
+  await userRepasitory.updatePostComments(googleID, comment._id);
   return comment;
 }
 
@@ -82,6 +95,14 @@ export async function getComment(id) {
 
 export async function commentUpdate(id, text) {
   return Comment.findByIdAndUpdate(id, { text }, { returnOriginal: false });
+}
+
+export async function commentUpdateUsername(id, username){
+  await Comment.findByIdAndUpdate(id, { username });
+}
+
+export async function commentUpdateAvataUrl(id, avataUrl){
+  await Comment.findByIdAndUpdate(id, { avataUrl });
 }
 
 export async function commentRemove(id) {

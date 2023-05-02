@@ -1,6 +1,7 @@
 import express from 'express';
 import passport from 'passport';
 import * as userRepository from '../database/user.js'
+import { isAuth } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -43,15 +44,18 @@ router.get('/login/google/callback',
    },
 );
 
-router.put('/google/update', async (req, res) => {
+router.put('/google/update', isAuth, async (req, res) => {
    const { googleID, username, avataUrl } = req.body;
-   const update = await userRepository.update(googleID, username, avataUrl);
-   if (update) {
-      res.status(200).json(update);
+   if(googleID == req.user.googleID){
+      const update = await userRepository.update(googleID, username, avataUrl);
+      if (update) {
+         res.status(200).json(update);
+      } else {
+         res.status(404).json({ message: 'user not found' });
+      }
    } else {
       res.status(404).json({ message: 'user not found' });
    }
-   res.status(200);
 });
 
 
