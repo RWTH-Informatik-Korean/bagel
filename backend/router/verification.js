@@ -1,10 +1,11 @@
 import express from 'express';
 
 import * as verifiEmail from '../verification/verification.js';
+import { emailRules, validate } from '../middleware/validate.js';
 
 const router = express.Router();
 
-router.post('/send', async (req, res) => {
+router.post('/send', emailRules(), validate, async (req, res) => {
   const email = req.body.email;
   const result = await verifiEmail.send(email);
 
