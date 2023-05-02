@@ -54,7 +54,7 @@ router.put('/google/update', isAuth, async (req, res) => {
          res.status(404).json({ message: 'user not found' });
       }
    } else {
-      res.status(404).json({ message: 'user not '});
+      res.status(404).json({ message: 'user not found'});
    }
 });
 
