@@ -91,7 +91,6 @@ router.put('/google/update', isAuth, usernameRules(), validate, async (req, res)
       if (username && !(await userRepository.findUsername(username))) {
          res.status(404).json({ message: 'username이 존재합니다.' });
        }
-       
       const update = await userRepository.update(googleID, username, avataUrl);
       if (update) {
          res.status(200).json(update);
@@ -102,8 +101,6 @@ router.put('/google/update', isAuth, usernameRules(), validate, async (req, res)
       res.status(404).json({ message: 'user not found'});
    }
 });
-
-
 
 router.get('/logout', (req, res) => {
    req.session.destroy((err) => {
