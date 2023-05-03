@@ -6,7 +6,7 @@ const userSchema = new Mongoose.Schema(
   {
     username: { type: String, required: true },
     googleID: { type: String, requierd: true },
-    avataUrl: { type: String },
+    avatarUrl: { type: String },
     postCards: [],
     postComments: [],
     rwthVerified: { type: Boolean, requried: true }
@@ -31,22 +31,22 @@ export async function create(username, googleID, avatarUrl){
   }).save();
 }
 
-export async function update(googleID, username, avataUrl){
-  const user = await User.findOneAndUpdate({ googleID }, { username, avataUrl });
+export async function update(googleID, username, avatarUrl){
+  const user = await User.findOneAndUpdate({ googleID }, { username, avatarUrl });
   user.postCards.map(async (cardId) => {
     if(username){
       await cardRepasitory.updateUsername(cardId, username);
     }
-    if(avataUrl){
-      await cardRepasitory.updateAvataUrl(cardId, avataUrl);
+    if(avatarUrl){
+      await cardRepasitory.updateAvatarUrl(cardId, avatarUrl);
     }
   });
   user.postComments.map(async (cardId) => {
     if(username){
       await cardRepasitory.commentUpdateUsername(cardId, username);
     }
-    if(avataUrl){
-      await cardRepasitory.commentUpdateAvataUrl(cardId, avataUrl);
+    if(avatarUrl){
+      await cardRepasitory.commentUpdateAvatarUrl(cardId, avatarUrl);
     }
   });
   return user;

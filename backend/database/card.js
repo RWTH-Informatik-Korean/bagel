@@ -7,7 +7,7 @@ const commentSchema = new Mongoose.Schema(
     cardId : { type: String, require: true },
     text: { type: String, require: true },
     username: { type: String, require: true },
-    avataUrl: { type: String },
+    avatarUrl: { type: String },
   }, { timestamps: true, versionKey: false }
 );
 const Comment = new Mongoose.model('comments', commentSchema);
@@ -18,7 +18,7 @@ const cardSchema = new Mongoose.Schema(
     text: { type: String, requierd: true },
     category: { type: String, requierd: true },
     username: { type: String, requierd: true },
-    avataUrl: { type: String },
+    avatarUrl: { type: String },
     term: { type: String, requierd: true },
     course: { type: String, requierd: true },
     views: { type: Number, required: true },
@@ -61,8 +61,8 @@ export async function updateUsername(id, username){
   await Card.findByIdAndUpdate(id, { username });
 }
 
-export async function updateAvataUrl(id, avataUrl){
-  await Card.findByIdAndUpdate(id, { avataUrl });
+export async function updateAvatarUrl(id, avatarUrl){
+  await Card.findByIdAndUpdate(id, { avatarUrl });
 }
 
 export async function remove(id, googleID) {
@@ -89,8 +89,8 @@ export async function commentUpdateUsername(id, username){
   await Comment.findByIdAndUpdate(id, { username });
 }
 
-export async function commentUpdateAvataUrl(id, avataUrl){
-  await Comment.findByIdAndUpdate(id, { avataUrl });
+export async function commentUpdateAvatarUrl(id, avatarUrl){
+  await Comment.findByIdAndUpdate(id, { avatarUrl });
 }
 
 export async function commentRemove(id) {
