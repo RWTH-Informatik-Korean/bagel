@@ -1,7 +1,7 @@
 import express from 'express';
 
 import * as verifiEmail from '../verification/verification.js';
-import { emailRules, validate } from '../middleware/validate.js';
+import { emailRules, usernameRules, validate } from '../middleware/validate.js';
 
 const router = express.Router();
 

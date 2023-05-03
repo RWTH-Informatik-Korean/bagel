@@ -2,6 +2,7 @@ import express from 'express';
 import passport from 'passport';
 import * as userRepository from '../database/user.js'
 import { isAuth } from '../middleware/auth.js';
+import { usernameRules } from '../middleware/validate.js';
 
 const router = express.Router();
 
@@ -17,12 +18,15 @@ router.get('/signup/google', (req, res) => {
    }
  });
 
-router.post('/signup/google', async (req, res) => {
+router.post('/signup/google', usernameRules(), async (req, res) => {
    const { username, googleID, avataUrl } = req.body;
 
    if (googleID == 'undefined') {
       res.status(404).json({ message: 'no googleID' });
    } else {
+      if (!await userRepository.findUsername(username)) {
+         res.status(404).json({ message: 'username이 존재합니다.' });
+       }
       const newUser = await userRepository.create(username, googleID, avataUrl);
       if (newUser) {
          req.session.passport = { user: googleID, username: username };
@@ -44,9 +48,13 @@ router.get('/login/google/callback',
    },
 );
 
-router.put('/google/update', isAuth, async (req, res) => {
+router.put('/google/update', usernameRules(), isAuth, async (req, res) => {
    const { googleID, username, avataUrl } = req.body;
    if(googleID == req.user.googleID){
+      if (username && !(await userRepository.findUsername(username))) {
+         res.status(404).json({ message: 'username이 존재합니다.' });
+       }
+       
       const update = await userRepository.update(googleID, username, avataUrl);
       if (update) {
          res.status(200).json(update);
@@ -54,7 +62,7 @@ router.put('/google/update', isAuth, async (req, res) => {
          res.status(404).json({ message: 'user not found' });
       }
    } else {
-      res.status(404).json({ message: 'user not '});
+      res.status(404).json({ message: 'user not found'});
    }
 });
 
