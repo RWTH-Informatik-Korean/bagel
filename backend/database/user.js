@@ -19,6 +19,10 @@ export async function findUser(googleID){
   return User.findOne({ googleID: googleID });
 }
 
+export async function findUsername(username){
+  return User.findOne({ username: username });
+}
+
 export async function create(username, googleID, avatarUrl){
   return new User({
     username,

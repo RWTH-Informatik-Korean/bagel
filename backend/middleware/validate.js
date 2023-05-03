@@ -20,5 +20,5 @@ export const usernameRules = () => {
   .if((value, { req }) => req.body.username).notEmpty()
   .trim()
   .isLength({ min:2, max:8 })
-  .withMessage('username의 길이는 2자 미만 이거나 8자 이상 입니다.');
+  .withMessage('username의 길이는 2~8자만 가능합니다.');
 }

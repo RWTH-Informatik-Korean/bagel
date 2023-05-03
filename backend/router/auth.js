@@ -2,7 +2,7 @@ import express from 'express';
 import passport from 'passport';
 import * as userRepository from '../database/user.js'
 import { isAuth } from '../middleware/auth.js';
-import { usernameRules } from '../middleware/validate.js';
+import { usernameRules, validate } from '../middleware/validate.js';
 
 const router = express.Router();
 
@@ -26,7 +26,7 @@ router.get('/signup/google', (req, res) => {
  *  signup user for bagel
  *  @param - googleID, username, avatarUrl
  */
-router.post('/signup/google', usernameRules(), async (req, res) => {
+router.post('/signup/google', usernameRules(), validate, async (req, res) => {
   // const profile = JSON.parse(req.query.profile);
   // console.log('받아온 정보: ', profile.googleID);
   console.log('받음');
@@ -35,16 +35,17 @@ router.post('/signup/google', usernameRules(), async (req, res) => {
    if (googleID == 'undefined') {
       res.status(404).json({ message: 'no googleID' });
    } else {
-      if (!await userRepository.findUsername(username)) {
+      if (await userRepository.findUsername(username)) {
          res.status(404).json({ message: 'username이 존재합니다.' });
+       } else {
+         const newUser = await userRepository.create(username, googleID, avatarUrl);
+         if (newUser) {
+            req.session.passport = { user: googleID, username: username };
+            res.status(200).json(req.session);
+         } else {
+            res.status(404).json({ message: '새로운 유저를 만들지 못했습니다.' });
+         }
        }
-      const newUser = await userRepository.create(username, googleID, avataUrl);
-      if (newUser) {
-         req.session.passport = { user: googleID, username: username };
-         res.status(200).json(req.session);
-      } else {
-         res.status(404).json({ message: 'signup failed' });
-      }
    }
 });
 
@@ -84,7 +85,7 @@ router.put('google/update/verified', async (req, res) => {
    }
  });
  
-router.put('/google/update', usernameRules(), isAuth, async (req, res) => {
+router.put('/google/update', isAuth, usernameRules(), validate, async (req, res) => {
    const { googleID, username, avataUrl } = req.body;
    if(googleID == req.user.googleID){
       if (username && !(await userRepository.findUsername(username))) {

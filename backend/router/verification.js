@@ -2,7 +2,7 @@ import express from 'express';
 import passport from 'passport';
 import * as verifiEmail from '../verification/verification.js';
 import * as userRepository from '../database/user.js';
-import { emailRules, usernameRules, validate } from '../middleware/validate.js';
+import { emailRules, validate } from '../middleware/validate.js';
 
 const router = express.Router();
 
