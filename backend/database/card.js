@@ -32,12 +32,28 @@ export async function getAll(){
   return Card.find({}).sort({ "_id": -1 });
 }
 
-export async function categoryCards(category) {
-  return Card.find({ category: category }, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1, views: 1 }).sort({ "_id": -1 });
+export async function getPages(page){
+  const offset = (page - 1) * 9;
+  return Card.find({})
+          .sort({ "_id": -1 })
+          .skip(offset)
+          .limit(9);
 }
 
-export async function courseCards(course) {
-  return Card.find({ course: course }, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1, views: 1 }).sort({ "_id": -1 });
+export async function categoryCards(category, page) {
+  const offset = (page - 1) * 9;
+  return Card.find({ category: category }, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1, views: 1 })
+              .sort({ "_id": -1 })
+              .skip(offset)
+              .limit(9);
+}
+
+export async function courseCards(course, page) {
+  const offset = (page - 1) * 9;
+  return Card.find({ course: course }, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1, views: 1 })
+              .sort({ "_id": -1 })
+              .skip(offset)
+              .limit(9);
 }
 
 export async function getList(){
@@ -62,8 +78,12 @@ export async function create(title, text, category, term, course, username, goog
   return card;
 }
 
-export async function searchCards(keyword) {
-  return Card.find({$or: [{ title: keyword }, { text: keyword }]});
+export async function searchCards(keyword, page) {
+  const offset = (page - 1) * 9;
+  return Card.find({$or: [{ title: keyword }, { text: keyword }]})
+              .sort({ "_id": -1 })
+              .skip(offset)
+              .limit(9);
 }
 
 export async function update(id, title, text, category, term, course) {

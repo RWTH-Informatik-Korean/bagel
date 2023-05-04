@@ -72,10 +72,12 @@ function escapeRegex(text) {
 };
 
 app.get('/cards', async (req, res, next) => {
+  const page = req.query.page;
+
   if(req.query.search) {
     const regex = new RegExp(escapeRegex(req.query.search), 'gi');
 
-    const searchedCard = await cardRepository.searchCards(regex);
+    const searchedCard = await cardRepository.searchCards(regex, page);
     if (searchedCard) {
       res.status(200).json(searchedCard);
     } else {
@@ -83,7 +85,7 @@ app.get('/cards', async (req, res, next) => {
     }
   } else if(req.query.category) {
     const category = req.query.category;
-    const categoryCard = await cardRepository.categoryCards(category);
+    const categoryCard = await cardRepository.categoryCards(category, page);
     if(categoryCard) {
       res.status(200).json(categoryCard);
     } else {
@@ -91,7 +93,7 @@ app.get('/cards', async (req, res, next) => {
     }
   } else if(req.query.course) {
     const course = req.query.course;
-    const courseCard = await cardRepository.courseCards(course);
+    const courseCard = await cardRepository.courseCards(course, page);
     if(courseCard) {
       res.status(200).json(courseCard);
     } else {
@@ -103,7 +105,8 @@ app.get('/cards', async (req, res, next) => {
 })
 
 app.get('/cards/', async (req, res) => {
-  const cards = await cardRepository.getAll();
+  const page = req.query.page;
+  const cards = await cardRepository.getPages(page);
   if(cards) {
     res.status(200).json(cards);
   } else {
