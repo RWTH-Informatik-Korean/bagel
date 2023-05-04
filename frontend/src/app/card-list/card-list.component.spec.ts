@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AfterSearchComponent } from './after-search.component';
+import { CardListComponent } from './card-list.component';
 
-describe('AfterSearchComponent', () => {
-  let component: AfterSearchComponent;
-  let fixture: ComponentFixture<AfterSearchComponent>;
+describe('CardListComponent', () => {
+  let component: CardListComponent;
+  let fixture: ComponentFixture<CardListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AfterSearchComponent ]
+      declarations: [ CardListComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AfterSearchComponent);
+    fixture = TestBed.createComponent(CardListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

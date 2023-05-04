@@ -30,8 +30,8 @@ export class SidenavComponent implements OnInit{
       this.navMode = 'saved';
     }
   }
-  changeAvatar(imageObject: { imageSrc: string; }) {
-    this.myUser.imageSrc = imageObject.imageSrc;
+  changeAvatar(imageObject: { avatarUrl: string; }) {
+    this.myUser.avatarUrl = imageObject.avatarUrl;
   }  
   updateUser() {
     console.log('todo');

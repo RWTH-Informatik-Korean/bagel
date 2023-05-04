@@ -2,9 +2,9 @@
   <button class="close-btn" type="button" (click)="onToggleClose()"><i class="bi bi-x-lg"></i></button>
   <!-- Saved Information -->
   <section class="avatar-info" *ngSwitchCase="'default'">
-    <img class="avatar-item avatar-image" [src]="myUser.imageSrc"/>
-    <h2 class="avatar-item">{{ myUser.userName }}</h2>
-    <span class="avatar-item">{{ myUser.email }}</span>
+    <img class="avatar-item avatar-image" [src]="myUser.avatarUrl"/>
+    <h2 class="avatar-item">{{ myUser.username }}</h2>
+    <span class="avatar-item">{{ myUser.googleID }}</span>
     <button class="avatar-item avatar-btn" id="edit-btn" type="button" (click)="changeViewMode()">Edit</button>
     <button class="avatar-item avatar-btn" type="button">Sign Out</button>
   </section>
@@ -13,12 +13,12 @@
     <!-- todo: add image change event -->
     <div class="avatar-item dropdown" id="dropdownMenuLink">
       <a class="btn avatar-change-btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img class="avatar-image" id="avatar-bg" [src]="myUser.imageSrc" />
+        <img class="avatar-image" id="avatar-bg" [src]="myUser.avatarUrl" />
         <i class="bi bi-image" id="avatar-change-icon"></i>
       </a>
       <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink">
         <div class="dropdown-item-wrapper">
-          <a class="dropdown-item" (click)="changeAvatar(avatar)" *ngFor="let avatar of avatars"><img class="dropdown-image" [src]="avatar.imageSrc"/></a>
+          <a class="dropdown-item" (click)="changeAvatar(avatar)" *ngFor="let avatar of avatars"><img class="dropdown-image" [src]="avatar.avatarUrl"/></a>
           <a class="dropdown-item" href="#">
             <form class="avatar-upload">
               <label class="avatar-upload-text" for="avatar">Upload</label>
@@ -29,10 +29,10 @@
       </div>
     </div>
     <h2 class="avatar-item">
-      <input type="text" placeholder="{{ myUser.userName }}" />
+      <input type="text" placeholder="{{ myUser.username }}" />
     </h2>
     <span class="avatar-item">
-      <input type="text" placeholder="{{ myUser.email }}" />
+      <input type="text" placeholder="{{ myUser.googleID }}" />
     </span>
     <button class="avatar-item avatar-btn" id="save-btn" type="button" (click)="updateUser()">Save</button>
   </section>

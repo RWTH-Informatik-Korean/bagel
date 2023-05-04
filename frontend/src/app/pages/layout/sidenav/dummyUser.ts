@@ -1,13 +1,17 @@
 export interface dummyUser {
-  userName: string;
-  imageSrc: string;
-  email: string;
+  userId?: string;
+  username: string;
+  googleID?: string;
+  avatarUrl: string;
+  isSignedup?: boolean;
+  islogged?: boolean;
 }
 
 export const USERS: dummyUser = 
   {
-    userName: 'Jinny',
-    imageSrc: '../../assets/images/Avatar_1.png',
-    email: 'hyejin.kang@rwth-aachen.de',
+    username: 'Jinny',
+    avatarUrl: '../../assets/images/Avatar_1.png',
+    googleID: 'hyejin.kang@rwth-aachen.de',
+    islogged: true,
   }
 

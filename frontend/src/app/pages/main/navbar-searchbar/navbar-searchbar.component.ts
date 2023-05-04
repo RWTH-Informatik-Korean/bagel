@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { CardService } from 'src/app/services/card.service';
 import { CATEGORIES } from '../../../models/post-category';
-import { SearchService } from '../../../services/search.service';
 
 @Component({
   selector: 'app-navbar-searchbar',
@@ -9,6 +9,8 @@ import { SearchService } from '../../../services/search.service';
   styleUrls: ['./navbar-searchbar.component.scss']
 })
 export class NavbarSearchbarComponent implements OnInit {
+  
+  @Input() isSearch: boolean;
   @Output() SelectedCategory = new EventEmitter<string>();
   @Output() InputtedText = new EventEmitter<string>();
   
@@ -18,7 +20,7 @@ export class NavbarSearchbarComponent implements OnInit {
   doubbleSubmit: boolean = false;
 
   constructor(
-    private searchService: SearchService, 
+    private cardservice: CardService, 
     public router: Router) { }
 
   ngOnInit(): void {
@@ -38,7 +40,7 @@ export class NavbarSearchbarComponent implements OnInit {
           return
         } else {
           this.doubbleSubmit = true;
-          return this.searchService.searchCard(this.searchInput);
+          return this.cardservice.searchCard(this.searchInput);
        }
     }
   }

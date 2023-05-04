@@ -5,25 +5,31 @@
   margin-inline: auto;  
   max-height: 120px;
   padding: 32px 0;
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  grid-gap: 200px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  &.jc-end{
+    justify-content: flex-end;
+  }
 }
 .navbar{
+  flex-basis: max-content;
   display: flex;
   justify-content: space-between;
 }
 .nav-item{
+  margin-right: 1.5rem;
   font-size: 1.5rem;
   cursor: pointer;
 }
 .searchbar{
+  flex-basis: max-content;
   vertical-align: bottom;
   vertical-align: 20%;
   display: inline-block;
   vertical-align: middle;
-  margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
 }
 .searchbar input{
   font-size: 0.9rem;
@@ -65,12 +71,13 @@ a:hover{
   .nav-search-bar{
     width: min(100% - 1rem, 576px);
     padding: 16px 0;
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     align-items: center;
   }
   .navbar{
     width: 100%;
+    
     display: flex;
     justify-content: space-between;
     padding: 0 8px 8px 8px;

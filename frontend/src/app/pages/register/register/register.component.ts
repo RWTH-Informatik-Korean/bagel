@@ -23,7 +23,8 @@ export class RegisterComponent implements OnInit {
       ['blockquote', 'code-block'],
       [{ 'header': 1 }, { 'header': 2 }],
       [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-      [{ 'script': 'sub' }, { 'script': 'super' }]
+      [{ 'script': 'sub' }, { 'script': 'super' }],
+      // ['image'] 
     ],
   }; 
   courses = COURSES;

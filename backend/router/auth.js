@@ -49,28 +49,28 @@ router.post('/signup/google', usernameRules(), validate, async (req, res) => {
    }
 });
 
+// google OAuth2 callback function
 router.get('/login/google/callback',
    passport.authenticate('googleLogin', { failureRedirect: '/auth/signup/google' }),
    async (req, res) => {
       if (req.sessionID) {
-        //  res.status(200).json(req.session);
-        console.log(req.session.passport.user);
         res.status(200);
-
         const userPassport = await req.session.passport.user;
-        // const userPassportJson = JSON.stringify(userPassport);
-
         const user = await userRepository.findUser(userPassport.googleID);
-
+        // rwth email 미인증 user -> email 인증 페이지로 이동
         if (!user.rwthVerified) {
-          // TODO: 수정할 것 - paramteter가 주소에 노출되는 보안 문제 - 다른 방법을 찾아야 함!!!
-          return res.redirect(`http://localhost:4200/signup/?googleID=${userPassport.googleID}`);
-          // return res.redirect(`/auth/login/google/verification?googleID=${userPassport.googleID}`);
-        } 
-        return res.redirect(`http://localhost:4200/?username=${userPassport.username}&googleID=${userPassport.googleID}`);
+          res.cookie("googleID", userPassport.googleID);
+          res.cookie("avatarUrl", user.avatarUrl);
+          return res.redirect(`http://localhost:4200/login`);
+        }
+        // 가입 완료된 user -> 로그인 완료 후 main 페이지로 이동
+        res.cookie("googleID", userPassport.googleID);
+        res.cookie("avatarUrl", user.avatarUrl);
+        res.cookie("loggedIn", 'true');
+        return res.redirect(`http://localhost:4200/`);
         
       } else {
-         return res.status(404).json({ message: 'login failed'});
+         return res.status(404).json({ message: 'login failed' });
       }
    },
 );
@@ -78,12 +78,12 @@ router.get('/login/google/callback',
 router.put('google/update/verified', async (req, res) => {
    const rwthVerified = req.body;
    const update = await userRepository.updateVerfied(rwthVerified);
-   if (update) {
-     res.status(200);
-   } else {
-     res.status(404).json({ message: 'user not found' });
-   }
- });
+  if (update) {
+    res.status(200);
+  } else {
+    res.status(404).json({ message: 'user not found' });
+  }
+});
  
 router.put('/google/update', isAuth, usernameRules(), validate, async (req, res) => {
    const { googleID, username, avatarUrl } = req.body;

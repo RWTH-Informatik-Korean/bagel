@@ -1,3 +1,8 @@
-<app-main-navigation *ngIf="screenMode==='W' && !searched"></app-main-navigation>
-<app-navbar-searchbar (SelectedCategory)="changePostCategory($event)" (InputtedText)="searchText($event)"></app-navbar-searchbar>
-<app-card-list [postCategory]="selectedCategory" [isSearch]="searched" [searchText]="inputtedText"></app-card-list>
+<app-main-navigation *ngIf="screenMode==='W' && !searched" (SelectedCourse)="getCourseBagel($event)"></app-main-navigation>
+<app-navbar-searchbar (SelectedCategory)="changePostCategory($event)" (InputtedText)="searchText($event)" [isSearch]="searched"></app-navbar-searchbar>
+<app-card-list 
+  [postCategory]="selectedCategory" 
+  [isSearch]="searched" 
+  [searchText]="inputtedText"
+  [getCourse]="selectedCourse"
+  ></app-card-list>

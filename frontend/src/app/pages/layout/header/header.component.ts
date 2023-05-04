@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
-import { SignupComponent } from '../../../pages/user/signup/signup/signup.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { LoginComponent } from '../../../components/login/login.component';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -13,48 +13,62 @@ export class HeaderComponent implements OnInit{
   @Output() SideNavToggle = new EventEmitter();
 
   headerFixed: boolean = false;
-  isLoggedIn: boolean = false;
   screenMode: string;
+  isLoggedIn: boolean;
+  avatarUrl: string;
 
   constructor(
     public matDialog: MatDialog,
     private router: Router,
+    private authService: AuthService
   ) {
+    
   }
   
-  // route to singup page
-  signup(): void {
-    this.router.navigate(['/signup']);
+  ngOnInit(): void {  
+    let screenWidth = window.innerWidth;
+    (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
+
+    this.userData();
   }
+
+  async userData() {
+    await this.authService.isLoggedIn().subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn;
+    });
+    await this.authService.avatarUrl().subscribe(avtarUrl => {
+      this.avatarUrl = avtarUrl;
+    })
+    console.log('로그인 됨?: ', this.isLoggedIn, ' 아바타는?: ', this.avatarUrl);
+    return
+  }
+
+  // google login Button(OAuth2) 
+  signup(): void {
+    // !구글 로그인 성공 && !rwth email 인증
+    if (!this.authService.getGoogleLoggedIn()) {
+       window.location.href = 'http://localhost:8080/auth/login/google';
+       return
+    } 
+    // 구글 로그인 성공 && !rwth email 인증
+    else if (this.authService.getGoogleLoggedIn && !this.authService.getVerified()){
+      this.router.navigate(['/login']);
+      return
+    } 
+    return
+  }  
 
   openSidenav() {
     this.SideNavToggle.emit();
   }
-  openModal() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.id = "signup-component";
-    dialogConfig.height = "600px";
-    dialogConfig.width = "800px";
-    const modalDialog = this.matDialog.open(SignupComponent, dialogConfig);
-  }
-  openLoginModal() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.id = "login-component";
-    dialogConfig.height = "600px";
-    dialogConfig.width = "800px";
-    const modalDialog = this.matDialog.open(LoginComponent, dialogConfig);
-  }
-  ngOnInit(): void {  
-    let screenWidth = window.innerWidth;
-    (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
-  }
+  
+
   @HostListener ('window:resize', ['$event'])
   onResize(event: any) {
     let screenWidth = window.innerWidth;
     (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
   }
+  
   @HostListener('window:scroll', ['$event']) onscroll() {
     if(window.scrollY > 1) {
       this.headerFixed = true;

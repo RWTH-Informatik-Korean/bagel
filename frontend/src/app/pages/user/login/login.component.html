@@ -1,0 +1,38 @@
+<div class="signup-container">
+  <div class="signip-title-container">
+    <!-- 1. 구글 로그인 후 - RWTH Email 입력 -->
+    <h1 class="signup-title" *ngIf="!googleLoggedin || !sentCode || !verified">Create your account</h1>
+    <h1 class="welcome-title" *ngIf="googleLoggedin && sentCode && verified">Hey! Welcome to Bagel.</h1>
+  </div>
+  <div class="signup-guide1" *ngIf="googleLoggedin && !sentCode && !verified">Authentication via RWTH email is required.</div>
+  <div class="singup-guide2"*ngIf="!googleLoggedin || !sentCode || !verified">
+    Please note that RWTH-Email verification is required for sign up.
+    Your information will only be used to verify your identity for security purpose.
+  </div>
+  <div class="email-wrapper">
+    <div class="input-container">
+      <!-- 1. 구글 로그인 후 - RWTH Email 입력 -->
+      <input *ngIf="googleLoggedin && !sentCode && !verified" class="email-input" type="text" name="email" autocomplete="off" [(ngModel)]="rwthEmail" required>
+      <!-- 2. 메일 코드 발송 후 - Verfication code 입력 -->
+      <input *ngIf="googleLoggedin && sentCode && !verified" class="email-input" type="text" name="email" autocomplete="off" spellcheck="false" [(ngModel)]="verificationCode" required>
+
+
+      <label for="text" class="label-name">
+        <!-- 1. 구글 로그인 후 - RWTH Email 입력 -->
+        <span *ngIf="googleLoggedin && !sentCode && !verified" class="content-name">RWTH Email</span>
+        <!-- 2. 메일 코드 발송 후 - Verfication code 입력 -->
+        <span *ngIf="googleLoggedin && sentCode && !verified" class="content-name">Verification code</span>
+      </label>
+    </div>
+
+
+    <div class="email-btn-container">
+      <!-- 1. 구글 로그인 후 - RWTH Email 입력 -->
+     <button *ngIf="googleLoggedin && !sentCode && !verified" class="email-btn" type="submit" name="action" (click)="verificationEmail(rwthEmail)">Send</button>
+     <!-- 2. 메일 코드 발송 후 - Verfication code 입력 -->
+     <button *ngIf="googleLoggedin && sentCode && !verified" class="email-btn" type="submit" name="action" (click)="validateCode(verificationCode)">Continue</button>
+    </div>
+
+
+  </div>
+</div>

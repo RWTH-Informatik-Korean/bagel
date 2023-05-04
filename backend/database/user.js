@@ -23,11 +23,12 @@ export async function findUsername(username){
   return User.findOne({ username: username });
 }
 
-export async function create(username, googleID, avatarUrl){
+export async function create(username, googleID, avatarUrl, rwthVerified){
   return new User({
     username,
     googleID,
-    avatarUrl
+    avatarUrl,
+    rwthVerified
   }).save();
 }
 
