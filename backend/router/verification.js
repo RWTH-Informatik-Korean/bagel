@@ -1,10 +1,12 @@
 import express from 'express';
-
+import passport from 'passport';
 import * as verifiEmail from '../verification/verification.js';
+import * as userRepository from '../database/user.js';
+import { emailRules, validate } from '../middleware/validate.js';
 
 const router = express.Router();
 
-router.post('/send', async (req, res) => {
+router.post('/send', emailRules(), validate, async (req, res) => {
   const email = req.body.email;
   const result = await verifiEmail.send(email);
 
@@ -22,6 +24,10 @@ router.post('/check', async (req, res) => {
   const result = await verifiEmail.checkVerifiCode(email, verifiCode);
 
   if (result == '1') {
+    // DB user data update (rwthVerified)
+    const googlID = req.session.passport.user.googleID;
+    userRepository.updateVerfied(googlID);
+
     res.status(200).json({ message: '인증에 성공 했습니다.' });
   } else if (result == '2') {
     res.status(404).json({ message: '이미 인증된 이메일 입니다.' });

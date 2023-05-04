@@ -6,9 +6,10 @@ const userSchema = new Mongoose.Schema(
   {
     username: { type: String, required: true },
     googleID: { type: String, requierd: true },
-    avataUrl: { type: String },
+    avatarUrl: { type: String },
     postCards: [],
     postComments: [],
+    rwthVerified: { type: Boolean, requried: true }
     }, { timestamps: true, versionKey: false }
 );
 
@@ -18,33 +19,42 @@ export async function findUser(googleID){
   return User.findOne({ googleID: googleID });
 }
 
-export async function create(username, googleID, avataUrl){
+export async function findUsername(username){
+  return User.findOne({ username: username });
+}
+
+export async function create(username, googleID, avatarUrl){
   return new User({
     username,
     googleID,
-    avataUrl,
+    avatarUrl
   }).save();
 }
 
-export async function update(googleID, username, avataUrl){
-  const user = await User.findOneAndUpdate({ googleID }, { username, avataUrl });
+export async function update(googleID, username, avatarUrl){
+  const user = await User.findOneAndUpdate({ googleID }, { username, avatarUrl });
   user.postCards.map(async (cardId) => {
     if(username){
       await cardRepasitory.updateUsername(cardId, username);
     }
-    if(avataUrl){
-      await cardRepasitory.updateAvataUrl(cardId, avataUrl);
+    if(avatarUrl){
+      await cardRepasitory.updateAvatarUrl(cardId, avatarUrl);
     }
   });
   user.postComments.map(async (cardId) => {
     if(username){
       await cardRepasitory.commentUpdateUsername(cardId, username);
     }
-    if(avataUrl){
-      await cardRepasitory.commentUpdateAvataUrl(cardId, avataUrl);
+    if(avatarUrl){
+      await cardRepasitory.commentUpdateAvatarUrl(cardId, avatarUrl);
     }
   });
   return user;
+}
+
+export async function updateVerfied(googleID) {
+  return User.findOneAndUpdate({googleID: googleID}
+    , { rwthVerified: true });
 }
 
 export async function remove(id) {
