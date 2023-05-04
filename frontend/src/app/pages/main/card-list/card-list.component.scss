@@ -3,10 +3,11 @@
 .cardList-wrapper {
   width: min(100% - 1rem, 1180px);
   margin-inline: auto;
-  margin-bottom: 60px;
+  margin-bottom: 3.75rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 44px;
+  gap: 2.5rem;
+  justify-content: center;
 }
 .bagelHidden {
   display: none;

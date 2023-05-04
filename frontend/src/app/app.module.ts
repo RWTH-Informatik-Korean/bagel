@@ -4,6 +4,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
+// import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
@@ -27,8 +30,8 @@ import { CommentComponent } from './pages/post/comments/comment/comment.componen
 import { CommentFormComponent } from './pages/post/comments/comment-form/comment-form.component';
 import { CommentsComponent } from './pages/post/comments/comments.component';
 import { PlusButtonComponent } from './pages/layout/plus-button/plus-button.component';
-import { QuillModule, QuillEditorComponent } from 'ngx-quill';
-import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
+import { QuillModule } from 'ngx-quill';
+import { ToastrModule, ToastNoAnimationModule } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
@@ -70,8 +73,12 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ToastNoAnimationModule.forRoot(),
     ToastrModule.forRoot(),
     HttpClientModule,
+    InfiniteScrollModule,
+    ScrollingModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// platformBrowserDynamic().bootstrapModule(AppModule);
