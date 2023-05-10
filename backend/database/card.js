@@ -64,8 +64,8 @@ export async function getCard(id){
   return Card.findById(id);
 }
 
-export async function create(title, text, category, username, avatarUrl,term, course){
-  return new Card({
+export async function create(title, text, category, username, avatarUrl, term, course, googleID){
+  const card = new Card({
     title,
     text,
     category,
@@ -110,8 +110,8 @@ export async function remove(id, googleID) {
   return Card.findByIdAndDelete(id);
 }
 
-export async function commentCreate(cardId, text, username, googleID) {
-  const comment = await new Comment({ cardId, text, username }).save();
+export async function commentCreate(cardId, text, username, googleID, avatarUrl) {
+  const comment = await new Comment({ cardId, text, username, avatarUrl }).save();
   await Card.findByIdAndUpdate(cardId, { $push : { comments: comment._id } }, { returnOriginal: false });
   await userRepasitory.updatePostComments(googleID, comment._id);
   return comment;
