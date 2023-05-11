@@ -2,6 +2,7 @@ import passport from 'passport';
 import * as userRepository from '../database/user.js'
 
 export function login() {
+  console.log('a')
   passport.authenticate('googleLogin', { scope: ['profile'] });
 }
 
@@ -35,32 +36,30 @@ export async function signup(req, res) {
   }
 }
 
-export async function googleCallback() {
-  passport.authenticate('googleLogin', { failureRedirect: '/auth/signup/google' }),
-    async (req, res) => {
-      if (req.sessionID) {
-        res.status(200);
-        const userPassport = await req.session.passport.user;
-        const user = await userRepository.findUser(userPassport.googleID);
-        // rwth email 미인증 user -> email 인증 페이지로 이동
-        if (!user.rwthVerified) {
-          res.cookie("googleLoggedIn", 'true');
-          res.cookie("_id", user.id.toString());
-          res.cookie("username", user.username);
-          res.cookie("avatarUrl", user.avatarUrl);
-          return res.redirect(`http://localhost:4200/login`);
-        }
-        // 가입 완료된 user -> 로그인 완료 후 main 페이지로 이동
-        res.cookie("_id", user._id.toString());
-        res.cookie("username", user.username);
-        res.cookie("avatarUrl", user.avatarUrl);
-        res.cookie("loggedIn", 'true');
-        return res.redirect(`http://localhost:4200/`);
-
-      } else {
-        return res.status(404).json({ message: 'login failed' });
-      }
+export async function googleCallback(req, res) {
+  if (req.sessionID) {
+    res.status(200);
+    const userPassport = await req.session.passport.user;
+    const user = await userRepository.findUser(userPassport.googleID);
+    // rwth email 미인증 user -> email 인증 페이지로 이동
+    if (!user.rwthVerified) {
+      res.cookie("googleLoggedIn", 'true');
+      res.cookie("_id", user.id.toString());
+      res.cookie("username", user.username);
+      res.cookie("avatarUrl", user.avatarUrl);
+      return res.redirect(`http://localhost:4200/login`);
     }
+    // 가입 완료된 user -> 로그인 완료 후 main 페이지로 이동
+    res.cookie("_id", user._id.toString());
+    res.cookie("username", user.username);
+    res.cookie("avatarUrl", user.avatarUrl);
+    res.cookie("loggedIn", 'true');
+    return res.redirect(`http://localhost:4200/`);
+
+  } else {
+    return res.status(404).json({ message: 'login failed' });
+  }
+
 }
 
 export function logout(req, res) {
