@@ -65,7 +65,7 @@ export async function getCard(id){
 }
 
 export async function create(title, text, category, username, avatarUrl, term, course, googleID){
-  const card = new Card({
+  const card = await new Card({
     title,
     text,
     category,
