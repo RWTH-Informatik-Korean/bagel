@@ -18,7 +18,7 @@
     <label for="inputCourses">Courses</label>
     <input type="Courses" class="form-control" name="course" list="selectCourses" placeholder="Input course" [disabled]="isEnabled" [(ngModel)]="bagelCard.course">
     <datalist id="selectCourses">
-      <option *ngFor="let course of courses">{{course.courseName}}</option>
+      <option *ngFor="let course of courses">{{ course.courseName }}</option>
     </datalist>
   </div>
   

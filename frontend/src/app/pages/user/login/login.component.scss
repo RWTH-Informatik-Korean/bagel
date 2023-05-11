@@ -1,4 +1,4 @@
-@import '../../../../../styles.scss';
+@import '../../../../styles.scss';
 
 .signup-container {
   display: flex;
@@ -11,16 +11,34 @@
 .signup-title {
   display: flex;
   justify-content: center;
-  font-size: 2.4rem;
+  font-size: 2.1rem;
   font-weight: bold;
+  margin-bottom: 5px;
 }
-.singup-guide {
+.welcome-title {
+  display: flex;
+  justify-content: center;
+  font-size: 2.1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: $bagel-accent;
+}
+.signup-guide1 {
+  display: flex;
+  justify-content: flex-start;
+  width: 350px;
+  margin: auto;
+  padding: 15px 5px 5px 5px;
+  font-size: 1rem;
+  color: $bagel-warn;
+}
+.singup-guide2 {
   display: flex;
   justify-content: center;
   width: 350px;
   margin: auto;
   padding: 0 5px;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 .email-wrapper {
   display: flex;

@@ -27,6 +27,10 @@ export class PostPageComponent implements OnInit {
   ngOnInit(): void {
     this.getBagel(this.route.snapshot.params['cardId']);
   }
+  
+  gotoCards() {
+    this.router.navigate(['/home']);
+  }
   getBagel(_id: string): void {
     this._getCardService.get(_id)
       .subscribe({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 import { BagelCard } from '../models/bagelCard';
 
 @Injectable({
@@ -32,4 +32,34 @@ export class CardService {
   delete(id: any): Observable<any> {
     return this._http.delete(`${this.cardUrl}/${id}`);
   }
+  
+  searchCard (search: string): Observable<BagelCard[]> {
+    console.log(search);
+    return this._http.get<BagelCard[]>("http://localhost:8080/cards", {
+      params: new HttpParams().set('search', search)
+    });
+  }
+  
+  findByCategory(postCategory: string): Observable<BagelCard[]> {
+    console.log(postCategory);
+    return this._http.get<BagelCard[]>("http://localhost:8080/cards", {
+      params: new HttpParams().set('category', postCategory)
+    });
+    // return this.getAllData().pipe(map((items: any[]) => 
+    //   items.filter((item: { category: string; }) => 
+    //     item.category === postCategory)))
+  }
+
+  findBySearchCategory(searchText: string, postCategory: string): Observable<BagelCard[]> {
+    return this.searchCard(searchText).pipe(map((items: any[]) => 
+      items.filter((item: { category: string; }) => 
+        item.category === postCategory)))
+  }
+  findByCourse(_course: string): Observable<BagelCard[]> {
+    console.log(_course);
+    return this._http.get<BagelCard[]>("http://localhost:8080/cards", {
+      params: new HttpParams().set('course', _course)
+    });
+  }
+  
 }

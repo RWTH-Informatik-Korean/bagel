@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 import { Comment } from 'src/app/models/comment.model';
 import { CommentService } from 'src/app/services/comment.service';
@@ -27,7 +28,10 @@ export class CommentFormComponent implements OnDestroy {
   @Input() comments: Comment[];
   @Input() index: number;
 
-  constructor(private commentService: CommentService) {}
+  constructor(
+    private commentService: CommentService,
+    private authService: AuthService
+  ) {}
 
   ngOnDestroy(): void {
     this.postCommentSubscription.unsubscribe();
@@ -35,6 +39,7 @@ export class CommentFormComponent implements OnDestroy {
 
   postComment(form: NgForm, commentId?: number) {
     const commentText: string = form.value.commentBox;
+    const avatarUrl: string = this.authService.getAvatarUrl();
 
     if (
       form.valid &&
@@ -43,7 +48,7 @@ export class CommentFormComponent implements OnDestroy {
       commentText !== null
     ) {
       this.postCommentSubscription.add(
-        this.commentService.postComment(commentText, commentId).subscribe({
+        this.commentService.postComment(commentId, commentText, avatarUrl).subscribe({
           next: (updatedComment) => {
             if (this.index) {
               this.comments[this.index].text = updatedComment?.text;

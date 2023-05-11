@@ -1,10 +1,8 @@
 @use '@angular/material' as mat;
 @include mat.core();
-
 @import '~quill/dist/quill.snow.css';
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.bubble.css';
-
 @import 'ngx-toastr/toastr';
 
 $bagel-primary: #4c9d9f;
@@ -27,9 +25,13 @@ body {
   scroll-behavior: smooth;
   position: relative;
   min-height: 100%;
-  margin-top: 80px;
   font-family: "Poppins", "Helvetica Neue", sans-serif; 
   color: #1B1C1E;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  &::-webkit-scrollbar {  /* Hide scrollbar for Chrome, Safari and Opera */
+    display: none;
+  }
 }
 ul, ol {
   list-style: none;
@@ -43,7 +45,4 @@ a, a:link, a:visited, a:active, a:hover {
 button, .btn.active, .btn.show {
   border: none;
   background: none;
-}
-@media only screen and (max-width: 768px) {
-  
 }

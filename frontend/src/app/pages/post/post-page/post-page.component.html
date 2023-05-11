@@ -1,7 +1,7 @@
 <div class="post-page-container">
   <div *ngIf="bagel._id" class="back-btn-container">
     <!-- todo: add history router link -->
-    <a href=""><img src="../../../../assets/icons/backIcon.svg" alt="back-icon"></a>
+    <a (click)="gotoCards()"><img src="../../../../assets/icons/backIcon.svg" alt="back-icon"></a>
   </div>
   <div class="post-info">
     <span id="course">{{ bagel.course }}</span>

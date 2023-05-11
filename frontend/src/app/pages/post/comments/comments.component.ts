@@ -12,6 +12,7 @@ import { Comment } from "../../../models/comment.model";
 })
 export class CommentsComponent implements OnInit {
   comments$: Observable<Comment[]>;
+  avatarUrl: string;
 
   constructor(private commentService: CommentService) {}
 

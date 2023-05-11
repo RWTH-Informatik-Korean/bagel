@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="aboutSearch" *ngIf="isSearch" >
     <div class="no-result" *ngIf="noResult" >
-      <span class="info-text">죄송합니다. 검색어 관련 게시글이 없습니다.</span>
+      <span class="info-text">검색어 관련 게시글이 없습니다. 다른 검색어를 넣어주세요 :D</span>
       <span class="info-text">No Result Found</span>
       <span class="info-text">We can’t find any item matching your search</span>
     </div>
@@ -25,10 +25,7 @@
       <div class="cardItem-footer">
         <div class="cardItemF-left">{{ bagel.username }}</div> 
         <div class="cardItemF-right">
-          <!-- todo: view count , comment count -->
-          <!-- <div id="view"><i class="bi bi-eye"></i>{{ bagel.view }}</div>
-          <div id="chat"><i class="bi bi-chat-left"></i>{{ bagel.comment }}</div> -->
-          <div id="view"><img id="view" src="../../../../assets/icons/eye.svg">5</div>
+          <div id="view"><img id="view" src="../../../../assets/icons/eye.svg">{{ bagel.views }}</div>
           <div id="chat"><img id="chat" src="../../../../assets/icons/chat.svg">0</div>
         </div>
       </div>
