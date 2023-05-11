@@ -4,10 +4,11 @@ export interface BagelCard {
     text?: string;  // "같이 할거면 연락주세요"
     category?: string;  // "Course
     username?: string;  // "Jinny"
+    avatarUrl?: string;
     term?: string;  // "ws22"
     course?: string;  // "PSP"
     createdAt?: string;  // "2022-12-19T17:31:58.738Z"
     updatedAt?: string;  // "2022-12-19T17:31:58.738Z"
-    view?: number;
-    comment?: number;
+    views?: number;
+    comments?: [];
 }

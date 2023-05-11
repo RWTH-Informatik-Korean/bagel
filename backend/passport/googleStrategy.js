@@ -35,13 +35,12 @@ const googleLogin = new Strategy(
       const exUser = await userRepository.findUser(profile.id);
 
       // IF: existing user && rwthVerified -> log in
-      if (exUser && exUser.rwthVerified) {
-      console.log('user is:', exUser);
-      return done(null, exUser);
+        if (exUser) {
+        return done(null, exUser);
       } 
+      // IF: new user(!exUser && !exUser.rwthVeried) -> sign up + log in
+      else if (!exUser){ 
 
-      // IF: new user -> sign up + log in
-      else { 
         console.log(profile);
         // 구글 profile 정보에서 parameters 가져옴 - username, googleIDm, avatarUrl 초기화 + (rwthVerified: false)
         userRepository.create(profile.displayName, profile.id, profile._json.picture, false)

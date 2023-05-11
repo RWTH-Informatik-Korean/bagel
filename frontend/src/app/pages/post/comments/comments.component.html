@@ -3,7 +3,7 @@
     <ul class="comments-list">
       <li *ngFor="let comment of comments; index as i">
         <div class="user-container">
-            <img src="../../assets/user-photo/tigger.png" class="user-photo">
+            <img [src]="avatarUrl" class="user-photo">
             <div class="user-name">Tigger</div>
         </div>
           <app-comment

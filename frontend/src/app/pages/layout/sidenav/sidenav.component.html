@@ -2,18 +2,17 @@
   <button class="close-btn" type="button" (click)="onToggleClose()"><i class="bi bi-x-lg"></i></button>
   <!-- Saved Information -->
   <section class="avatar-info" *ngSwitchCase="'default'">
-    <img class="avatar-item avatar-image" [src]="myUser.avatarUrl"/>
-    <h2 class="avatar-item">{{ myUser.username }}</h2>
-    <span class="avatar-item">{{ myUser.googleID }}</span>
+    <img class="avatar-item avatar-image" [src]="curUser.avatarUrl"/>
+    <h2 class="avatar-item">{{ curUser.username || "아이디를 적어주세요"}} </h2>
+    <span class="avatar-item">{{ curUser.googleID }}</span>
     <button class="avatar-item avatar-btn" id="edit-btn" type="button" (click)="changeViewMode()">Edit</button>
-    <button class="avatar-item avatar-btn" type="button">Sign Out</button>
+    <button class="avatar-item avatar-btn" type="button" (click)="signOut()">Sign Out</button>
   </section>
   <!-- Edit Fields -->
-  <section class="btn-group dropleft avatar-info" *ngSwitchCase="'edit'">
-    <!-- todo: add image change event -->
+  <form class="avatar-info btn-group dropleft" *ngSwitchCase="'edit'">
     <div class="avatar-item dropdown" id="dropdownMenuLink">
-      <a class="btn avatar-change-btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img class="avatar-image" id="avatar-bg" [src]="myUser.avatarUrl" />
+      <a class="btn avatar-change-btn" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img class="avatar-image" id="avatar-bg" [src]="curUser.avatarUrl" />
         <i class="bi bi-image" id="avatar-change-icon"></i>
       </a>
       <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink">
@@ -29,11 +28,11 @@
       </div>
     </div>
     <h2 class="avatar-item">
-      <input type="text" placeholder="{{ myUser.username }}" />
+      <input type="text" placeholder="{{ curUser.username }}" name="username" [value]="curUser.username" [(ngModel)]="curUser.username" />
     </h2>
     <span class="avatar-item">
-      <input type="text" placeholder="{{ myUser.googleID }}" />
+      <input type="text" placeholder="{{ curUser.googleID }}" name="googleID" [value]="curUser.googleID" [(ngModel)]="curUser.googleID" />
     </span>
-    <button class="avatar-item avatar-btn" id="save-btn" type="button" (click)="updateUser()">Save</button>
-  </section>
+    <button class="avatar-item avatar-btn" id="save-btn" type="submit" (click)="updateUser()">Save</button>
+  </form>
 </mat-nav-list>

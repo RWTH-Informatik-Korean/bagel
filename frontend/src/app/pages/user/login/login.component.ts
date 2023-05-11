@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent implements OnInit{
   // Google - google id / google OAuth logged in or not
-  googleId: string = '';
+  userID: string = '';
   googleLoggedin: boolean = false;
   avatarUrl: string = '';
   // RWTH Email Verification - rwth email / verification code / email verified or not  
@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit{
 
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
     private toastr: ToastrService,
@@ -29,27 +28,38 @@ export class LoginComponent implements OnInit{
     ) {}
 
   ngOnInit(): void {
-    this.authService.setGoogleLoggedIn();
-
-    // Check the status of singup
-    this.googleLoggedin = this.authService.getGoogleLoggedIn();
-    this.googleId = this.authService.getGoogleID();
-    this.sentCode = this.authService.getSentCode();
-    this.verified = this.authService.getVerified();
-    this.avatarUrl = this.authService.getAvatarUrl();
-
     this.loginCheck();
   }
 
   // 가입 상태 확인하는 fucntion
   async loginCheck() {
-    // 기존 회원이 로그인한 경우 = 구글 로그인 성공 && rwth email 인증
     if (this.authService.getLoggedIn()) {
       this.router.navigate(['/']);
       return
     }
+    else if (this.authService.getGoogleLoggedIn() && !this.authService.getVerified()) {
+      const googleLoggedInPassport = await this.cookieService.get('googleLoggedIn');
+      const userIDPasport = await this.cookieService.get('_id');
+      const avatarUrl = await this.cookieService.get('avatarUrl');
+
+      if (googleLoggedInPassport)  this.authService.setGoogleLoggedIn();
+      if (userIDPasport) this.authService.setUserID(userIDPasport);
+      if (avatarUrl) this.authService.setAvatarUrl(avatarUrl);
+
+
+      await this.authService.isGooglLoggedIn().subscribe(googleLoggedin => {
+        this.googleLoggedin = googleLoggedin;
+      })
+      await this.authService.isSentCode().subscribe(sentCode => {
+        this.sentCode = sentCode;
+      })
+      await this.authService.isVerified().subscribe(verified => {
+        this.verified = verified;
+      })
+      return
+    }
     return
-  }
+  } 
 
 
   // Verification rwth email
@@ -79,7 +89,7 @@ export class LoginComponent implements OnInit{
 
   // Validate verification code
   validateCode(code: string) {
-    const validateCode$ = this.authService.validateCode(this.rwthEmail, code);
+    const validateCode$ = this.authService.validateCode(this.rwthEmail, code, this.authService.getUserID());
 
     validateCode$.subscribe(res => {
       if (res.status === 200) {

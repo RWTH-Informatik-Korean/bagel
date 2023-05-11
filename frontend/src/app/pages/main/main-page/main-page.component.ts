@@ -27,7 +27,6 @@ export class MainPageComponent implements OnInit {
     (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
   }
 
-  
   scrollToTop() {
     this.scroller.scrollToPosition([0, 0]);
   }

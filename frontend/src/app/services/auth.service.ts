@@ -15,25 +15,58 @@ export class AuthService {
 
   // Setter, Getter for Auth-data
   // google id from user
-  private googleIDSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.getGoogleID());
+  private userIDSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.getUserID());
 
-  setGoogleID(googleID: string) {
-    const googleIDEncrypt = CryptoJS.AES.encrypt(googleID, environment.CRYPTOKEY);
-    localStorage.setItem('googleID', googleIDEncrypt.toString());
-    this.googleIDSubject.next(googleIDEncrypt.toString());
-    this.cookieService.delete('googleID');
-  }
   getGoogleID(): string {
     const googleID = localStorage.getItem('googleID');  
-    
+
     if (googleID) {
       const decryptValue = CryptoJS.AES.decrypt(googleID, environment.CRYPTOKEY).toString(CryptoJS.enc.Utf8);
     return decryptValue;
     }
     return null;
   }
-  googleID(): Observable<string> {
-    return this.googleIDSubject.asObservable();
+  
+  
+  setUserID(_id: string) {
+    const userIDEncrypt = CryptoJS.AES.encrypt(_id, environment.CRYPTOKEY);
+    localStorage.setItem('userID', userIDEncrypt.toString());
+    this.userIDSubject.next(userIDEncrypt.toString());
+    this.cookieService.delete('_id');
+  }
+  getUserID(): string {
+    const userID = localStorage.getItem('userID');  
+    
+    if (userID) {
+      const decryptValue = CryptoJS.AES.decrypt(userID, environment.CRYPTOKEY).toString(CryptoJS.enc.Utf8);
+    return decryptValue;
+    }
+    return null;
+  }
+  userID(): Observable<string> {
+    return this.userIDSubject.asObservable();
+  }
+
+  // username from user
+  private usernameSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.getUsername());
+
+  setUsername(username: string) {
+    const usernameEncrypt = CryptoJS.AES.encrypt(username, environment.CRYPTOKEY);
+    localStorage.setItem('username', usernameEncrypt.toString());
+    this.usernameSubject.next(usernameEncrypt.toString());
+    this.cookieService.delete('username');
+  }
+  getUsername(): string {
+    const username = localStorage.getItem('username');  
+    
+    if (username) {
+      const decryptValue = CryptoJS.AES.decrypt(username, environment.CRYPTOKEY).toString(CryptoJS.enc.Utf8);
+    return decryptValue;
+    }
+    return null;
+  }
+  username(): Observable<string> {
+    return this.usernameSubject.asObservable();
   }
 
   // user avatar url
@@ -43,7 +76,7 @@ export class AuthService {
     this.avatarUrlSubject.next(avatarUrl);
     const avatarUrlEncrypt = CryptoJS.AES.encrypt(avatarUrl, environment.CRYPTOKEY);
     localStorage.setItem('avatarUrl', avatarUrlEncrypt.toString());
-    this.cookieService.delete('avatarUrl');
+    // this.cookieService.delete('avatarUrl');
   }
   getAvatarUrl(): string {
     const avatarUrl = localStorage.getItem('avatarUrl');  
@@ -65,6 +98,7 @@ export class AuthService {
     const trueEncrypt = CryptoJS.AES.encrypt('true', environment.CRYPTOKEY);
     localStorage.setItem('googleLoggedIn', trueEncrypt.toString());
     this.googleLoggedInSubject.next(true);
+    this.cookieService.delete('googleLoggedIn');
   }
   getGoogleLoggedIn(): boolean {
     const googleLoggedIn = localStorage.getItem('googleLoggedIn');  
@@ -87,6 +121,12 @@ export class AuthService {
     const trueEncrypt = CryptoJS.AES.encrypt('true', environment.CRYPTOKEY);
     localStorage.setItem('sentCode', trueEncrypt.toString());
     this.sentCodeSubject.next(true);
+    this.cookieService.delete('sentCode');
+
+    // verification code는 1분 후에 소멸되므로 localStorage에서도 자동 소멸되게 함
+    setTimeout(() => {
+      localStorage.removeItem('sentCode');
+    }, 60000);
   }
   getSentCode(): boolean {
     const sentCode = localStorage.getItem('sentCode');  
@@ -109,6 +149,7 @@ export class AuthService {
     const trueEncrypt = CryptoJS.AES.encrypt('true', environment.CRYPTOKEY);
     localStorage.setItem('verified', trueEncrypt.toString());
     this.verifiedSubject.next(true);
+    this.cookieService.delete('verified');
   }
   getVerified(): boolean {
     const verified = localStorage.getItem('verified');  
@@ -130,7 +171,7 @@ export class AuthService {
     const trueEncrypt = CryptoJS.AES.encrypt('true', environment.CRYPTOKEY);
     localStorage.setItem('bagelLoggedIn', trueEncrypt.toString());
     this.loggedInSubject.next(true);
-    this.cookieService.delete('loggedIn');
+    // this.cookieService.delete('loggedIn');
   }
   getLoggedIn(): boolean {
     const logggedIn = localStorage.getItem('bagelLoggedIn');  
@@ -152,7 +193,7 @@ export class AuthService {
   ) { }
 
 
-  // 1. Verification rwth email
+  // Verification rwth email
   // send the verification code to the email user entered in input
   verificationEmail (email: string) {
     const body = { email };
@@ -160,16 +201,29 @@ export class AuthService {
     return this.http.post<any>(`${this.verificationUrl}/send`, body, { observe: 'response' }); 
   }
 
-  // 2. Validate verification code
-  validateCode(email: string, verifiCode: string) {
-    const body = { email, verifiCode };
+  // Validate verification code
+  validateCode(email: string, verifiCode: string, userID: string) {
+    const body = { email, verifiCode, userID };
     return this.http.post<any>(`${this.verificationUrl}/check`, body, { observe: 'response' });
     }
 
-  // 3. Update DB for User information  - rwthVerified: true
+  // Update DB for User information  - rwthVerified: true
   updateDBVerified(rwthVerified: boolean) {
     const body = rwthVerified;
     return this.http.post<any>(`${this.verificationUrl}/google/update/verified`, body, { observe: 'response' });
   }
 
+  // Get AvatarUrl via username
+  getAvatar(username: string) {
+    const body = username;
+    return this.http.get<any>(`${this.authUrl}/avatar`);
+  }
+  updateUser(data: any): Observable<any> {
+    console.log(data);
+    const options = { withCredentials: true };
+    return this.http.put(`${this.authUrl}/google/update`, data, options);
+  }
+  logoutUser() {
+    return this.http.get(`${this.authUrl}/logout`);
+  }
 }

@@ -11,26 +11,21 @@ export class CommentService {
   comments: Comment[] = [
     {
       id: 1,
-      text: "This is the first comment"
+      text: "This is the first comment",
+      avatarUrl: ""
     },
-    {
-      id: 2,
-      text: "This is the second comment"
-    }
   ];
 
   getAllComments(): Observable<Comment[]> {
     return of(this.comments);
   }
 
-  postComment(
-    commentText: string,
-    commentId: number
-  ): Observable<Comment | undefined> {
+  postComment(commentId: number, commentText: string, commentAvatarUrl: string): Observable<Comment | undefined> {
     const isNewComment: boolean = commentId === null || commentId === undefined;
     const newComment: Comment = {
       id: this.comments.length + 1,
       text: commentText,
+      avatarUrl: commentAvatarUrl
     };
 
     

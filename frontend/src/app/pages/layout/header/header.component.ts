@@ -21,14 +21,11 @@ export class HeaderComponent implements OnInit{
     public matDialog: MatDialog,
     private router: Router,
     private authService: AuthService
-  ) {
-    
-  }
+  ) { }
   
   ngOnInit(): void {  
     let screenWidth = window.innerWidth;
     (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
-
     this.userData();
   }
 
@@ -39,7 +36,6 @@ export class HeaderComponent implements OnInit{
     await this.authService.avatarUrl().subscribe(avtarUrl => {
       this.avatarUrl = avtarUrl;
     })
-    console.log('로그인 됨?: ', this.isLoggedIn, ' 아바타는?: ', this.avatarUrl);
     return
   }
 
@@ -51,7 +47,7 @@ export class HeaderComponent implements OnInit{
        return
     } 
     // 구글 로그인 성공 && !rwth email 인증
-    else if (this.authService.getGoogleLoggedIn && !this.authService.getVerified()){
+    else if (this.authService.getGoogleLoggedIn() && !this.authService.getVerified()){
       this.router.navigate(['/login']);
       return
     } 
@@ -61,7 +57,6 @@ export class HeaderComponent implements OnInit{
   openSidenav() {
     this.SideNavToggle.emit();
   }
-  
 
   @HostListener ('window:resize', ['$event'])
   onResize(event: any) {
@@ -70,7 +65,7 @@ export class HeaderComponent implements OnInit{
   }
   
   @HostListener('window:scroll', ['$event']) onscroll() {
-    if(window.scrollY > 1) {
+    if(window.scrollY > 10) {
       this.headerFixed = true;
     } else {
       this.headerFixed = false;

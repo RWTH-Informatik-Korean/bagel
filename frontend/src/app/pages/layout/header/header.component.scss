@@ -1,13 +1,14 @@
 @import '../../../../styles.scss'; 
 
 .container-fluid {
-  position: fixed;
-  top: 0px;
-  z-index: 10;
   width: 100%;
   background-color: rgb(240, 203, 146, 0.35);
 }
 .fixed {
+  position: fixed;
+  top: 0px;
+  z-index: 1;
+  width: 100%;
   background-color: #fff;
 }
 .content-wrapper {
@@ -44,7 +45,6 @@
 .btn-login {
   margin-right: 25px;
 }
-
 
 // log in button
 .login-btn {

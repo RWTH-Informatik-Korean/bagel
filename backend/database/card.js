@@ -64,15 +64,17 @@ export async function getCard(id){
   return Card.findById(id);
 }
 
-export async function create(title, text, category, term, course, username, googleID){
+export async function create(title, text, category, username, avatarUrl, term, course, googleID){
   const card = await new Card({
     title,
     text,
-    username,
     category,
+    username,
+    avatarUrl,
     term,
     course,
     views: 0,
+    comments: []
   }).save();
   await userRepasitory.updatePostCards(googleID, card._id);
   return card;
@@ -86,8 +88,21 @@ export async function searchCards(keyword, page) {
               .limit(9);
 }
 
-export async function update(id, title, text, category, term, course) {
-  return Card.findByIdAndUpdate(id, { title, text, category, term, course }, { returnOriginal: false });
+export async function update(id, title, text, username, avatarUrl, category, term, course, views) {
+  return Card.findByIdAndUpdate(id, { title, text, username, avatarUrl, category, term, course, views }, { returnOriginal: false }
+  );
+}
+
+export async function searchCards(keyword, page) {
+  const offset = (page - 1) * 9;
+  return Card.find({$or: [{ title: keyword }, { text: keyword }]})
+              .sort({ "_id": -1 })
+              .skip(offset)
+              .limit(9);
+}
+
+export async function viewsUpdate(id, views) {
+  return Card.findByIdAndUpdate(id, views, { returnOriginal: false }, { new: true });
 }
 export async function updateUsername(id, username){
   await Card.findByIdAndUpdate(id, { username });
@@ -102,8 +117,9 @@ export async function remove(id, googleID) {
   return Card.findByIdAndDelete(id);
 }
 
-export async function commentCreate(cardId, text, username, googleID) {
-  const comment = await new Comment({ cardId, text, username }).save();
+export async function commentCreate(cardId, text, username, googleID, avatarUrl) {
+  const comment = await new Comment({ cardId, text, username, avatarUrl }).save();
+  
   await Card.findByIdAndUpdate(cardId, { $push : { comments: comment._id } }, { returnOriginal: false });
   await userRepasitory.updatePostComments(googleID, comment._id);
   return comment;
@@ -123,7 +139,6 @@ export async function commentUpdateUsername(id, username){
 
 export async function commentUpdateAvatarUrl(id, avatarUrl){
   await Comment.findByIdAndUpdate(id, { avatarUrl });
-
 }
 
 export async function commentRemove(id) {

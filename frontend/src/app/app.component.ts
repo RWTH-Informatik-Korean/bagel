@@ -44,52 +44,41 @@ export class AppComponent implements OnInit{
     // 로그인 정보 설정
     // !로그인 -> 쿠키 확인
     const loggedInPassport = await Boolean(this.cookieService.get('loggedIn'));
-    const googleIDPasport = await this.cookieService.get('googleID');
-    const avatarUrl = await this.cookieService.get('avatarUrl');
+    const googleLoggedInPassport = await Boolean(this.cookieService.get('googleLoggedIn'));
+    const userIDPassport = await this.cookieService.get('_id');
+    const usernamePassport = await this.cookieService.get('username');
+    const avatarUrlPassport = await this.cookieService.get('avatarUrl');
 
     // 로그인 성공
     if (loggedInPassport) {
       this.authService.setLoggedIn();
-      this.authService.setGoogleID(googleIDPasport)
-      this.authService.setAvatarUrl(avatarUrl);
-      // backend에서 받은 cookie 제거
-      // this.cookieService.delete('googleID');
-      // this.cookieService.delete('loggedIn');
-      // this.cookieService.delete('avatarUrl');
+      if (userIDPassport) this.authService.setUserID(userIDPassport);
+      if (usernamePassport) this.authService.setUsername(usernamePassport);
+      if (avatarUrlPassport) this.authService.setAvatarUrl(avatarUrlPassport);
 
       console.log('로그인 성공')
-      console.log(this.authService.getLoggedIn(), this.authService.getGoogleID(), this.authService.getAvatarUrl());
+      console.log(this.authService.getLoggedIn(), this.authService.getUserID(), this.authService.getUsername(), this.authService.getAvatarUrl());
       return
     }
-    // 비로그인 상태 && backend로부터 받은 로그인 성공(cookie) -> '로그인' + avatarUrl 설정
+    //
+    else if (!loggedInPassport && googleLoggedInPassport) {
+      this.authService.setGoogleLoggedIn();
+      if (userIDPassport) this.authService.setUserID(userIDPassport);
+      if (usernamePassport) this.authService.setUsername(usernamePassport);
+      if (avatarUrlPassport) this.authService.setAvatarUrl(avatarUrlPassport);
+      this.router.navigate(['/login']);
+    }
+    // 비로그인 상태, 하지만 localStorage는 loggedIn(이미 로그인 성공했음) -> '로그인' + avatarUrl 설정
     else if (!this.authService.getLoggedIn() && loggedInPassport) {
       this.authService.setLoggedIn();
-      this.authService.setGoogleID(googleIDPasport)
-      this.authService.setAvatarUrl(avatarUrl);
+      if (userIDPassport) this.authService.setUserID(userIDPassport);
+      if (usernamePassport) this.authService.setUsername(usernamePassport);
+      if (avatarUrlPassport) this.authService.setAvatarUrl(avatarUrlPassport);
       console.log('로그인으로 바꿨어')
 
-      // backend에서 받은 cookie 제거
-      // this.cookieService.delete('googleID');
-      // this.cookieService.delete('loggedIn');
-      // this.cookieService.delete('avatarUrl');
-
-      console.log(this.authService.getLoggedIn(), this.authService.getGoogleID(), this.authService.getAvatarUrl());
+      console.log(this.authService.getLoggedIn(), this.authService.getUserID(), this.authService.getUsername(), this.authService.getAvatarUrl());
       return
     } 
-    // google 로그인 완료 && rwth 인증 전 -> 인증 화면 (login page)
-    else if (googleIDPasport && !this.authService.getVerified()) {
-      this.router.navigate(['/login']);
-      console.log('미인증이어서 인증 하러가')
-
-      // backend에서 받은 cookie 제거
-      // this.cookieService.delete('googleID');
-      // this.cookieService.delete('loggedIn');
-      // this.cookieService.delete('avatarUrl');
-
-      console.log(this.authService.getLoggedIn(), this.authService.getGoogleID(), this.authService.getAvatarUrl());
-      return
-    }
-    
   }
 
 }
