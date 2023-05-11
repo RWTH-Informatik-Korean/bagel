@@ -25,3 +25,7 @@ export const nodemailerConfig = {
   user: required('NODEMAILER_USER'),
   pass : required('NODEMAILER_PASS')
 }
+
+export const sessionConfig = {
+  secret: required('SESSION_SECRET')
+}
