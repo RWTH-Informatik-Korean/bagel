@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(helmet());
 app.use(cors({
-  origin:"http://localhost:4200",
+  origin:"http://www.bagel-rwth.de",
   credentials: true
 }));
 app.use(morgan('tiny'));

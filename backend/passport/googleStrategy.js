@@ -26,7 +26,7 @@ const googleLogin = new Strategy(
    {
       clientID: config.id,
       clientSecret: config.secret,
-      callbackURL: '/auth/login/google/callback',
+      callbackURL: '/api/auth/login/google/callback',
       passReqToCallback: true,
       withCredentials: true,
    },

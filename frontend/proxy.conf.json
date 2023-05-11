@@ -1,6 +1,6 @@
 {
   "/auth/*": {
-      "target": "http://localhost:8080",
+      "target": "http://www.bagel-rwth.de/api",
       "secure": false,
       "logLevel": "debug",
       "changeOrigin": true
