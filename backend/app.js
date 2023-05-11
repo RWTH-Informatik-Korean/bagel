@@ -14,6 +14,7 @@ import verificationRouter from './router/verification.js';
 import cardsRouter from './router/cards.js';
 import cardRouter from './router/card.js';
 import commentRouter from './router/comment.js'
+import { sessionConfig as config } from './config.js';
 
 const app = express();
 const port = 8080;
@@ -27,7 +28,7 @@ app.use(cors({
 }));
 app.use(morgan('tiny'));
 app.use(session({ 
-  secret: 'SECRET',
+  secret: config.secret,
   resave: true,
   saveUninitialized: true,
   cookie: { httpOnly: false }
