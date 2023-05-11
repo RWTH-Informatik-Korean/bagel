@@ -93,17 +93,10 @@ export async function update(id, title, text, username, avatarUrl, category, ter
   );
 }
 
-export async function searchCards(keyword, page) {
-  const offset = (page - 1) * 9;
-  return Card.find({$or: [{ title: keyword }, { text: keyword }]})
-              .sort({ "_id": -1 })
-              .skip(offset)
-              .limit(9);
-}
-
 export async function viewsUpdate(id, views) {
   return Card.findByIdAndUpdate(id, views, { returnOriginal: false }, { new: true });
 }
+
 export async function updateUsername(id, username){
   await Card.findByIdAndUpdate(id, { username });
 }
