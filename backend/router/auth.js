@@ -2,7 +2,6 @@ import express from 'express';
 import passport from 'passport';
 
 import * as authController from '../controller/auth.js';
-import * as userRepository from '../database/user.js'
 
 import { isAuth } from '../middleware/auth.js';
 import { usernameRules, validate } from '../middleware/validate.js';
