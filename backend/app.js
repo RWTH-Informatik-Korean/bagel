@@ -8,9 +8,6 @@ import flash from 'connect-flash';
 
 import passportGoogle from './passport/googleStrategy.js';
 import { connectDB } from './database/database.js';
-import * as courseCategoryRepository from './database/courseCategory.js';
-import * as moduleCategoryRepository from './database/moduleCategory.js';
-import * as postCategoryRepository from './database/postCategory.js';
 
 import authRouter from './router/auth.js';
 import verificationRouter from './router/verification.js';
@@ -44,33 +41,6 @@ app.use('/verification', verificationRouter);
 app.use('/cards', cardsRouter);
 app.use('/card', cardRouter);
 app.use('/comment', commentRouter);
-
-app.get('/category/module', async (req, res) => {
-  const category = await moduleCategoryRepository.getAll();
-  if (category) {
-    res.status(200).json(category);
-  } else {
-    res.status(404).json({ message: 'category(module) not found' });
-  }
-});
-
-app.get('/category/course', async (req, res) => {
-  const category = await courseCategoryRepository.getAll();
-  if (category) {
-    res.status(200).json(category);
-  } else {
-    res.status(404).json({ message: 'category(course) not found' });
-  }
-});
-
-app.get('/category/post', async (req, res) => {
-  const category = await postCategoryRepository.getAll();
-  if (category) {
-    res.status(200).json(category);
-  } else {
-    res.status(404).json({ message: 'category(post) not found' });
-  }
-});
 
 app.use((req, res, next) => {
   res.sendStatus(404);
