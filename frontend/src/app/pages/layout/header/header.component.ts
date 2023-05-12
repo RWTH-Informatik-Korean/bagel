@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit{
   signup(): void {
     // !구글 로그인 성공 && !rwth email 인증
     if (!this.authService.getGoogleLoggedIn()) {
-       window.location.href = 'http://www.bagel-rwth.de/api/auth/login/google';
+       window.location.href = 'https://www.bagel-rwth.de/api/auth/login/google';
        return
     } 
     // 구글 로그인 성공 && !rwth email 인증

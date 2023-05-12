@@ -47,14 +47,14 @@ export async function googleCallback(req, res) {
       res.cookie("_id", user.id.toString());
       res.cookie("username", user.username);
       res.cookie("avatarUrl", user.avatarUrl);
-      return res.redirect(`http://www.bagel-rwth.de/api/login`);
+      return res.redirect(`https://www.bagel-rwth.de/api/login`);
     }
     // 가입 완료된 user -> 로그인 완료 후 main 페이지로 이동
     res.cookie("_id", user._id.toString());
     res.cookie("username", user.username);
     res.cookie("avatarUrl", user.avatarUrl);
     res.cookie("loggedIn", 'true');
-    return res.redirect(`http://www.bagel-rwth.de/api/`);
+    return res.redirect(`https://www.bagel-rwth.de/api/`);
 
   } else {
     return res.status(404).json({ message: 'login failed' });

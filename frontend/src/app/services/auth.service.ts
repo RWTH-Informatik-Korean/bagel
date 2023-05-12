@@ -10,8 +10,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private verificationUrl = 'http://www.bagel-rwth.de/api/verification';
-  private authUrl = 'http://www.bagel-rwth.de/api/auth';
+  private verificationUrl = 'https://www.bagel-rwth.de/api/verification';
+  private authUrl = 'https://www.bagel-rwth.de/api/auth';
 
   // Setter, Getter for Auth-data
   // google id from user

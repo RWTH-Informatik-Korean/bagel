@@ -1,6 +1,6 @@
 {
   "/auth/*": {
-      "target": "http://www.bagel-rwth.de/api",
+      "target": "https://www.bagel-rwth.de/api",
       "secure": false,
       "logLevel": "debug",
       "changeOrigin": true

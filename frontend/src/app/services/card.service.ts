@@ -8,8 +8,8 @@ import { BagelCard } from '../models/bagelCard';
 })
 export class CardService {
 
-  private cardsUrl = 'http://www.bagel-rwth.de/api/cards/list';
-  private cardUrl = 'http://www.bagel-rwth.de/api/card';
+  private cardsUrl = 'https://www.bagel-rwth.de/api/cards/list';
+  private cardUrl = 'https://www.bagel-rwth.de/api/card';
   
   constructor(private _http: HttpClient) { }
   
@@ -35,14 +35,14 @@ export class CardService {
   
   searchCard (search: string): Observable<BagelCard[]> {
     console.log(search);
-    return this._http.get<BagelCard[]>("http://www.bagel-rwth.de/api/cards", {
+    return this._http.get<BagelCard[]>("https://www.bagel-rwth.de/api/cards", {
       params: new HttpParams().set('search', search)
     });
   }
   
   findByCategory(postCategory: string): Observable<BagelCard[]> {
     console.log(postCategory);
-    return this._http.get<BagelCard[]>("http://www.bagel-rwth.de/api/cards", {
+    return this._http.get<BagelCard[]>("https://www.bagel-rwth.de/api/cards", {
       params: new HttpParams().set('category', postCategory)
     });
     // return this.getAllData().pipe(map((items: any[]) => 
@@ -57,7 +57,7 @@ export class CardService {
   }
   findByCourse(_course: string): Observable<BagelCard[]> {
     console.log(_course);
-    return this._http.get<BagelCard[]>("http://www.bagel-rwth.de/api/cards", {
+    return this._http.get<BagelCard[]>("https://www.bagel-rwth.de/api/cards", {
       params: new HttpParams().set('course', _course)
     });
   }
