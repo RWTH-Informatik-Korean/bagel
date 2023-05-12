@@ -14,7 +14,6 @@ export class CardService {
 
   constructor(private _http: HttpClient){}
 
-  // card id
   private cardIDSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.getCardID());
 
   setCardID(cardID: string) {
@@ -28,7 +27,6 @@ export class CardService {
     return this.cardIDSubject.asObservable();
   }
   
-  // http mehtods for card data
   getAllData(): Observable<BagelCard[]> {
     return this._http.get<BagelCard[]>(this.cardListUrl, { withCredentials: true });
    }
@@ -49,8 +47,7 @@ export class CardService {
   delete(id: any): Observable<any> {
     return this._http.delete(`${this.cardUrl}/${id}`, { withCredentials: true });
   }
-  
-  // new function for card filter
+
   filterCards(filter: any[]): Observable<BagelCard[]> {
     return this.getAllData().pipe(map(items => {
         return this.varFilter(items, filter);

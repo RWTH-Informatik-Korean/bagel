@@ -81,8 +81,12 @@ export async function verifiedUpdate(req, res) {
 export async function userUpdate(req, res) {
   const { googleID } = req.user;
   const { username, avatarUrl } = req.body;
-  if (username && !(await userRepository.findUsername(username))) {
-    res.status(404).json({ message: 'username이 존재합니다.' });
+  if (username && await userRepository.findUsername(username)) {
+    const usernameExist = await userRepository.findUsername(username);
+    const usernameCheck = await userRepository.findUsername2(googleID, username);
+    if (usernameExist._id.toString() !== usernameCheck._id.toString()) {
+      return res.status(404).json({ message: 'username이 존재합니다.' });
+    }
   }
   const update = await userRepository.update(googleID, username, avatarUrl);
   if (update) {
