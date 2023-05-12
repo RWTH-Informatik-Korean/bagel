@@ -33,6 +33,9 @@ export async function getAll(){
 }
 
 export async function getPages(page){
+  if(page === undefined){
+    return Card.find({}).sort({ "_id": -1 });
+  }
   const offset = (page - 1) * 9;
   return Card.find({})
           .sort({ "_id": -1 })
@@ -41,6 +44,10 @@ export async function getPages(page){
 }
 
 export async function categoryCards(category, page) {
+  if(page === undefined){
+    return Card.find({ category: category }, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1, views: 1 })
+              .sort({ "_id": -1 });
+  }
   const offset = (page - 1) * 9;
   return Card.find({ category: category }, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1, views: 1 })
               .sort({ "_id": -1 })
@@ -49,6 +56,10 @@ export async function categoryCards(category, page) {
 }
 
 export async function courseCards(course, page) {
+  if(page === undefined){
+    return Card.find({ course: course }, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1, views: 1 })
+              .sort({ "_id": -1 });
+  }
   const offset = (page - 1) * 9;
   return Card.find({ course: course }, { id: 1, title: 1, category: 1, username: 1, term: 1, course: 1, views: 1 })
               .sort({ "_id": -1 })
@@ -81,6 +92,10 @@ export async function create(title, text, category, username, avatarUrl, term, c
 }
 
 export async function searchCards(keyword, page) {
+  if(page === undefined){
+    return Card.find({$or: [{ title: keyword }, { text: keyword }]})
+              .sort({ "_id": -1 })
+  }
   const offset = (page - 1) * 9;
   return Card.find({$or: [{ title: keyword }, { text: keyword }]})
               .sort({ "_id": -1 })
