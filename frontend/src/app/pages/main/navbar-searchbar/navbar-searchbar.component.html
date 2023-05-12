@@ -1,10 +1,12 @@
-<div class="nav-search-bar">
+<div class="nav-search-bar" [ngClass]="isCourse ? 'disable' : ''">
   <div class="navbar">
     <a class="nav-item" [ngClass]="selected===category.category ? 'selected' : ''" *ngFor="let category of categories">
       <div (click)="selectedPostCategory(category.category)">{{ category.category }}</div>
     </a>
   </div>
   <div class="searchbar">
-    <input [(ngModel)]="searchInput" name="searchInput" type="search" autocomplete="off" placeholder="Search" (keydown.enter)="searchCard(); $event.preventDefault(); "/>
+    <input #searchBox [(ngModel)]="searchInput" name="searchInput" type="search" autocomplete="off" placeholder="Search" 
+    (input)="searchCard()"/>
+    <button></button>
   </div>
 </div>

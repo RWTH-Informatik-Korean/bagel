@@ -9,7 +9,7 @@
   </div>
   <div class="user-info">
     <div>
-      <img src="../../assets/user-photo/tigger.png" alt="">
+      <img [src]="bagel.avatarUrl" alt="">
       <span id="username">{{ bagel.username }}</span>
     </div>
     <span id="created-date">{{ bagel.createdAt | date:'mediumDate'}}</span>
@@ -19,5 +19,7 @@
     </div>
   </div>
   <quill-view [content]="bagel.text" format="html"></quill-view>
-  <app-comments></app-comments>
+  
+  <!-- Comment Part -->
+  <app-comments calss="post-content" [comments]="comments"></app-comments>
 </div>

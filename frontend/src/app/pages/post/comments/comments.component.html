@@ -1,21 +1,15 @@
 <div class="comments-container">
-  <div *ngIf="comments$ | async as comments">
+  <div *ngIf="comments">
     <ul class="comments-list">
-      <li *ngFor="let comment of comments; index as i">
+      <li *ngFor="let comment of comments">
         <div class="user-container">
-            <img [src]="avatarUrl" class="user-photo">
-            <div class="user-name">Tigger</div>
+            <img [src]="comment.avatarUrl" class="user-photo">
+            <div class="user-name">{{ comment.username }}</div>
         </div>
-          <app-comment
-            [comment]="comment"
-            [comments]="comments"
-            [index]="i">
+          <app-comment [comment]="comment">
           </app-comment>
       </li>
     </ul>
-    <p class="fst-italic text-black-50" *ngIf="comments.length === 0">
-      No comments to display
-    </p>
-    <app-comment-form [comments]="comments"></app-comment-form>
+    <app-comment-form ></app-comment-form>
   </div>
 </div>

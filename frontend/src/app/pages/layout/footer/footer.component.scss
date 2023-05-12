@@ -29,16 +29,27 @@
 
 @media only screen and (max-width: 768px) {
   /* For mobile: */
+  .footer-container{
+    width: min(100% - 2rem, 420px);
+    margin-inline: auto;
+    height: 100px;
+    z-index: 0;
+  }
   .footer-text {
     font-size: 1rem;
+    text-align: center;
   }
 }
 @media only screen and (max-width: 576px) {
   /* For mobile: */
   .footer-container{
+    width: min(100% - 2rem, 280px);
+    margin-inline: auto;
     height: 100px;
+    z-index: 0;
   }
   .footer-text {
     font-size: 0.5rem;
+    text-align: center;
   }
 }

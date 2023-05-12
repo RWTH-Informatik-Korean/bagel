@@ -12,6 +12,7 @@ export class MainPageComponent implements OnInit {
   
   selectedCategory: string;
   selectedCourse: string;
+  selectCourse: boolean;
   inputtedText: string;
   searched: boolean;
   screenMode: string;
@@ -39,6 +40,7 @@ export class MainPageComponent implements OnInit {
   }
   getCourseBagel(course: string) {
     this.selectedCourse = course;
+    this.selectCourse = true;
   }
   @HostListener ('window:resize', ['$event'])
   onResize(event: any) {

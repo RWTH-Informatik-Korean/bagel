@@ -37,6 +37,7 @@ const iconPraktisch: string = "../../assets/logos/PRAKTISCH.svg";
 const iconTechnisch: string = "../../assets/logos/TECHNISCH.svg";
 const iconWahlpflicht: string = "../../assets/logos/WAHLPFLICHT.svg";
 const iconSonstige: string = "../../assets/logos/SONSTIGE.svg";
+const iconArchive: string = "../../assets/logos/BAGEL.png";
 
 export const COURSES: Course[] = [
   {
@@ -205,6 +206,13 @@ export const COURSES: Course[] = [
     courseId: 24,
 		module: 'Sonstige',
 		moduleUrl: iconSonstige
+  },
+  {    
+    courseName: 'Archive',
+    category: 'Archive',
+    courseId: 25,
+		module: 'INFORMATIK',
+		moduleUrl: iconArchive
   },
 ]
 
@@ -424,5 +432,16 @@ export const LEHRSTUHLE: Lehrstuhl[] = [
 		module: 'Informatik',
 		moduleUrl: "../../assets/logos/informatik.svg",
     href: "https://www.informatik.rwth-aachen.de/cms/informatik/Forschung/Forschungsbereiche/~mrys/Liste-der-Forschungsbereiche/?lidx=1"
-  },
+  }
 ]
+
+export const Archive: Lehrstuhl[] = [
+  {    
+    courseName: 'Archive',
+    category: 'Archive',
+    courseId: 52,
+		module: 'Archive',
+		moduleUrl: iconArchive,
+    href: ""
+  }
+];

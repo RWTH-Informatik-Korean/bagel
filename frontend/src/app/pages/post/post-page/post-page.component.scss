@@ -13,13 +13,22 @@
 
 .post-page-container {
   width: min(100% - 4rem, 1024px);
+  min-height: 1vh;
   margin-inline: auto;
   margin: 40px auto 60px;
 }
 .back-btn-container {
-  height: 68px;
+  height: 60px;
   display: flex;
+  flex-direction: row;
   align-items: center;
+  & a {
+    cursor: pointer;
+  }
+  & img {
+    width: 30;
+    height: 20;
+  }
 }
 .post-info {
   display: flex;
@@ -27,8 +36,9 @@
   margin: 32px 0;
 }
 #course {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   margin-bottom: 32px;
+  height: 32px;
 }
 #title {
   font-size: 2.5rem;
@@ -64,7 +74,12 @@
     margin: 0 0.25rem;
   }  
 }
-
+.bi:hover {
+  cursor: pointer;
+}
+.post-content {
+  min-height: 1vh;
+}
 
 @media only screen and (max-width: 768px) {
   /* For mobile: */
@@ -73,20 +88,36 @@
     width: min(100% - 2rem, 768px);
     margin-inline: auto;
   }
+  .back-btn-container img{
+    height: 25px;
+    width: 25px;
+  }
   .post-info {
     margin: 16px 0;
   }
   #course {
-    font-size: 1.5rem;
-    margin-bottom: 16px;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
   }
   #title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     margin-bottom: 8px;
     line-height: 100%;
   }
   .user-info {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-bottom: 30px;
+  }
+  #username {
+    font-size: 1rem;
+  }
+  #created-date {
+    font-size: 1rem;
+    margin-left: 0px;
+  }
+  .icon-wrapper  {
+    margin: 0;
   }
 }

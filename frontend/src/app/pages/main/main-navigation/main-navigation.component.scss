@@ -73,6 +73,9 @@
   align-items: center;
   height: 88px;
 }
+.courses:hover {
+  cursor: pointer;
+}
 .courseLogo {
   height: 55px;
   margin-left: 16px;
@@ -107,5 +110,9 @@
   }
   .courseName {
     font-size: 1rem;
+  }
+
+  @media only screen and (max-width: 768px) {
+    /* For Mobile */
   }
 }

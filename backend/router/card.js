@@ -12,6 +12,7 @@ router.post('/', isAuth, cardController.createCard);
 router.put('/:id', isAuth, cardController.updateCard);
 router.delete('/:id', isAuth, cardController.deleteCard);
 router.put('/views/:id', cardController.viewsUpdate);
+router.get('/:id/comments', isAuth, commentController.getComments);
 router.post('/:id/comment', isAuth, commentController.createComment);
 
 export default router;

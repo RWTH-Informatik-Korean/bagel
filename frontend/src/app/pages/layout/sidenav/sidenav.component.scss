@@ -29,7 +29,7 @@ i {
   margin-bottom: 20px;
 }
 .avatar-image {
-  width: 80%;
+  width: 50%;
   border-radius: 50%;
   text-align: center;
 }
@@ -55,15 +55,16 @@ input {
   height: 32px;
   font-size: 1rem;
   text-align: center;
-  border: 0.5px solid #F0CB92;
+  border: 0.5px solid $bagel-warn;
   border-radius: 50px;
   background-color: #ffffff;
-  color: #F0CB92;
+  color: $bagel-warn;
 }
 #edit-btn {
   border: none;
   background-color: $bagel-primary;
   color: $bagel-W-text;
+  margin-top: 30px;
 }
 #save-btn {
   border: none;

@@ -1,7 +1,7 @@
 <form class="container submit-form">
   <div class="form-group">
     <label for="selectCategory">Category</label>
-    <select class="form-select form-control" id="selectCategory" (change)="selectCategory()" name="category" [(ngModel)]="bagelCard.category">
+    <select class="form-select form-control" id="selectCategory" (change)="selectCategory()" name="category" [(ngModel)]="bagelCard.category" required>
       <option selected>Select category</option>
       <option value="Course">Courses</option>
       <option value="Study">Study</option>
@@ -18,7 +18,7 @@
     <label for="inputCourses">Courses</label>
     <input type="Courses" class="form-control" name="course" list="selectCourses" placeholder="Input course" [disabled]="isEnabled" [(ngModel)]="bagelCard.course">
     <datalist id="selectCourses">
-      <option *ngFor="let course of courses">{{ course.courseName }}</option>
+      <option *ngFor="let course of courses">{{ course.courseName || ' ' }}</option>
     </datalist>
   </div>
   

@@ -1,5 +1,7 @@
 export interface Comment {
-  id: number,
-  text: string,
-  avatarUrl: string
+  _id?: string,
+  cardId?: string,
+  text?: string,
+  username?: string,
+  avatarUrl?: string
 }

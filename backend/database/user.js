@@ -33,7 +33,7 @@ export async function create(username, googleID, avatarUrl, rwthVerified){
 }
 
 export async function update(googleID, username, avatarUrl){
-  const user = await User.findOneAndUpdate({ googleID }, { username, avatarUrl });
+  const user = await User.findOneAndUpdate({ googleID }, { username, avatarUrl }, { returnOriginal: false });
   user.postCards.map(async (cardId) => {
     if(username){
       await cardRepository.updateUsername(cardId, username);

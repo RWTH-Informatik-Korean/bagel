@@ -5,7 +5,7 @@
   margin-inline: auto;
   margin-bottom: 3.75rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2.5rem;
   justify-content: center;
 }
@@ -31,6 +31,7 @@
 }
 .cardItem:hover, #newBagel:hover {
   box-shadow: 0 14px 28px rgba(93,67,58,0.25), 0 10px 10px rgba(93,67,58,0.22);
+  cursor: pointer;
 }
 .cardItem-header {
   font-size: 0.75rem;
@@ -70,6 +71,9 @@
   flex-direction: column;
   margin: 1rem 0;
   font-size: 1.5rem;
+  & #text-course {
+    font-size: 1.2rem;
+  }
 }
 .cardItemC-text {
   margin: 1rem 0;
@@ -112,17 +116,21 @@
 .res-text {
   font-size: 1rem;
 }
+
 @media only screen and (max-width: 992px) {
   /* For pad: */
   .cardList-wrapper {
     width: min(100% - 2rem, 992px);
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 24px;
   }
-
 }
 @media only screen and (max-width: 576px) {
   /* For mobile: */
+  .aboutSearch {
+    width: min(100% - 1rem, 576px);
+    margin-inline: auto;
+  }
   .cardList-wrapper {
     width: min(100% - 1rem, 576px);
     margin-inline: auto;
@@ -155,8 +163,8 @@
     height: 50%;
   }
   .cardItemC-text {
-    height: auto;
-    margin: 0;
+    height: 24px;
+    margin: 0.3rem;
     line-height: 150%;
   }
   .cardItem-content #text-course{

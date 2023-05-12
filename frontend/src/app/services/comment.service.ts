@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 
 import { Comment } from '../models/comment.model';
 
@@ -8,36 +10,62 @@ import { Comment } from '../models/comment.model';
 })
 
 export class CommentService {
-  comments: Comment[] = [
-    {
-      id: 1,
-      text: "This is the first comment",
-      avatarUrl: ""
-    },
-  ];
+  private cardUrl: string = "http://localhost:8080/card";
+  private commentUrl: string = "http://localhost:8080/comment";
+  
+  constructor(
+    private _http: HttpClient
+  ){}
 
-  getAllComments(): Observable<Comment[]> {
-    return of(this.comments);
+  private comments: Comment[] = [];
+
+  // Observerble comments
+  private commentsSubject: BehaviorSubject<Comment[]> = new BehaviorSubject<Comment[]>([]);
+
+  setComments(comments: Comment[]): void {
+    this.comments = [...this.comments, ...comments];
+    this.commentsSubject.next(this.comments); // 구독하는 옵저버들에게 값 전달
+  }
+  pullComment(id: string): void {
+    const commentToUpdate = this.comments.find(comment => comment._id === id);
+    if (commentToUpdate) {
+      commentToUpdate.text = '삭제 되었습니다.';
+      const updatedComments = this.comments.map(comment => {
+        if (comment._id === id) {
+          return commentToUpdate;
+        }
+        return comment;
+      });
+      this.comments = updatedComments;
+      this.commentsSubject.next(this.comments);
+    }
+  }
+  getComments(): Comment[] {
+    return this.comments;
+  }
+  followComments() {
+    return this.commentsSubject.asObservable()
+  }
+  clearComments(): Comment[] {
+    return this.comments = [];
+  }
+  
+
+  // get all comment via cardID
+  getAllComments(id:string): Observable<any> {
+    return this._http.get(`${this.cardUrl}/${id}/comments`, { withCredentials: true });
   }
 
-  postComment(commentId: number, commentText: string, commentAvatarUrl: string): Observable<Comment | undefined> {
-    const isNewComment: boolean = commentId === null || commentId === undefined;
-    const newComment: Comment = {
-      id: this.comments.length + 1,
-      text: commentText,
-      avatarUrl: commentAvatarUrl
-    };
+  // create comment
+  createComment(comment: Comment) {
+    const body = { text: comment.text, avatarUrl: comment.avatarUrl };
+    const cardId = comment.cardId;
+    return this._http.post(`${this.cardUrl}/${cardId}/comment`, body, { withCredentials: true });
+  }
 
-    
-    if (isNewComment) { // add new Comment into comment array
-      this.comments.push(newComment);
-      return of(newComment); //'of' operator from RxJS convert comments data to an obseverble
-    } else { // edit exist Comment (find and edit)
-      this.comments = this.comments.map((comment) => 
-        comment.id === commentId ? { ...comment, text: commentText} : comment
-      );
-      const updatedComment = this.comments.find((comment) => comment.id === commentId);
-      return of(updatedComment);
-    }
+  // delete comment
+  deleteComment(id: string) {
+    const commentId = id;
+    return this._http.delete(`${this.commentUrl}/${commentId}`, { withCredentials: true });
   }
 }

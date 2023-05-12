@@ -31,7 +31,11 @@ app.use(session({
   secret: config.secret,
   resave: true,
   saveUninitialized: true,
-  cookie: { httpOnly: false }
+  cookie: { 
+    secure: false,  // true로 설정할 경우, google oauth2의 sid 설정이 불가
+    httpOnly: false,
+    maxAge: 1000 * 60 * 120  // session 유효시간: 120분
+  }
 }));
 app.use(flash());
 

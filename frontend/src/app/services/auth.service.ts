@@ -13,25 +13,25 @@ export class AuthService {
   private verificationUrl = 'https://www.bagel-rwth.de/api/verification';
   private authUrl = 'https://www.bagel-rwth.de/api/auth';
 
-  // Setter, Getter for Auth-data
-  // google id from user
-  private userIDSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.getUserID());
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) {}
 
-  getGoogleID(): string {
-    const googleID = localStorage.getItem('googleID');  
-
-    if (googleID) {
-      const decryptValue = CryptoJS.AES.decrypt(googleID, environment.CRYPTOKEY).toString(CryptoJS.enc.Utf8);
-    return decryptValue;
-    }
-    return null;
+  checkSid(): boolean {
+    const sid = this.cookieService.get('connect.sid');
+    if (sid) return true;
+    return false;
   }
-  
+
+  // Setter, Getter for Auth-data
+  // user id from DB
+  private userIDSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.getUserID());
   
   setUserID(_id: string) {
     const userIDEncrypt = CryptoJS.AES.encrypt(_id, environment.CRYPTOKEY);
     localStorage.setItem('userID', userIDEncrypt.toString());
-    this.userIDSubject.next(userIDEncrypt.toString());
+    this.userIDSubject.next(_id);
     this.cookieService.delete('_id');
   }
   getUserID(): string {
@@ -47,14 +47,36 @@ export class AuthService {
     return this.userIDSubject.asObservable();
   }
 
+  // google id of user
+  private googleIDSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.getGoogleID());
+  
+  setGoogleID(googleID: string) {
+    const googleIDEncrypt = CryptoJS.AES.encrypt(googleID, environment.CRYPTOKEY);
+    localStorage.setItem('googleID', googleIDEncrypt.toString());
+    this.googleIDSubject.next(googleID);
+    this.cookieService.delete('googleID');
+  }
+  getGoogleID(): string {
+    const googleID = localStorage.getItem('googleID');  
+    
+    if (googleID) {
+      const decryptValue = CryptoJS.AES.decrypt(googleID, environment.CRYPTOKEY).toString(CryptoJS.enc.Utf8);
+    return decryptValue;
+    }
+    return null;
+  }
+  googleID(): Observable<string> {
+    return this.googleIDSubject.asObservable();
+  }
+
+
   // username from user
   private usernameSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.getUsername());
 
   setUsername(username: string) {
     const usernameEncrypt = CryptoJS.AES.encrypt(username, environment.CRYPTOKEY);
     localStorage.setItem('username', usernameEncrypt.toString());
-    this.usernameSubject.next(usernameEncrypt.toString());
-    this.cookieService.delete('username');
+    this.usernameSubject.next(username);
   }
   getUsername(): string {
     const username = localStorage.getItem('username');  
@@ -73,10 +95,10 @@ export class AuthService {
   private avatarUrlSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.getAvatarUrl());
 
   setAvatarUrl(avatarUrl: string) {
-    this.avatarUrlSubject.next(avatarUrl);
     const avatarUrlEncrypt = CryptoJS.AES.encrypt(avatarUrl, environment.CRYPTOKEY);
     localStorage.setItem('avatarUrl', avatarUrlEncrypt.toString());
-    // this.cookieService.delete('avatarUrl');
+    this.avatarUrlSubject.next(avatarUrl);
+    this.cookieService.delete('avatarUrl');
   }
   getAvatarUrl(): string {
     const avatarUrl = localStorage.getItem('avatarUrl');  
@@ -171,7 +193,10 @@ export class AuthService {
     const trueEncrypt = CryptoJS.AES.encrypt('true', environment.CRYPTOKEY);
     localStorage.setItem('bagelLoggedIn', trueEncrypt.toString());
     this.loggedInSubject.next(true);
-    // this.cookieService.delete('loggedIn');
+    this.cookieService.delete('loggedIn');
+  }
+  setLoggedOut() {
+    this.loggedInSubject.next(false);
   }
   getLoggedIn(): boolean {
     const logggedIn = localStorage.getItem('bagelLoggedIn');  
@@ -187,43 +212,39 @@ export class AuthService {
   }
 
 
-  constructor(
-    private http: HttpClient,
-    private cookieService: CookieService
-  ) { }
-
 
   // Verification rwth email
   // send the verification code to the email user entered in input
   verificationEmail (email: string) {
     const body = { email };
     // observe: 'response' - 특정 헤더 정보나 status code 확인을 위해 전체 응답을 받는 옵션
-    return this.http.post<any>(`${this.verificationUrl}/send`, body, { observe: 'response' }); 
+    return this.http.post<any>(`${this.verificationUrl}/send`, body, { observe: 'response', withCredentials: true }); 
   }
 
   // Validate verification code
   validateCode(email: string, verifiCode: string, userID: string) {
     const body = { email, verifiCode, userID };
-    return this.http.post<any>(`${this.verificationUrl}/check`, body, { observe: 'response' });
+    return this.http.post<any>(`${this.verificationUrl}/check`, body, { observe: 'response', withCredentials: true });
     }
 
   // Update DB for User information  - rwthVerified: true
   updateDBVerified(rwthVerified: boolean) {
     const body = rwthVerified;
-    return this.http.post<any>(`${this.verificationUrl}/google/update/verified`, body, { observe: 'response' });
+    return this.http.post<any>(`${this.verificationUrl}/google/update/verified`, body, { observe: 'response', withCredentials: true });
   }
 
   // Get AvatarUrl via username
   getAvatar(username: string) {
     const body = username;
-    return this.http.get<any>(`${this.authUrl}/avatar`);
+    return this.http.get<any>(`${this.authUrl}/avatar`, { withCredentials: true });
   }
+  // Update user information - username, avatarUrl
   updateUser(data: any): Observable<any> {
-    console.log(data);
     const options = { withCredentials: true };
     return this.http.put(`${this.authUrl}/google/update`, data, options);
   }
+  // Log out
   logoutUser() {
-    return this.http.get(`${this.authUrl}/logout`);
+    return this.http.get(`${this.authUrl}/logout`, { withCredentials: true });
   }
 }

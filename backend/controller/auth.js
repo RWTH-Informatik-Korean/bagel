@@ -79,7 +79,8 @@ export async function verifiedUpdate(req, res) {
 }
 
 export async function userUpdate(req, res) {
-  const { googleID, username, avatarUrl } = req.user;
+  const { googleID } = req.user;
+  const { username, avatarUrl } = req.body;
   if (username && !(await userRepository.findUsername(username))) {
     res.status(404).json({ message: 'username이 존재합니다.' });
   }

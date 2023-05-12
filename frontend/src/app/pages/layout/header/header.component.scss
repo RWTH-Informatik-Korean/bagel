@@ -10,6 +10,7 @@
   z-index: 1;
   width: 100%;
   background-color: #fff;
+  transition: all 200ms ease-in;
 }
 .content-wrapper {
   width: min(100%, 1180px);
@@ -137,12 +138,8 @@
   .logo {
     height: 40px;
   }
-  .btn-item {
-    height: 32px;
-    width: 64px;
-    font-size: 0.7rem;
-    background-color: $bagel-dark;
-    border: none;
-    color: $bagel-accent;
-  }
+  // log in button
+.login-btn {
+  font-size: 0.8rem;
+}
 }

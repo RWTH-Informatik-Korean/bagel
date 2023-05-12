@@ -1,40 +1,53 @@
-import { Component, Input } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { CommentService } from 'src/app/services/comment.service';
 import { Comment } from 'src/app/models/comment.model';
+
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss'],
 })
-export class CommentComponent {
-  // isCommentInEditMode: if the current comment is in the edit mode or not
+export class CommentComponent implements OnInit{
   isCommentInEditMode: boolean = false;
-  // isDropdowClick: boolean = false;
-
+  myComment: Comment = {}
+  isWriter: boolean = false;
+  deletedComment: boolean = false;
   @Input() comment: Comment;
-  @Input() index: number;
-  @Input() comments: Comment[];
 
+  constructor(
+    private authService: AuthService,
+    private commentService: CommentService
+  ) {}
 
-  editComment(): void {
-    this.isCommentInEditMode = true;
+  ngOnInit(): void {
+    this.myComment = this.comment;
+    this.authCheck();
+    this.deletedCheck();
   }
 
-  deleteComment(): void {
-    this.comments = this.comments.splice(this.index, 1);
+  async authCheck() {
+    const username = await this.authService.getUsername();
+    if (this.myComment.username === username && !(this.myComment.text == "삭제 되었습니다.")) {
+      return this.isWriter = true;
+    }
+    return this.isWriter = false;
   }
 
-  disableCommentEditMode(isEditMode: boolean) {
-    this.isCommentInEditMode = isEditMode;
+  async deletedCheck() {
+    if (this.myComment.text == "삭제 되었습니다.") {
+      return this.deletedComment = true;
+    }
+    return this.deletedComment = false;
   }
 
-  // dropdownClick(): void {
-  //   this.isDropdowClick = !this.isDropdowClick;
-  //   console.log(this.isDropdowClick);
-  // }
-
-
-
-
+  async deleteComment() {
+    this.commentService.deleteComment(this.myComment._id).subscribe({
+      next: (res) => {
+        this.commentService.pullComment(this.myComment._id);
+        this.deletedComment = true;
+      }
+    })
+  }
 }

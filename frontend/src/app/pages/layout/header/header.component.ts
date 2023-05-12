@@ -9,9 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit{
-
   @Output() SideNavToggle = new EventEmitter();
-
   headerFixed: boolean = false;
   screenMode: string;
   isLoggedIn: boolean;
@@ -26,6 +24,7 @@ export class HeaderComponent implements OnInit{
   ngOnInit(): void {  
     let screenWidth = window.innerWidth;
     (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
+    // get user data
     this.userData();
   }
 
@@ -36,7 +35,6 @@ export class HeaderComponent implements OnInit{
     await this.authService.avatarUrl().subscribe(avtarUrl => {
       this.avatarUrl = avtarUrl;
     })
-    return
   }
 
   // google login Button(OAuth2) 
@@ -65,7 +63,7 @@ export class HeaderComponent implements OnInit{
   }
   
   @HostListener('window:scroll', ['$event']) onscroll() {
-    if(window.scrollY > 10) {
+    if(window.scrollY > 1) {
       this.headerFixed = true;
     } else {
       this.headerFixed = false;
