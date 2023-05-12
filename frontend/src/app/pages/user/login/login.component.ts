@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit{
   sentCode: boolean = false;  // verification code sent successfully or not
   verified: boolean = false;  // Verification of RWTH email successfully or not 
 
-  loginhref: string = "http://localhost:8080/auth/login/google";
+  loginhref: string = "https://www.bagel-rwth.de/api/auth/login/google";
 
 
   constructor(

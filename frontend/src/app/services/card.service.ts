@@ -7,9 +7,9 @@ import { BagelCard } from '../models/bagelCard';
   providedIn: 'root'
 })
 export class CardService {
-  private cardListUrl = 'http://localhost:8080/cards/list';
-  private cardsUrl = 'http://localhost:8080/cards';
-  private cardUrl = 'http://localhost:8080/card';
+  private cardListUrl = 'https://www.bagel-rwth.de/api/cards/list';
+  private cardsUrl = 'https://www.bagel-rwth.de/api/cards';
+  private cardUrl = 'https://www.bagel-rwth.de/api/card';
   private cardId: string;
 
   constructor(private _http: HttpClient){}
@@ -105,4 +105,3 @@ export class CardService {
   // } 
 
 }
-

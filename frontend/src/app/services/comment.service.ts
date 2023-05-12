@@ -10,8 +10,8 @@ import { Comment } from '../models/comment.model';
 })
 
 export class CommentService {
-  private cardUrl: string = "http://localhost:8080/card";
-  private commentUrl: string = "http://localhost:8080/comment";
+  private cardUrl: string = "https://www.bagel-rwth.de/api/card";
+  private commentUrl: string = "https://www.bagel-rwth.de/api/comment";
   
   constructor(
     private _http: HttpClient
