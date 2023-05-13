@@ -39,7 +39,10 @@ export class AppComponent implements OnInit{
     this.scroller.scrollToPosition([0, 0]);
   }
   plusNewCard() {
-    this.router.navigate(['/register']);
+    if (this.authService.getLoggedIn()) {
+      return this.router.navigate(['/register']);
+    }
+    return this.router.navigate(['/login']);
   }
 
   async authSet() {
@@ -81,7 +84,7 @@ export class AppComponent implements OnInit{
       } 
     }
     
-    // seesion이 만료된 경우 logout 실행
+    // Seesion이 만료된 경우, logout 실행
     loginCheck() {
       const stillLoggedIn = this.authService.checkSid();
       if (!stillLoggedIn) {

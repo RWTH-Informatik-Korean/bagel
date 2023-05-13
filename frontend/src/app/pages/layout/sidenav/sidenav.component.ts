@@ -26,6 +26,7 @@ export class SidenavComponent implements OnInit{
     rwthVerified: false,
   }
   updatedAvatarUrl: string;
+  updateErrorMsg: string;
 
   constructor( 
     private _authService: AuthService, 
@@ -54,6 +55,12 @@ export class SidenavComponent implements OnInit{
     this.curUser.avatarUrl = imageObject.avatarUrl;
   }  
   updateUser() {
+    if (this.curUser.username.length < 2 || this.curUser.username.length > 8) {
+      this.toastr.error('', `Must be between 2-8 characters`, {
+        positionClass: 'toast-top-right',
+      });
+      return
+    }
     this._authService.updateUser(this.curUser)
     .subscribe({
       next: async (updatedUser) => {
@@ -62,7 +69,10 @@ export class SidenavComponent implements OnInit{
         this._authService.setUsername(updatedUser.username);
       },
       error: (err) => {
-        console.error('Failed to update user:', err);
+        this.toastr.error('', `Failed to update user`, {
+          positionClass: 'toast-top-right',
+        });
+        return
       }
     })
     this.navMode = 'default';

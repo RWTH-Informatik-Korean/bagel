@@ -18,7 +18,11 @@ export const emailRules = () => {
 export const usernameRules = () => {
   return body('username')
   .if((value, { req }) => req.body.username).notEmpty()
-  .trim()
   .isLength({ min:2, max:8 })
   .withMessage('username의 길이는 2~8자만 가능합니다.');
+}
+
+export const trimUsername = ( req, res, next ) => {
+  req.body.username = req.body.username.trim().replace(/\s+/g, '');
+  next()
 }
