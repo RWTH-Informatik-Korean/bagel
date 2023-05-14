@@ -81,18 +81,22 @@ export async function verifiedUpdate(req, res) {
 export async function userUpdate(req, res) {
   const { googleID } = req.user;
   const { username, avatarUrl } = req.body;
-  if (username && await userRepository.findUsername(username)) {
-    const usernameExist = await userRepository.findUsername(username);
-    const usernameCheck = await userRepository.findUsername2(googleID, username);
-    if (usernameExist._id.toString() !== usernameCheck._id.toString()) {
-      return res.status(404).json({ message: 'username이 존재합니다.' });
-    }
-  }
   const update = await userRepository.update(googleID, username, avatarUrl);
   if (update) {
     res.status(200).json(update);
   } else {
     res.status(404).json({ message: 'user not found' });
+  }
+}
+
+export async function usernameDuplicateCheck(req, res) {
+  const username = req.params.username;
+  const { googleID } = req.user;
+  const exUsername = await userRepository.findUsername(username);
+  if (exUsername && (googleID !== exUsername.googleID)) {
+    res.status(200).json({ duplicate: true });
+  } else {
+   res.status(200).json({ duplicate: false });
   }
 }
 

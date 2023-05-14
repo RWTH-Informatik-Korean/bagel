@@ -5,7 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { take } from 'rxjs';
 import { Router } from '@angular/router';
-import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-sidenav',
@@ -55,27 +54,40 @@ export class SidenavComponent implements OnInit{
     this.curUser.avatarUrl = imageObject.avatarUrl;
   }  
   updateUser() {
+    // validate length of username
     if (this.curUser.username.length < 2 || this.curUser.username.length > 8) {
       this.toastr.error('', `Must be between 2-8 characters`, {
         positionClass: 'toast-top-right',
       });
       return
     }
-    this._authService.updateUser(this.curUser)
-    .subscribe({
-      next: async (updatedUser) => {
-        this.curUser = await updatedUser;    
-        this._authService.setAvatarUrl(updatedUser.avatarUrl);
-        this._authService.setUsername(updatedUser.username);
-      },
-      error: (err) => {
-        this.toastr.error('', `Failed to update user`, {
+    // validate duplication of username
+    this._authService.usernameDuplicate(this.curUser.username).subscribe( async (data: any) => {
+      const dupCheck = await data;
+      if (!dupCheck.duplicate) {
+        this._authService.updateUser(this.curUser)
+        .subscribe({
+          next: async (updatedUser) => {
+            this.curUser = await updatedUser;    
+            this._authService.setAvatarUrl(updatedUser.avatarUrl);
+            this._authService.setUsername(updatedUser.username);
+
+            this.navMode = 'default';
+          },
+           error: (error) => {
+            // pop up msg for error
+            return this.toastr.error('', `${error.error.message}`, {
+            positionClass: 'toast-top-right',
+          });
+          }
+        });
+      } else {
+        this.toastr.error('', `This usename is already in use.`, {
           positionClass: 'toast-top-right',
         });
-        return
+        return;
       }
-    })
-    this.navMode = 'default';
+    });
   }
 
   signOut() {
@@ -85,8 +97,8 @@ export class SidenavComponent implements OnInit{
       .subscribe(() => {
         this._authService.logoutUser();
         this.onToggleClose();
-        this.cookieService.deleteAll();
         localStorage.clear();
+        this.cookieService.deleteAll();
         this._authService.setLoggedOut();
         this.router.navigate(['/']);
       }

@@ -3,6 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ export class AppComponent implements OnInit{
     private scroller: ViewportScroller,
     private router: Router,
     private authService: AuthService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private location: Location
   ) {
     let screenWidth = window.innerWidth;
     (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
@@ -34,6 +36,12 @@ export class AppComponent implements OnInit{
   onResize(event: any) {
     let screenWidth = window.innerWidth;
     (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
+  }
+  // postpage에서 browser의 back button을 눌렀을 때, bagel home 이전으로 redirect되는 문제를 해결하기 위함
+  // Angular에서 browser의 back button이 실행되면 popstate가 실행되며, 이걸 감지하여 home에 머무르도록 처리함
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: any) {
+    this.router.navigate(['/home']);
   }
   scrollToTop() {
     this.scroller.scrollToPosition([0, 0]);

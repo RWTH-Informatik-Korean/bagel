@@ -10,8 +10,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent },
-  { path: 'home', redirectTo: '', pathMatch: 'full'},
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'home', component: MainPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'login/:googleID', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

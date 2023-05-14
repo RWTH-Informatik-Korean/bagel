@@ -77,6 +77,8 @@ export class AuthService {
     const usernameEncrypt = CryptoJS.AES.encrypt(username, environment.CRYPTOKEY);
     localStorage.setItem('username', usernameEncrypt.toString());
     this.usernameSubject.next(username);
+    this.googleIDSubject.next(username);
+    this.cookieService.delete('username');
   }
   getUsername(): string {
     const username = localStorage.getItem('username');  
@@ -243,6 +245,11 @@ export class AuthService {
     const options = { withCredentials: true };
     return this.http.put(`${this.authUrl}/google/update`, data, options);
   }
+  // Duplication check for username
+  usernameDuplicate(username: string)  {
+    return this.http.get(`${this.authUrl}/google/duplicate/${username}`, { withCredentials: true });
+  }
+
   // Log out
   logoutUser() {
     return this.http.get(`${this.authUrl}/logout`, { withCredentials: true });
