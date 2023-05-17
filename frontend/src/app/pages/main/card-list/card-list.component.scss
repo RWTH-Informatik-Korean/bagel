@@ -78,7 +78,15 @@
 .cardItemC-text {
   margin: 1rem 0;
   height: 64px;
-  line-height: normal;
+  line-height: 1.3;
+  vertical-align: top;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .cardItem-footer {
   margin-top: 1rem;

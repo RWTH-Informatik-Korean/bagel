@@ -22,9 +22,21 @@
     </div>
   </div>
   <div class="singup-guide2"*ngIf="googleLoggedin">
-    Please note that RWTH-Email verification is required for sign up.
-    Your information will only be used to verify your identity for security purpose.
+    1. RWTH-Email Verification<br>
+    Please note that RWTH-Email verification is required for sign up. Your information will only be used to verify your identity for security purpose.
   </div>
+  <div class="signup-guide2" *ngIf="googleLoggedin">
+    2. Intellectual Property Rights<br>
+    The materials provided by this site are protected by intellectual property laws and are to be used solely for personal study purposes. Under no circumstances are they to be provided to or disclosed to others. Any legal liability resulting from the disclosure of materials will be borne by the individual who discloses it.
+  </div>
+
+  <div class="terms-container">
+    <label class="terms">
+      <input *ngIf="googleLoggedin && !sentCode && !verified" type="checkbox" [(ngModel)]="termsAccepted">
+      I have read and agreed to the Terms and the conditions above.
+    </label>
+  </div>
+
   <div class="email-wrapper">
     <div class="input-container">
       <!-- 1. 구글 로그인 후 - RWTH Email 입력 -->
@@ -44,7 +56,7 @@
 
     <div class="email-btn-container">
       <!-- 1. 구글 로그인 후 - RWTH Email 입력 -->
-     <button *ngIf="googleLoggedin && !sentCode && !verified" class="email-btn" type="submit" name="action" (click)="verificationEmail(rwthEmail)">Send</button>
+     <button [disabled]="!termsAccepted" *ngIf="googleLoggedin && !sentCode && !verified" class="email-btn" type="submit" name="action" (click)="verificationEmail(rwthEmail)">Send</button>
      <!-- 2. 메일 코드 발송 후 - Verfication code 입력 -->
      <button *ngIf="googleLoggedin && sentCode && !verified" class="email-btn" type="submit" name="action" (click)="validateCode(verificationCode)">Continue</button>
     </div>
