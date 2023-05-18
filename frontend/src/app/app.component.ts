@@ -23,7 +23,9 @@ export class AppComponent implements OnInit{
     private location: Location
   ) {
     let screenWidth = window.innerWidth;
-    (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
+    this.screenMode = (screenWidth > 767) ? "W" : "M";
+    // TODO: 5.18 변경
+    // (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
   }
 
   ngOnInit(): void {
@@ -33,10 +35,16 @@ export class AppComponent implements OnInit{
 
   
   @HostListener ('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize(event: Event) {
     let screenWidth = window.innerWidth;
-    (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
+    this.screenMode = (screenWidth > 767) ? "W" : "M";
   }
+  // TODO: 5.18 변경
+  // onResize(event: any) {
+  //   let screenWidth = window.innerWidth;
+  //   (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
+  // }
+  
   // postpage에서 browser의 back button을 눌렀을 때, bagel home 이전으로 redirect되는 문제를 해결하기 위함
   // Angular에서 browser의 back button이 실행되면 popstate가 실행되며, 이걸 감지하여 home에 머무르도록 처리함
   @HostListener('window:popstate', ['$event'])

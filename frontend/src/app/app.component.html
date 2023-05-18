@@ -1,5 +1,7 @@
-<mat-sidenav-container class="container-fluid" [(ngModel)]="screenMode">
-  <mat-sidenav class="mySidenav" #sidenav mode="over" position="end">
+<!-- <mat-sidenav-container class="container-fluid" [(ngModel)]="screenMode"> -->
+<!-- TODO: 5.18 변경함, form control 안쓰는데 ngModel 써서 console에 계속 에러뜸-->
+<mat-sidenav-container class="container-fluid" [ngClass]="screenMode">
+  <mat-sidenav #sidenav mode="over" position="end">
     <app-sidenav (closeSideNav)="sidenav.close()"></app-sidenav>
   </mat-sidenav>
 

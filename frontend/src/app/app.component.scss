@@ -1,14 +1,22 @@
 @import '../styles.scss';
 
+
+
 .mat-drawer-container {
   background-color: #fff;
+  overflow: visible;
 }
-//.container-fluid {
-  //margin-top: -80px;
-//}
-.mySidenav {
+.mat-drawer-content {
+  overflow: auto;
+}
+::ng-deep .mat-drawer.mat-sidenav {
+  overflow-y: visible;
   width: 300px;
   background-color: #fff;
   z-index: 999;
   box-shadow: -0.5rem 0 0.75rem 0.1rem rgba(240, 203, 146, 0.1);
+  & .mat-drawer-inner-container {
+    overflow: visible;
+  }
 }
+

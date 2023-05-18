@@ -11,12 +11,12 @@
   </div>
   <div class="form-group">
     <label for="inputTerm">Term</label>
-    <input type="term" class="form-control" name="term" placeholder="ex) ss21, ws22" [disabled]="isEnabled" [(ngModel)]="bagelCard.term">
+    <input type="term" class="form-control" placeholder="ex) ss21, ws22" [disabled]="isEnabled" name="term" [(ngModel)]="bagelCard.term">
   </div>
 
   <div class="form-group">
     <label for="inputCourses">Courses</label>
-    <input type="Courses" class="form-control" name="course" list="selectCourses" placeholder="Input course" [disabled]="isEnabled" [(ngModel)]="bagelCard.course">
+    <input type="Courses" class="form-control" list="selectCourses" placeholder="Input course" [disabled]="isEnabled" name="course" [(ngModel)]="bagelCard.course">
     <datalist id="selectCourses">
       <option *ngFor="let course of courses">{{ course.courseName || ' ' }}</option>
     </datalist>
@@ -24,7 +24,7 @@
   
   <div class="form-group">
     <label for="inputTitle">Title</label>
-    <input type="text" class="form-control" name="title" placeholder="ex) 과제 팀원 구합니다." [(ngModel)]="bagelCard.title">
+    <input type="text" class="form-control" placeholder="ex) 과제 팀원 구합니다." name="title" [(ngModel)]="bagelCard.title">
   </div>
   <div class="form-group">
     <label for="inputText">Content</label>

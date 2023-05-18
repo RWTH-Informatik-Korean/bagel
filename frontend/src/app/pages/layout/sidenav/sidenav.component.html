@@ -17,12 +17,6 @@
       <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink">
         <div class="dropdown-item-wrapper">
           <a class="dropdown-item" (click)="changeAvatar(avatar)" *ngFor="let avatar of avatars"><img class="dropdown-image" [src]="avatar.avatarUrl"/></a>
-          <a class="dropdown-item" href="#">
-            <form class="avatar-upload">
-              <label class="avatar-upload-text" for="avatar">Upload</label>
-              <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
-            </form>
-          </a>
         </div>
       </div>
     </div>

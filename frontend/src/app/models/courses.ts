@@ -29,6 +29,14 @@ export interface Lehrstuhl {
 	moduleUrl: string;
   href: string;
 }
+export interface Archive {
+  courseName: string;
+  category: string;
+  courseId?: number;
+	module : string;
+	moduleUrl: string;
+  href: string;
+}
 
 // icon src for each module
 const iconMathematik: string = "../../assets/logos/MATHEMATIK.svg";
@@ -441,14 +449,3 @@ export const LEHRSTUHLE: Lehrstuhl[] = [
     href: "https://www.informatik.rwth-aachen.de/cms/informatik/Forschung/Forschungsbereiche/~mrys/Liste-der-Forschungsbereiche/?lidx=1"
   }
 ]
-
-export const Archive: Lehrstuhl[] = [
-  {    
-    courseName: 'Archive',
-    category: 'Archive',
-    courseId: 52,
-		module: 'Archive',
-		moduleUrl: iconArchive,
-    href: "https://studentsrwthaachende-my.sharepoint.com/:f:/r/personal/scpm9mnjy9v4r66r_students_rwth-aachen_de/Documents/Bagel?csf=1&web=1&e=6yVWaV"
-  }
-];

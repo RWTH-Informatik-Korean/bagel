@@ -22,14 +22,16 @@ export class NavbarSearchbarComponent implements OnInit {
   doubbleSubmit: boolean = false;
 
   constructor(
-    private cardservice: CardService, 
+    private _cardService: CardService, 
     public router: Router) { }
 
   ngOnInit(): void {
+    this.selected = 'All';
   }
   
   selectedPostCategory(category: string) {
     this.SelectedCategory.emit(category);
+    this.selected = category;
   }
 
   searchCard() {
