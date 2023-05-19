@@ -30,9 +30,9 @@
     The materials provided by this site are protected by intellectual property laws and are to be used solely for personal study purposes. Under no circumstances are they to be provided to or disclosed to others. Any legal liability resulting from the disclosure of materials will be borne by the individual who discloses it.
   </div>
 
-  <div class="terms-container">
+  <div class="terms-container" *ngIf="googleLoggedin">
     <label class="terms">
-      <input *ngIf="googleLoggedin && !sentCode && !verified" type="checkbox" [(ngModel)]="termsAccepted">
+      <input type="checkbox" [(ngModel)]="termsAccepted">
       I have read and agreed to the Terms and the conditions above.
     </label>
   </div>

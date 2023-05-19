@@ -35,10 +35,19 @@ export class SidenavComponent implements OnInit{
   ) {}
   
   ngOnInit(): void {
-    this.curUser.username = this._authService.getUsername();
-    this.curUser.avatarUrl = this._authService.getAvatarUrl();
-    this.curUser.rwthVerified = this._authService.getVerified();
+    this.authSet();
 	}
+
+  async authSet() {
+    if (this.cookieService.get('username') && this.cookieService.get('avatarUrl')) {
+      this.curUser.username = await this.cookieService.get('username');
+      this.curUser.avatarUrl = await this.cookieService.get('avatarUrl');
+    } else {
+      this.curUser.username = this._authService.getUsername();
+      this.curUser.avatarUrl = this._authService.getAvatarUrl();
+    }
+  }
+
   onToggleClose(): void {
     this.navMode = 'default';
     this.closeSideNav.emit();

@@ -20,5 +20,12 @@ export const AVATARS: avatar[] = [
     avatarID: 4,
     avatarUrl: '/assets/images/Avatar_4.png',
   },
-
+  {
+    avatarID: 5,
+    avatarUrl: '/assets/images/Avatar_5.png',
+  },
+  {
+    avatarID: 6,
+    avatarUrl: '/assets/images/Avatar_6.png',
+  },
 ]

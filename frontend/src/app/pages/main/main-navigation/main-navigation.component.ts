@@ -46,7 +46,7 @@ export class MainNavigationComponent implements OnInit {
     this.selected = data;
   }
   selectedCourse(course: any) {
-    if(this.selected='Archive') {
+    if(this.selected === 'Archive') {
       const externalUrl = 'https://studentsrwthaachende-my.sharepoint.com/:f:/r/personal/scpm9mnjy9v4r66r_students_rwth-aachen_de/Documents/Bagel?csf=1&web=1&e=6yVWaV';
       window.location.href = externalUrl;
     } else {      

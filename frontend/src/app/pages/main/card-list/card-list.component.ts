@@ -33,10 +33,11 @@ export class CardListComponent implements OnInit {
   
   loadInitBagel() {
     this._cardservice.getAllData().subscribe({
-      next: (data) => { this.bagels = data; },
+      next: async (data) => { this.bagels = await data; },
       error: (e) => console.log(e)
     });
   }
+
   filterBagel() {   
     this._cardservice.filterCards(this.filterItems).subscribe({
       next: res => {
