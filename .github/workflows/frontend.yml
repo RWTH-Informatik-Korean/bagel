@@ -24,7 +24,7 @@ jobs:
               run: npm install -g @angular/cli && npm ci
 
             - name: Build Frontend
-              run: ls -al  
+              run: cd frontend | ng build  
               #run: ng build
     # build:
     #     needs: setup
