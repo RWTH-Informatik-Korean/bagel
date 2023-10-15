@@ -22,4 +22,4 @@ jobs:
             
             - name: Setup Angular
               run: npm install -g @angular/cli && npm ci
-            - run: ng --version
+            - run: ng version
