@@ -24,12 +24,15 @@ jobs:
               run: |
                cd frontend
                npm install -g @angular/cli 
+               npm install
+               ng build --prod
+
             
-            - name: Install dependencies
-              run: npm install
+            # - name: Install dependencies
+            #   run: npm install
         
-            - name: Build Angular Application
-              run: ng build --prod
+            # - name: Build Angular Application
+            #   run: ng build --prod
         
             - name: Archive artifacts
               uses: actions/upload-artifact@v2
