@@ -21,15 +21,15 @@ jobs:
                 node-version: '16'
             
             - name: Setup Angular
-              run: npm install -g @angular/cli 
+              run: |
+               cd frontend
+               npm install -g @angular/cli 
             
             - name: Install dependencies
               run: npm install
         
             - name: Build Angular Application
-              run: |
-                cd frontend
-                ng build --prod
+              run: ng build --prod
         
             - name: Archive artifacts
               uses: actions/upload-artifact@v2
