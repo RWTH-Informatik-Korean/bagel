@@ -22,4 +22,10 @@ jobs:
             
             - name: Setup Angular
               run: npm install -g @angular/cli && npm ci
+    
+    test: 
+        needs: [build]
+        runs-on: ubuntu-latest
+
+        steps: 
             - run: ng version
