@@ -24,7 +24,7 @@ jobs:
               run: npm install -g @angular/cli && npm ci
     
     test: 
-        needs: [build]
+        needs: build
         runs-on: ubuntu-latest
 
         steps: 
