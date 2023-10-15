@@ -21,10 +21,19 @@ jobs:
                 node-version: '16'
             
             - name: Setup Angular
-              run: npm install -g @angular/cli && npm ci
-
-            - name: Build Frontend
-              run: cd frontend | ng build  
+              run: npm install -g @angular/cli 
+            
+            - name: Install dependencies
+              run: npm install
+        
+            - name: Build Angular Application
+              run: ng build --prod
+        
+            - name: Archive artifacts
+              uses: actions/upload-artifact@v2
+              with:
+                name: built-files
+                path: /build
               #run: ng build
     # build:
     #     needs: setup
