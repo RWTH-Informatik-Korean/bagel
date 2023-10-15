@@ -27,7 +27,9 @@ jobs:
               run: npm install
         
             - name: Build Angular Application
-              run: ng build --prod
+              run: |
+                cd frontend
+                ng build --prod
         
             - name: Archive artifacts
               uses: actions/upload-artifact@v2
