@@ -38,7 +38,7 @@ jobs:
               uses: actions/upload-artifact@v2
               with:
                 name: built-files
-                path: /build
+                path: /frontend/build
               #run: ng build
     # build:
     #     needs: setup
