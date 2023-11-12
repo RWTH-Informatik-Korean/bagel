@@ -23,8 +23,7 @@ jobs:
             - name: Setup Angular
               run: |
                cd frontend
-               ls -al
-               npm install -g @angular/cli 
+               npm install -g @angular/cli@15.0.4 
                npm install
                ng build
 
