@@ -53,8 +53,10 @@ jobs:
         - name: Move all build files to frontend folder
           run: |
             tar -xvf build_files.tar
-            cd ${{ github.workspace }}/frontend/dist/bagel
-            mv * /var/www/bagel_build
+            ls -al
+
+            # cd ${{ github.workspace }}/frontend/dist/bagel
+            # mv * /var/www/bagel_build
 
     # build:
     #     needs: setup
