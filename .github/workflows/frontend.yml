@@ -38,7 +38,7 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                 name: build-files
-                path: ${{ github.workspace }}/build
+                path: ${{ github.workspace }}/frontend/build
                 if-no-files-found: error
               #run: ng build
     # build:
