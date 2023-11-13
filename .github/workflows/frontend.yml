@@ -6,7 +6,7 @@ on:
     #     branches: [ frontend ]
     #     types: [ closed ]
     push: 
-        branches: [Adopt_github_action#193]
+        branches: [main]
 jobs:
     setup:
       runs-on: ubuntu-latest
