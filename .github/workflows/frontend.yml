@@ -9,28 +9,46 @@ on:
         branches: [Adopt_github_action#193]
 jobs:
     setup:
-        runs-on: ubuntu-latest
+      runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v3
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
             
-            - name: Setup Node.js
-              uses: actions/setup-node@v2
-              with:
-                node-version: '16'
+        - name: Setup Node.js
+          uses: actions/setup-node@v2
+          with:
+            node-version: '16'
             
-            - name: Setup Angular
-              run: |
-               cd frontend
-               npm install -g @angular/cli@15.0.4 
-               npm install
-               ng build
+        - name: Setup Angular
+          run: |
+            cd frontend
+            npm install -g @angular/cli@15.0.4 
+            npm install
+            ng build
             
-            - name: Setup Angular
-              run: |
-                cd frontend/dist/bagel
-                ls -al
+        - name: Tar build files
+          run: tar -cvf build_files.tar ${{ github.workspace }}/frontend/dist/bagel
+            
+        - name: Upload Artifact
+          uses: actions/upload-artifact@v3
+          with:
+            name: my-artifact
+            path: build_files.tar
+            if-no-files-found: error
+            retention-days: 1
+    
+    deploy:
+      runs-on: self-hosted
+
+      steps:
+        - name: Checking runner on server
+          run: pwd
+
+            # - name: Setup Angular
+            #   run: |
+            #     cd frontend/dist/bagel
+            #     ls -al
                 
             
             # - name: Install dependencies
@@ -38,13 +56,7 @@ jobs:
         
             # - name: Build Angular Application
             #   run: ng build --prod
-        
-            # - name: Archive artifacts
-            #   uses: actions/upload-artifact@v3
-            #   with:
-            #     name: build-files
-            #     path: ${{ github.workspace }}/frontend
-            #     if-no-files-found: error
+                
               #run: ng build
     # build:
     #     needs: setup
