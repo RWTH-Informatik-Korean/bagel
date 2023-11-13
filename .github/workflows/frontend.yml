@@ -44,6 +44,8 @@ jobs:
       steps:
         - name: Checking runner on server
           run: pwd
+        - name: Remove previous files
+          run:  sudo rm -rf /var/www/bagel_build/*
         
         - name: Dowload artifacts
           uses: actions/download-artifact@v3  
@@ -55,8 +57,9 @@ jobs:
 
         - name: Move all build files to frontend folder
           run: |
-            cd ${{ github.workspace }}/home/runner/work/bagel/bagel/frontend/dist/bagel
-            sudo cp -r * /var/www/bagel_build
+            cd ${{ github.workspace }}/home/runner/work/bagel/bagel/frontend/dist/bagel |
+            sudo mv * /var/www/bagel_build |
+            sudo chown -R www-data:www-data ./*
 
     # build:
     #     needs: setup
