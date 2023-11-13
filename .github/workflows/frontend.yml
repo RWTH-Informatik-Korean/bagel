@@ -2,11 +2,11 @@ name: bagel-frontend
 
 on:
     # start pipeline when merged
-    # pull_request:
-    #     branches: [ frontend ]
-    #     types: [ closed ]
-    push: 
-        branches: [main]
+    pull_request:
+        branches: [ frontend ]
+        types: [ closed ]
+    # push: 
+    #     branches: [main]
 jobs:
     setup:
       runs-on: ubuntu-latest
