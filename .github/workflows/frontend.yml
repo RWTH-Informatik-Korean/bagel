@@ -26,7 +26,15 @@ jobs:
                npm install -g @angular/cli@15.0.4 
                npm install
                ng build
-
+            
+            - name: Setup Angular
+              run: |
+                cd frontend
+                ls -al
+                mkdir build
+                # npm install -g @angular/cli@15.0.4 
+                # npm install
+                # ng build
             
             # - name: Install dependencies
             #   run: npm install
@@ -34,12 +42,12 @@ jobs:
             # - name: Build Angular Application
             #   run: ng build --prod
         
-            - name: Archive artifacts
-              uses: actions/upload-artifact@v3
-              with:
-                name: build-files
-                path: ${{ github.workspace }}/frontend
-                if-no-files-found: error
+            # - name: Archive artifacts
+            #   uses: actions/upload-artifact@v3
+            #   with:
+            #     name: build-files
+            #     path: ${{ github.workspace }}/frontend
+            #     if-no-files-found: error
               #run: ng build
     # build:
     #     needs: setup
