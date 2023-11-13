@@ -1,0 +1,73 @@
+name: bagel-frontend
+
+on:
+    # start pipeline when merged
+    pull_request:
+        branches: [ frontend ]
+        types: [ closed ]
+    # push: 
+    #     branches: [main]
+jobs:
+    setup:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Setup Node.js
+          uses: actions/setup-node@v2
+          with:
+            node-version: '16'
+
+        - name: Setup Angular
+          run: |
+            cd frontend
+            npm install -g @angular/cli@15.0.4 
+            npm install
+            ng build
+
+        - name: Tar build files
+          run: tar -cvf build_files.tar ${{ github.workspace }}/frontend/dist/bagel
+
+        - name: Upload Artifact
+          uses: actions/upload-artifact@v3
+          with:
+            name: my-artifact
+            path: build_files.tar
+            if-no-files-found: error
+            retention-days: 1
+
+    deploy:
+      runs-on: self-hosted
+      needs: setup
+      steps:
+        - name: Checking runner on server
+          run: pwd
+        - name: Remove previous files
+          run:  sudo rm -rf /var/www/bagel_build/*
+        
+        - name: Dowload artifacts
+          uses: actions/download-artifact@v3  
+          with:
+            name: my-artifact
+        
+        - name: Extract build files
+          run: tar -xvf build_files.tar
+
+        - name: Move all build files to frontend folder
+          run: |
+            cd ${{ github.workspace }}/home/runner/work/bagel/bagel/frontend/dist/bagel
+            sudo mv * /var/www/bagel_build
+        - run: sudo chown -R www-data:www-data /var/www/bagel_build/*
+
+    # build:
+    #     needs: setup
+    #     runs-on: ubuntu-latest
+
+    # test: 
+    #     needs: setup
+    #     runs-on: self-hosted
+
+    #     steps: 
+    #         - run: ng version
