@@ -14,22 +14,22 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v3
-            
+
         - name: Setup Node.js
           uses: actions/setup-node@v2
           with:
             node-version: '16'
-            
+
         - name: Setup Angular
           run: |
             cd frontend
             npm install -g @angular/cli@15.0.4 
             npm install
             ng build
-            
+
         - name: Tar build files
           run: tar -cvf build_files.tar ${{ github.workspace }}/frontend/dist/bagel
-            
+
         - name: Upload Artifact
           uses: actions/upload-artifact@v3
           with:
@@ -37,13 +37,19 @@ jobs:
             path: build_files.tar
             if-no-files-found: error
             retention-days: 1
-    
+
     deploy:
       runs-on: self-hosted
-
+      needs: setup
       steps:
         - name: Checking runner on server
           run: pwd
+        
+        - name: Dowload artifacts
+          uses: actions/download-artifact@v3  
+          with:
+            name: my-artifact
+          
 
             # - name: Setup Angular
             #   run: |
