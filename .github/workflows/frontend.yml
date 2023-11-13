@@ -29,11 +29,9 @@ jobs:
             
             - name: Setup Angular
               run: |
-                cd frontend/dist
+                cd frontend/dist/bagel
                 ls -al
-                # npm install -g @angular/cli@15.0.4 
-                # npm install
-                # ng build
+                
             
             # - name: Install dependencies
             #   run: npm install
