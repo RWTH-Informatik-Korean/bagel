@@ -51,12 +51,12 @@ jobs:
             name: my-artifact
         
         - name: Extract build files
-          run: tar -xvf build_files.tar /var/www/bagel_build
+          run: tar -xvf build_files.tar
 
-        # - name: Move all build files to frontend folder
-        #   run: |
-        #     cd ${{ github.workspace }}/home/runner/work/bagel/bagel/frontend/dist/bagel
-        #     sudo mv * /var/www/bagel_build
+        - name: Move all build files to frontend folder
+          run: |
+            cd ${{ github.workspace }}/home/runner/work/bagel/bagel/frontend/dist/bagel
+            sudo cp -r * /var/www/bagel_build
 
     # build:
     #     needs: setup
