@@ -58,8 +58,8 @@ jobs:
         - name: Move all build files to frontend folder
           run: |
             cd ${{ github.workspace }}/home/runner/work/bagel/bagel/frontend/dist/bagel |
-            sudo mv * /var/www/bagel_build |
-            sudo chown -R www-data:www-data ./*
+            sudo mv * /var/www/bagel_build
+        - run: sudo chown -R www-data:www-data ./*
 
     # build:
     #     needs: setup
