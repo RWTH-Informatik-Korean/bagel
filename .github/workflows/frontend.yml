@@ -49,21 +49,13 @@ jobs:
           uses: actions/download-artifact@v3  
           with:
             name: my-artifact
-          
-
-            # - name: Setup Angular
-            #   run: |
-            #     cd frontend/dist/bagel
-            #     ls -al
-                
-            
-            # - name: Install dependencies
-            #   run: npm install
         
-            # - name: Build Angular Application
-            #   run: ng build --prod
-                
-              #run: ng build
+        - name: Move all build files to frontend folder
+          run: |
+            tar -xvf build_files.tar
+            cd ./${{ github.workspace }}/frontend/dist/bagel
+            mv * /var/www/bagel_build
+
     # build:
     #     needs: setup
     #     runs-on: ubuntu-latest
