@@ -21,8 +21,8 @@
         <div class="cardItemC-text" id="text-course">{{ bagel.course }}</div>
         <div class="cardItemC-text" id="text-title">{{ bagel.title }}</div>
       </div>
-      <div class="cardItem-footer">
-        <div class="cardItemF-left">{{ bagel.username }}</div> 
+      <div class="cardItem-footer">     
+        <div class="cardItemF-left" id="small-avatar"><img [src]="bagel.avatarUrl">{{ bagel.username }}</div> 
         <div class="cardItemF-right">
           <div id="view"><img id="view" src="../../../../assets/icons/eye.svg">{{ bagel.views }}</div>
           <div id="chat"><img id="chat" src="../../../../assets/icons/chat.svg">{{ bagel.comments?.length.toString() || '0' }}</div>

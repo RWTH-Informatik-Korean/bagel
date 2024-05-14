@@ -55,7 +55,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     LoginComponent,
     TopButtonComponent,
     PlusButtonComponent,
-    PageNotFoundComponent,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule,

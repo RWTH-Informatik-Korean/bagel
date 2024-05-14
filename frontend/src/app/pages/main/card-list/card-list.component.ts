@@ -2,6 +2,7 @@ import { Component, OnInit, Input, SimpleChange, Output, HostListener, ViewChild
 import { NavigationExtras, Router } from '@angular/router';
 import { BagelCard } from '../../../models/bagelCard';
 import { CardService } from 'src/app/services/card.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-card-list',
@@ -26,15 +27,17 @@ export class CardListComponent implements OnInit {
 
   constructor(
     private _cardservice: CardService,
-    public router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
   
   loadInitBagel() {
     this._cardservice.getAllData().subscribe({
-      next: (data) => { this.bagels = data; },
+      next: async (data) => { this.bagels = await data; },
       error: (e) => console.log(e)
     });
   }
+
   filterBagel() {   
     this._cardservice.filterCards(this.filterItems).subscribe({
       next: res => {
@@ -63,13 +66,20 @@ export class CardListComponent implements OnInit {
     this.filterItems.push({ filterType: keys[keys.length - 1], filterText: lastCurrentValue});
     this.filterBagel(); 
   } 
-  newBagel() {
-    const navigationExtras: NavigationExtras = {
-      state: { currentBagel: this.bagel }
-    };
-    this.router.navigate(['/register'], navigationExtras);
+  async newBagel() {
+    const loggedIn = await this.authService.getLoggedIn();
+    if (loggedIn) {
+      const navigationExtras: NavigationExtras = {
+        state: { currentBagel: this.bagel }
+      };
+      this.router.navigate(['/register'], navigationExtras);
+      return
+    }
+    this.router.navigate(['/login']);
   }
+  
   showDetail(id: string) {
-    this.router.navigate(['/card',id], { skipLocationChange: true });
+    this.router.navigate(['/card',id]);
+
   }
 }

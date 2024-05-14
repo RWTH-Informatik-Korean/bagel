@@ -35,7 +35,6 @@ export class HeaderComponent implements OnInit{
     await this.authService.avatarUrl().subscribe(avtarUrl => {
       this.avatarUrl = avtarUrl;
     })
-    console.log('헤더의 유저 정보', this.avatarUrl);
   }
 
   // google login Button(OAuth2) 

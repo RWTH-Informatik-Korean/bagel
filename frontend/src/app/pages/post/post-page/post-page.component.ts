@@ -6,8 +6,7 @@ import { CardService } from '../../../services/card.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { ToastrService } from 'ngx-toastr';
-import { filter, take } from 'rxjs/operators';
-import { Card } from 'src/app/models/card.model';
+import { take } from 'rxjs/operators';
 import { Comment } from 'src/app/models/comment.model';
 
 @Component({

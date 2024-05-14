@@ -13,7 +13,7 @@
   border-radius: 50%;
   background-color: #fff;
   z-index: 100;
-  transition: all .2s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 .plus-new-card:active {
   background-color: $bagel-warn;
@@ -31,7 +31,7 @@
 #plus-btn-icon {
   font-size: 32px !important;
   color: $bagel-dark;
-  transition: all .2s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 .bi::before, .bi::after {
   font-weight: bolder !important;

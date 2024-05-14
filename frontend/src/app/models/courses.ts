@@ -29,6 +29,14 @@ export interface Lehrstuhl {
 	moduleUrl: string;
   href: string;
 }
+export interface Archive {
+  courseName: string;
+  category: string;
+  courseId?: number;
+	module : string;
+	moduleUrl: string;
+  href: string;
+}
 
 // icon src for each module
 const iconMathematik: string = "../../assets/logos/MATHEMATIK.svg";
@@ -180,14 +188,14 @@ export const COURSES: Course[] = [
 		moduleUrl: iconSonstige
   },
   {    
-    courseName: 'Nicht- technisches Wahlfach',
+    courseName: 'Software- Prjektpraktikum',
     category: '5 Sem',
     courseId: 21,
-		module: 'Wahlpflicht',
-		moduleUrl: iconWahlpflicht
+		module: 'Sonstige',
+		moduleUrl: iconSonstige
   },
   {    
-    courseName: 'Wahlpflicht-/ Anwendungsbereich',
+    courseName: 'Nicht- technisches Wahlfach',
     category: '5 Sem',
     courseId: 22,
 		module: 'Wahlpflicht',
@@ -195,22 +203,29 @@ export const COURSES: Course[] = [
   },
   {    
     courseName: 'Wahlpflicht-/ Anwendungsbereich',
-    category: '6 Sem',
+    category: '5 Sem',
     courseId: 23,
+		module: 'Wahlpflicht',
+		moduleUrl: iconWahlpflicht
+  },
+  {    
+    courseName: 'Wahlpflicht-/ Anwendungsbereich',
+    category: '6 Sem',
+    courseId: 24,
 		module: 'Wahlpflicht',
 		moduleUrl: iconWahlpflicht
   },
   {    
     courseName: 'Bachelorarbeit',
     category: '6 Sem',
-    courseId: 24,
+    courseId: 25,
 		module: 'Sonstige',
 		moduleUrl: iconSonstige
   },
   {    
     courseName: 'Archive',
     category: 'Archive',
-    courseId: 25,
+    courseId: 26,
 		module: 'INFORMATIK',
 		moduleUrl: iconArchive
   },
@@ -434,14 +449,3 @@ export const LEHRSTUHLE: Lehrstuhl[] = [
     href: "https://www.informatik.rwth-aachen.de/cms/informatik/Forschung/Forschungsbereiche/~mrys/Liste-der-Forschungsbereiche/?lidx=1"
   }
 ]
-
-export const Archive: Lehrstuhl[] = [
-  {    
-    courseName: 'Archive',
-    category: 'Archive',
-    courseId: 52,
-		module: 'Archive',
-		moduleUrl: iconArchive,
-    href: ""
-  }
-];

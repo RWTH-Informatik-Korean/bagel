@@ -3,6 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +19,13 @@ export class AppComponent implements OnInit{
     private scroller: ViewportScroller,
     private router: Router,
     private authService: AuthService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private location: Location
   ) {
     let screenWidth = window.innerWidth;
-    (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
+    this.screenMode = (screenWidth > 767) ? "W" : "M";
+    // TODO: 5.18 변경
+    // (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
   }
 
   ngOnInit(): void {
@@ -31,15 +35,30 @@ export class AppComponent implements OnInit{
 
   
   @HostListener ('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize(event: Event) {
     let screenWidth = window.innerWidth;
-    (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
+    this.screenMode = (screenWidth > 767) ? "W" : "M";
+  }
+  // TODO: 5.18 변경
+  // onResize(event: any) {
+  //   let screenWidth = window.innerWidth;
+  //   (screenWidth > 767) ? this.screenMode = "W" : this.screenMode = "M";
+  // }
+  
+  // postpage에서 browser의 back button을 눌렀을 때, bagel home 이전으로 redirect되는 문제를 해결하기 위함
+  // Angular에서 browser의 back button이 실행되면 popstate가 실행되며, 이걸 감지하여 home에 머무르도록 처리함
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: any) {
+    this.router.navigate(['/home']);
   }
   scrollToTop() {
     this.scroller.scrollToPosition([0, 0]);
   }
   plusNewCard() {
-    this.router.navigate(['/register']);
+    if (this.authService.getLoggedIn()) {
+      return this.router.navigate(['/register']);
+    }
+    return this.router.navigate(['/login']);
   }
 
   async authSet() {
@@ -59,9 +78,6 @@ export class AppComponent implements OnInit{
         if (googleIDPassport) this.authService.setGoogleID(googleIDPassport);
         if (usernamePassport) this.authService.setUsername(usernamePassport);
         if (avatarUrlPassport) this.authService.setAvatarUrl(avatarUrlPassport);
-
-        console.log('로그인 성공');
-        console.log('앱 시작 아바타',this.authService.getAvatarUrl());
         return
       }
       //
@@ -80,14 +96,11 @@ export class AppComponent implements OnInit{
         if (googleIDPassport) this.authService.setGoogleID(googleIDPassport);
         if (usernamePassport) this.authService.setUsername(usernamePassport);
         if (avatarUrlPassport) this.authService.setAvatarUrl(avatarUrlPassport);
-        console.log('로그인으로 바꿨어')
-
-        console.log(this.authService.getLoggedIn(), this.authService.getUserID(), this.authService.googleID(), this.authService.getUsername(), this.authService.getAvatarUrl());
         return
       } 
     }
     
-    // seesion이 만료된 경우 logout 실행
+    // Seesion이 만료된 경우, logout 실행
     loginCheck() {
       const stillLoggedIn = this.authService.checkSid();
       if (!stillLoggedIn) {

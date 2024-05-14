@@ -32,7 +32,7 @@ export async function updateCard(req, res) {
   } else if(card.username != username){
     res.status(403).json({ message: 'user is not author' });
   } else {
-    const updated = await cardRepository.update(id, title, text, username, avatarUrl, category, term, course, views);
+    const updated = await cardRepository.update(id, title, text, category, avatarUrl, username,  term, course, views);
     res.status(200).json(updated);
   }
 }

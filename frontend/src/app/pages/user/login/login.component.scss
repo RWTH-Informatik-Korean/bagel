@@ -32,6 +32,27 @@
   font-size: 1rem;
   color: $bagel-warn;
 }
+.signup-guide2 {
+  display: flex;
+  flex-direction:row;
+  justify-content: flex-start;
+  width: 350px;
+  margin: auto;
+  padding: 15px 5px 5px 5px;
+  font-size: 1rem;
+}
+.terms-container {
+  width: 350px;
+  margin: auto;
+  padding-top: 15px;
+}
+.terms {
+  width: 350px;
+  margin: auto;
+  & input {
+    margin-right: 10px;
+  }
+}
 .singup-guideInit {
   display: flex;
   flex-direction: column;

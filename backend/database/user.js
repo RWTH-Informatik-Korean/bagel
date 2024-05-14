@@ -20,7 +20,7 @@ export async function findUser(googleID){
 }
 
 export async function findUsername(username){
-  return User.findOne({ username: username });
+  return User.findOne({ username: {'$regex': username, '$options': 'i' }});
 }
 
 export async function create(username, googleID, avatarUrl, rwthVerified){

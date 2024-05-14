@@ -5,7 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { take } from 'rxjs';
 import { Router } from '@angular/router';
-import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-sidenav',
@@ -26,6 +25,7 @@ export class SidenavComponent implements OnInit{
     rwthVerified: false,
   }
   updatedAvatarUrl: string;
+  updateErrorMsg: string;
 
   constructor( 
     private _authService: AuthService, 
@@ -35,11 +35,19 @@ export class SidenavComponent implements OnInit{
   ) {}
   
   ngOnInit(): void {
-    this.curUser.username = this._authService.getUsername();
-    this.curUser.avatarUrl = this._authService.getAvatarUrl();
-    this.curUser.rwthVerified = this._authService.getVerified();
-    console.log(this.curUser);
+    this.authSet();
 	}
+
+  async authSet() {
+    if (this.cookieService.get('username') && this.cookieService.get('avatarUrl')) {
+      this.curUser.username = await this.cookieService.get('username');
+      this.curUser.avatarUrl = await this.cookieService.get('avatarUrl');
+    } else {
+      this.curUser.username = this._authService.getUsername();
+      this.curUser.avatarUrl = this._authService.getAvatarUrl();
+    }
+  }
+
   onToggleClose(): void {
     this.navMode = 'default';
     this.closeSideNav.emit();
@@ -55,19 +63,40 @@ export class SidenavComponent implements OnInit{
     this.curUser.avatarUrl = imageObject.avatarUrl;
   }  
   updateUser() {
-    this._authService.updateUser(this.curUser)
-    .subscribe({
-      next: async (updatedUser) => {
-        this.curUser = await updatedUser;    
-        this._authService.setAvatarUrl(updatedUser.avatarUrl);
-         this._authService.setUsername(updatedUser.username);
-        console.log('업데이트 한 유저 ver.2: ',this.curUser);
-      },
-      error: (err) => {
-        console.error('Failed to update user:', err);
+    // validate length of username
+    if (this.curUser.username.length < 2 || this.curUser.username.length > 8) {
+      this.toastr.error('', `Must be between 2-8 characters`, {
+        positionClass: 'toast-top-right',
+      });
+      return
+    }
+    // validate duplication of username
+    this._authService.usernameDuplicate(this.curUser.username).subscribe( async (data: any) => {
+      const dupCheck = await data;
+      if (!dupCheck.duplicate) {
+        this._authService.updateUser(this.curUser)
+        .subscribe({
+          next: async (updatedUser) => {
+            this.curUser = await updatedUser;    
+            this._authService.setAvatarUrl(updatedUser.avatarUrl);
+            this._authService.setUsername(updatedUser.username);
+
+            this.navMode = 'default';
+          },
+           error: (error) => {
+            // pop up msg for error
+            return this.toastr.error('', `${error.error.message}`, {
+            positionClass: 'toast-top-right',
+          });
+          }
+        });
+      } else {
+        this.toastr.error('', `This usename is already in use.`, {
+          positionClass: 'toast-top-right',
+        });
+        return;
       }
-    })
-    this.navMode = 'default';
+    });
   }
 
   signOut() {
@@ -77,8 +106,8 @@ export class SidenavComponent implements OnInit{
       .subscribe(() => {
         this._authService.logoutUser();
         this.onToggleClose();
-        this.cookieService.deleteAll();
         localStorage.clear();
+        this.cookieService.deleteAll();
         this._authService.setLoggedOut();
         this.router.navigate(['/']);
       }

@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit{
   verificationCode: string = '';  // verification code received in email
   sentCode: boolean = false;  // verification code sent successfully or not
   verified: boolean = false;  // Verification of RWTH email successfully or not 
+  termsAccepted: boolean = false;
 
   loginhref: string = "http://localhost:8080/auth/login/google";
 
